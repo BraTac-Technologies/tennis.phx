@@ -7,6 +7,8 @@ defmodule TennisPhx.Events do
   alias TennisPhx.Repo
 
   alias TennisPhx.Events.Tour
+  alias TennisPhx.Participants.Player
+  alias TennisPhx.Events.PlayerTour
 
   @doc """
   Returns the list of tours.
@@ -20,6 +22,31 @@ defmodule TennisPhx.Events do
   def list_tours do
     Repo.all(Tour)
   end
+
+  # ========== Player_Tour Many_to_Many ==========
+
+
+  def toggle_tour_players(%Tour{} = tour, player_id) do
+    tt = tour.id
+    query = from(pt in PlayerTour, where: pt.tour_id == ^tt and pt.player_id == ^player_id)
+    assoc = Repo.one(query)
+    # require IEx; IEx.pry
+    if assoc == nil do
+      %PlayerTour{}
+      |> PlayerTour.changeset(%{player_id: player_id, tour_id: tour.id})
+      |> Repo.insert()
+    else
+      Repo.delete(assoc)
+    end
+  end
+
+  def tour_players(%Tour{} = tour) do
+    tour_id = tour.id
+    query_join_table = from(pt in PlayerTour, where: pt.tour_id == ^tour_id)
+    Repo.all(query_join_table)
+  end
+
+  # ========== END Player_Tour Many_to_Many END ==========
 
   @doc """
   Gets a single tour.

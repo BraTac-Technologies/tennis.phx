@@ -1,23 +1,16 @@
 <h1>Show Tour</h1>
 
 <ul>
-
+  <%= for player <- @players do %>
   <li>
-    <strong>Title:</strong>
-    <%= @tour.title %>
+    <strong><%= player.name %></strong>
+    <%= checkbox(:tour, :check, phx_click: "toggle_check", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
   </li>
+    <% end %>
 
-  <li>
-    <strong>Info:</strong>
-    <%= @tour.info %>
-  </li>
 
-  <li>
-    <strong>Date:</strong>
-    <%= @tour.date %>
-  </li>
+
 
 </ul>
 
-<span><%= link "Edit", to: Routes.tour_path(@conn, :edit, @tour) %></span> |
-<span><%= link "Back", to: Routes.tour_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.tour_path(@socket, :edit, @tour) %></span> |
