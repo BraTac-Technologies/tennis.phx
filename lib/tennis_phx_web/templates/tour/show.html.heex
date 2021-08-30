@@ -1,0 +1,23 @@
+<h1>Show Tour</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @tour.title %>
+  </li>
+
+  <li>
+    <strong>Info:</strong>
+    <%= @tour.info %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @tour.date %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.tour_path(@conn, :edit, @tour) %></span> |
+<span><%= link "Back", to: Routes.tour_path(@conn, :index) %></span>
