@@ -22,6 +22,12 @@ defmodule TennisPhxWeb.Router do
     resources "/players", PlayerController
   end
 
+  scope "/", TennisPhxWeb do
+    pipe_through :browser
+
+    live "/tour_live/:id", TourLive
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", TennisPhxWeb do
   #   pipe_through :api
@@ -40,6 +46,7 @@ defmodule TennisPhxWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: TennisPhxWeb.Telemetry
+
     end
   end
 

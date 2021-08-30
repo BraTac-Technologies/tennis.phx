@@ -18,7 +18,7 @@
       <td><%= tour.date %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.tour_path(@conn, :show, tour) %></span>
+        <span><%= link "Show", to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></span>
         <span><%= link "Edit", to: Routes.tour_path(@conn, :edit, tour) %></span>
         <span><%= link "Delete", to: Routes.tour_path(@conn, :delete, tour), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
