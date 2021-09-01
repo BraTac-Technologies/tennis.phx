@@ -24,6 +24,6 @@ defmodule TennisPhx.Participants.Player do
   def changeset(player, attrs) do
     player
     |> cast(attrs, [:name, :nickname, :info, :birthdate])
-    |> validate_required([:name, :nickname, :info, :birthdate])
+    |> validate_required([:name])
   end
 end

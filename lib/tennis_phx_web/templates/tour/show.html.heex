@@ -2,11 +2,20 @@
 
 <ul>
   <%= for player <- @players do %>
-  <li>
-    <strong><%= player.name %></strong>
-    <%= checkbox(:tour, :check, phx_click: "toggle_check", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
-  </li>
-    <% end %>
+    <li>
+      <strong><%= player.name %></strong>
+      <%= checkbox(:tour, :check, phx_click: "toggle_check", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
+    </li>
+
+    <form action="#" phx-submit="change_name" phx-value-player-id="player.id">
+
+      <%= text_input :player, :name, placeholder: "Add new player name" %>
+      <%= submit "Add", phx_disable_with: "Adding...." %>
+
+    </form>
+
+
+  <% end %>
 
 
 

@@ -36,4 +36,10 @@ defmodule TennisPhxWeb.TourLive do
                    |>Enum.map(fn(x) -> x.player_id end)
                    {:noreply, assign(socket, :tour_players, tour_players)}
   end
+
+  def handle_event("change_name", %{"player" => attrs}, %{"player-id" => player}, socket ) do
+    Participants.change_player(player, attrs)
+
+  end
+
 end
