@@ -6,13 +6,14 @@
       <strong><%= player.name %></strong>
       <%= checkbox(:tour, :check, phx_click: "toggle_check", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
     </li>
+    <%= if Enum.member?(@tour_players, player.id) do %>
+      <form action="#" phx-submit="add_points" phx-value-player-id: "player.id">
 
-    <form action="#" phx-submit="change_name" phx-value-player-id="player.id">
+        <%= number_input :player_points, :points, placeholder: "Something" %>
+        <%= submit "Add", phx_disable_with: "Adding...." %>
 
-      <%= text_input :player, :name, placeholder: "Add new player name" %>
-      <%= submit "Add", phx_disable_with: "Adding...." %>
-
-    </form>
+      </form>
+    <% end %>
 
 
   <% end %>

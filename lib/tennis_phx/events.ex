@@ -48,6 +48,17 @@ defmodule TennisPhx.Events do
 
   # ========== END Player_Tour Many_to_Many END ==========
 
+
+  def bump_player_points(%Tour{} = tour, player_id, player_points) do
+    tt = tour.id
+    query = from(pt in PlayerTour, where: pt.tour_id == ^tt and pt.player_id == ^player_id and pt.points == ^player_points)
+    assoc = Repo.one(query)
+
+    %PlayerTour{}
+    |> PlayerTour.changeset(%{points: player_points})
+    |> Repo.insert()
+  end
+
   @doc """
   Gets a single tour.
 
