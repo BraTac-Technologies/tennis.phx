@@ -51,7 +51,7 @@ defmodule TennisPhx.Events do
 
   def bump_player_points(%Tour{} = tour, player_id, points_for_player) do
     tt = tour.id
-    query = from(pt in PlayerTour, where: pt.tour_id == ^tt and pt.player_id == ^player_id)
+    query = from(pt in PlayerTour, where: pt.tour_id == ^tt and pt.player_id == ^player_id, preload: [:tour, :player])
     assoc = Repo.one(query)
 
     assoc
@@ -76,7 +76,7 @@ defmodule TennisPhx.Events do
   def get_tour!(id) do
     Repo.get!(Tour, id)
     |> Repo.preload(:players)
-  end  
+  end
 
   @doc """
   Creates a tour.
