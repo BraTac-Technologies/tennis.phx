@@ -35,10 +35,11 @@ defmodule TennisPhxWeb.TourLive do
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
                    {:noreply, assign(socket, :tour_players, tour_players)}
-                   {:noreply, assign(socket, player_id)}
   end
 
-  def handle_event("add_points", %{"player_points" => %{"points" => points_for_player}}, socket) do
+
+
+  def handle_event("add_points", %{"player_id" => %{"player_id" => player_id}, "player_points" => %{"points" => points_for_player}}, socket) do
     tour = socket.assigns[:tour]
            |> Repo.preload(:players)
     Events.bump_player_points(tour, player_id, points_for_player)
