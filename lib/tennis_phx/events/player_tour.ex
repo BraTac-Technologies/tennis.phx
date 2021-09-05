@@ -6,6 +6,7 @@ defmodule TennisPhx.Events.PlayerTour do
   alias TennisPhx.Participants.Player
 
   schema "player_tour" do
+    field :points, :decimal
 
     belongs_to :tour, Tour
     belongs_to :player, Player
@@ -17,7 +18,7 @@ defmodule TennisPhx.Events.PlayerTour do
 
   def changeset(struct, attrs \\ %{}) do
     struct
-    |> cast(attrs, [:tour_id, :player_id])
+    |> cast(attrs, [:tour_id, :player_id, :points])
     |> validate_required([:tour_id, :player_id])
   end
 end

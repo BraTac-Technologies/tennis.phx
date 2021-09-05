@@ -56,7 +56,7 @@ defmodule TennisPhx.Events do
 
     assoc
     |> PlayerTour.changeset(%{points: points_for_player})
-    |> Repo.insert()
+    |> Repo.update()
   end
 
   @doc """
