@@ -35,7 +35,10 @@ defmodule TennisPhx.Participants do
       ** (Ecto.NoResultsError)
 
   """
-  def get_player!(id), do: Repo.get!(Player, id)
+  def get_player!(id) do
+    Repo.get!(Player, id)
+    |> Repo.preload(:tours)
+  end  
 
   @doc """
   Creates a player.
