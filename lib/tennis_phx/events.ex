@@ -9,6 +9,7 @@ defmodule TennisPhx.Events do
   alias TennisPhx.Events.Tour
   alias TennisPhx.Participants.Player
   alias TennisPhx.Events.PlayerTour
+  alias TennisPhx.Events.PlayerVsPlayer
 
   @doc """
   Returns the list of tours.
@@ -48,6 +49,8 @@ defmodule TennisPhx.Events do
 
   # ========== END Player_Tour Many_to_Many END ==========
 
+  # =============== Assign Player Points =================
+
 
   def assign_player_points(%Tour{} = tour, player_id, points_for_player) do
     tt = tour.id
@@ -59,20 +62,25 @@ defmodule TennisPhx.Events do
     |> Repo.update()
   end
 
-  @doc """
-  Gets a single tour.
+  # ============= END Assign Player Points ===============
 
-  Raises `Ecto.NoResultsError` if the Tour does not exist.
+  # =========== Assign Player v Player Match =============
 
-  ## Examples
+  def assign_match_result(%Tour{} = tour, player1_id, player1_games, player2_id, player2_games) do
+    tt = tour.id
+    query = from(pp in PlayerVsPlayer, where: pp.tour_id == ^tt and pp.player1_id == ^player1_id and pp.player2_id == ^player2_id and pp.player1_games == ^player1_games and pp.player2_games == ^player2_games)
+    assoc = Repo.one(query)
 
-      iex> get_tour!(123)
-      %Tour{}
+    if assoc == nil do
+      %PlayerVsPlayer{}
+      |> PlayerVsPlayer.changeset(%{tour_id: tour.id, player1_id: player1_id, player2_id: player2_id, player1_games: player1_games, player2_games: player2_games})
+      |> Repo.insert()
+    else
+      Repo.delete(assoc)
+    end
+  end
 
-      iex> get_tour!(456)
-      ** (Ecto.NoResultsError)
 
-  """
   def get_tour!(id) do
     Repo.get!(Tour, id)
     |> Repo.preload(:players)
