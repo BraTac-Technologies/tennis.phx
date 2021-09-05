@@ -49,7 +49,7 @@ defmodule TennisPhx.Events do
   # ========== END Player_Tour Many_to_Many END ==========
 
 
-  def bump_player_points(%Tour{} = tour, player_id, points_for_player) do
+  def assign_player_points(%Tour{} = tour, player_id, points_for_player) do
     tt = tour.id
     query = from(pt in PlayerTour, where: pt.tour_id == ^tt and pt.player_id == ^player_id, preload: [:tour, :player])
     assoc = Repo.one(query)
