@@ -1,4 +1,5 @@
 <h1>Show Tour</h1>
+<p>Checked players: <%= length(@tour_players) %></p>
 
 <ul>
   <%= for player <- @players do %>
@@ -29,3 +30,25 @@
 </ul>
 
 <span><%= link "Edit", to: Routes.tour_path(@socket, :edit, @tour) %></span> |
+<br>
+<h1> Matches </h1>
+
+<form phx-submit="assign_match">
+  <%= select(:player1, :player1_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player", disabled: true]) %>
+  <%= number_input :player1_games, :player1_games, placeholder: "Games" %>
+  -
+  <%= number_input :player2_games, :player2_games, placeholder: "Games" %>
+  <%= select(:player2, :player2_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player", disabled: true]) %>
+  <br>
+  <%= submit "Save", phx_disable_with: "Saving...." %>
+</form>
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
