@@ -80,6 +80,12 @@ defmodule TennisPhx.Events do
     end
   end
 
+  def get_player1(%Tour{} = tour) do
+    tour_id = tour.id
+    query_join_table = from(pp in PlayerVsPlayer, where: pp.tour_id == ^tour_id)
+    Repo.all(query_join_table)
+  end
+
 
   def get_tour!(id) do
     Repo.get!(Tour, id)

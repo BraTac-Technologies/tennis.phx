@@ -43,7 +43,21 @@
   <%= submit "Save", phx_disable_with: "Saving...." %>
 </form>
 
+<br>
+<h1> Show Enrolled Matches </h1>
 
+<%= for player1 <- @player1_match do %>
+
+  <%= player1.player1_id %>
+  vs
+  <%= player1.player2_id %>
+  =
+  <%= player1.player1_games %>
+  -
+  <%= player1.player2_games %>
+  <br>
+
+<% end %>
 
 
 <br>

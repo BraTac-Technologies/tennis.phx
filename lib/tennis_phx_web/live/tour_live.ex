@@ -19,12 +19,15 @@ defmodule TennisPhxWeb.TourLive do
     players_for_tour = tour.players |> Repo.preload(:tours)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
+    player1_match = Events.get_player1(tour)
+                    
     socket = assign(
         socket,
         tour: tour,
         players: players,
         tour_players: tour_players,
-        players_for_tour: players_for_tour
+        players_for_tour: players_for_tour,
+        player1_match: player1_match
       )
     {:ok, socket}
   end
