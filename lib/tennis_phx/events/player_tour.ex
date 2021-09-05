@@ -20,5 +20,6 @@ defmodule TennisPhx.Events.PlayerTour do
     struct
     |> cast(attrs, [:tour_id, :player_id, :points])
     |> validate_required([:tour_id, :player_id])
+    |> unique_constraint(:player_tour_unique_index, name: :player_tour_unique_index)
   end
 end
