@@ -4,7 +4,12 @@ defmodule TennisPhxWeb.TourLive do
   alias TennisPhx.Repo
   alias TennisPhxWeb.TourView
   alias TennisPhx.Events
+
   alias TennisPhx.Participants
+  alias TennisPhx.Locations
+  alias TennisPhx.Phases
+  alias TennisPhx.PlayerUnits
+  alias TennisPhx.Statuses
 
 
 
@@ -16,13 +21,21 @@ defmodule TennisPhxWeb.TourLive do
   def mount(params, _, socket) do
     tour = Events.get_tour!(params["id"])
     players = Participants.list_players()
+    locations = Locations.list_locations()
+    phases = Phases.list_phases()
+    player_units = PlayerUnits.list_player_units()
+    players_for_tour = tour.players |> Repo.preload(:tours)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
     socket = assign(
         socket,
         tour: tour,
         players: players,
-        tour_players: tour_players
+        tour_players: tour_players,
+        players_for_tour: players_for_tour,
+        locations: locations,
+        phases: phases,
+        player_units: player_units
       )
     {:ok, socket}
   end
@@ -45,5 +58,28 @@ defmodule TennisPhxWeb.TourLive do
     Events.assign_player_points(tour, player_id, points_for_player)
     {:noreply, socket}
   end
+
+  def handle_event("assign_match", %{
+                                    "tour_id" => %{"tour_id" => tour_id},
+                                    "player1" => %{"player1_id" => player1_id},
+                                    "player2" => %{"player2_id" => player2_id},
+                                    "games_per_player1" => %{"games1" => player1_games},
+                                    "games_per_player2" => %{"games2" => player2_games},
+                                    "starting_datetime" => %{"starting_datetime" => %{
+                                                                          "day" => day,
+                                                                          "hour" => hour,
+                                                                          "minute" => minute,
+                                                                          "month" => month,
+                                                                          "year" => year
+                                                                                        }
+                                                                                      },
+                                    "location" => %{"location" => location},
+                                    "phase" => %{"phase" => phase},
+                                    "unit" => %{"unit" => unit},
+                                    }, socket) do
+
+
+  end
+
 
 end
