@@ -1,0 +1,13 @@
+<h1>Show Player unit</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @player_unit.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.player_unit_path(@conn, :edit, @player_unit) %></span> |
+<span><%= link "Back", to: Routes.player_unit_path(@conn, :index) %></span>
