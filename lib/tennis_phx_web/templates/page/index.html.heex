@@ -8,10 +8,22 @@
     <h2>Pages</h2>
     <ul>
       <li>
-        <a href="/tours">Tours</a>
+        <%= link "Tours", to: Routes.tour_path(@conn, :index) %>
       </li>
       <li>
-        <a href="/players">Players</a>
+        <%= link "Players", to: Routes.player_path(@conn, :index) %>
+      </li>
+      <li>
+        <%= link "Locations", to: Routes.location_path(@conn, :index) %>
+      </li>
+      <li>
+        <%= link "Phases", to: Routes.phase_path(@conn, :index) %>
+      </li>
+      <li>
+        <%= link "Statuses", to: Routes.status_path(@conn, :index) %>
+      </li>
+      <li>
+        <%= link "Matches", to: Routes.match_path(@conn, :index) %>
       </li>
 
     </ul>

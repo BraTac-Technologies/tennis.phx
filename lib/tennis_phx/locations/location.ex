@@ -16,6 +16,6 @@ defmodule TennisPhx.Locations.Location do
   def changeset(location, attrs) do
     location
     |> cast(attrs, [:name, :description, :city, :country, :image])
-    |> validate_required([:name, :description, :city, :country, :image])
+    |> validate_required([:name, :city])
   end
 end
