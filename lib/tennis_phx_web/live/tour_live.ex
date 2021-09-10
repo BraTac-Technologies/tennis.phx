@@ -25,6 +25,7 @@ defmodule TennisPhxWeb.TourLive do
     locations = Locations.list_locations()
     phases = Phases.list_phases()
     player_units = PlayerUnits.list_player_units()
+    match_for_tour = Matches.get_match_for_tour(tour)
     players_for_tour = tour.players |> Repo.preload(:tours)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
@@ -36,7 +37,8 @@ defmodule TennisPhxWeb.TourLive do
         players_for_tour: players_for_tour,
         locations: locations,
         phases: phases,
-        player_units: player_units
+        player_units: player_units,
+        match_for_tour: match_for_tour
       )
     {:ok, socket}
   end

@@ -210,8 +210,15 @@
 
               <h1 class="text-4xl"> Show matches </h1>
               <br>
+              <%= for match <- @match_for_tour do %>
 
-              
+                <%= match.player1_id %>
+                vs
+                <%= match.player2_id %>
+
+                <br>
+
+            <% end %>
 
 
           </div>
