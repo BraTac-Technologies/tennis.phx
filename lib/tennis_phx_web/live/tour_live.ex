@@ -10,6 +10,7 @@ defmodule TennisPhxWeb.TourLive do
   alias TennisPhx.Phases
   alias TennisPhx.PlayerUnits
   alias TennisPhx.Statuses
+  alias TennisPhx.Matches
 
 
 
@@ -60,25 +61,24 @@ defmodule TennisPhxWeb.TourLive do
   end
 
   def handle_event("assign_match", %{
-                                    "tour_id" => %{"tour_id" => tour_id},
                                     "player1" => %{"player1_id" => player1_id},
                                     "player2" => %{"player2_id" => player2_id},
-                                    "games_per_player1" => %{"games1" => player1_games},
-                                    "games_per_player2" => %{"games2" => player2_games},
-                                    "starting_datetime" => %{"starting_datetime" => %{
-                                                                          "day" => day,
-                                                                          "hour" => hour,
-                                                                          "minute" => minute,
-                                                                          "month" => month,
-                                                                          "year" => year
-                                                                                        }
-                                                                                      },
+                                    "date" => %{"date" => %{
+                                                            "day" => day,
+                                                            "month" => month,
+                                                            "year" => year
+                                                                          }
+                                                                        },
                                     "location" => %{"location" => location},
                                     "phase" => %{"phase" => phase},
                                     "unit" => %{"unit" => unit},
                                     }, socket) do
 
 
+    tour = socket.assigns[:tour]
+           |> Repo.preload(:players)
+    Matches.assign_match(tour, player1_id, player2_id, day, month, year, location, phase, unit)
+    {:noreply, socket}
   end
 
 
