@@ -7,16 +7,21 @@ defmodule TennisPhx.Matches do
   alias TennisPhx.Repo
 
   alias TennisPhx.Matches.Match
+  alias TennisPhx.Events.Tour
 
-  @doc """
-  Returns the list of matches.
 
-  ## Examples
+  # =========== Assign Player v Player Match =============
 
-      iex> list_matches()
-      [%Match{}, ...]
+def assign_match(%Tour{} = tour, player1_id, player2_id, day, month, year, location, phase, unit) do
+  tt = tour.id
 
-  """
+  %Match{}
+  |> Match.changeset(%{tour_id: tour.id, player1_id: player1_id, player2_id: player2_id, location_id: location, phase_id: phase, player_unit_id: unit})
+  |> Repo.insert()
+
+end
+
+
   def list_matches do
     Repo.all(Match)
   end
