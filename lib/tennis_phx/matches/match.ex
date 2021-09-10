@@ -11,18 +11,17 @@ defmodule TennisPhx.Matches.Match do
   alias TennisPhx.Matches.Score
 
   schema "matches" do
-    belongs_to :tour, Tour
 
 
+    has_many :first_players, Player, foreign_key: :first_player_key_id
+    has_many :second_players, Player, foreign_key: :second_player_key_id
 
     field :starting_datetime, :date
-    field :player1_id, :integer
-    field :player2_id, :integer
-
     belongs_to :location, Location
     belongs_to :phase, Phase
     belongs_to :status, Status
     belongs_to :player_unit, PlayerUnit
+    belongs_to :tour, Tour
 
     embeds_one :score, Score, on_replace: :update
 
@@ -33,7 +32,7 @@ defmodule TennisPhx.Matches.Match do
   @doc false
   def changeset(match, attrs) do
     match
-    |> cast(attrs, [:tour_id, :player1_id, :player2_id, :starting_datetime, :location_id, :phase_id, :status_id, :player_unit_id])
-    |> validate_required([:tour_id, :player1_id, :player2_id, :location_id, :phase_id, :player_unit_id])
+    |> cast(attrs, [:tour_id, :first_players, :second_players, :starting_datetime, :location_id, :phase_id, :status_id, :player_unit_id])
+    |> validate_required([:tour_id, :first_players, :second_players, :location_id, :phase_id, :player_unit_id])
   end
 end

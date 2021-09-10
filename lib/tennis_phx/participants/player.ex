@@ -3,12 +3,17 @@ defmodule TennisPhx.Participants.Player do
   import Ecto.Changeset
 
   alias TennisPhx.Events.Tour
+  alias TennisPhx.Matches.Match
 
   schema "players" do
     field :birthdate, :naive_datetime
     field :info, :string
     field :name, :string
     field :nickname, :string
+
+    belongs_to :first_players, Match, foreign_key: :first_player_key_id
+    belongs_to :second_players, Match, foreign_key: :second_player_key_id
+
 
     timestamps()
 

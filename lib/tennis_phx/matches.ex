@@ -12,14 +12,20 @@ defmodule TennisPhx.Matches do
 
   # =========== Assign Player v Player Match =============
 
-def assign_match(%Tour{} = tour, player1_id, player2_id, day, month, year, location, phase, unit) do
-  tt = tour.id
+  def assign_match(%Tour{} = tour, player1_id, player2_id, day, month, year, location, phase, unit) do
+    tt = tour.id
 
-  %Match{}
-  |> Match.changeset(%{tour_id: tour.id, player1_id: player1_id, player2_id: player2_id, location_id: location, phase_id: phase, player_unit_id: unit})
-  |> Repo.insert()
+    %Match{}
+    |> Match.changeset(%{tour_id: tour.id, first_players: player1_id, second_players: player2_id, location_id: location, phase_id: phase, player_unit_id: unit})
+    |> Repo.insert()
 
-end
+  end
+
+  def get_match_for_tour(%Tour{} = tour) do
+    tour_id = tour.id
+    query = from(m in Match, where: m.tour_id == ^tour_id)
+    Repo.all(query)
+  end
 
 
   def list_matches do
