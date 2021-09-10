@@ -16,7 +16,7 @@ defmodule TennisPhx.Matches do
     tt = tour.id
 
     %Match{}
-    |> Match.changeset(%{tour_id: tour.id, first_players: player1_id, second_players: player2_id, location_id: location, phase_id: phase, player_unit_id: unit})
+    |> Match.changeset(%{tour_id: tour.id, first_player: player1_id, second_player: player2_id, location_id: location, phase_id: phase, player_unit_id: unit})
     |> Repo.insert()
 
   end

@@ -32,7 +32,7 @@ defmodule TennisPhx.Matches.Match do
   @doc false
   def changeset(match, attrs) do
     match
-    |> cast(attrs, [:tour_id, :first_player_id, :second_player_id, :starting_datetime, :location_id, :phase_id, :status_id, :player_unit_id])
-    |> validate_required([:tour_id, :first_player_id, :second_player_id, :location_id, :phase_id, :player_unit_id])
+    |> cast(attrs, [:tour_id, :first_player, :second_player, :starting_datetime, :location_id, :phase_id, :status_id, :player_unit_id])
+    |> validate_required([:tour_id, :location_id, :phase_id, :player_unit_id])
   end
 end
