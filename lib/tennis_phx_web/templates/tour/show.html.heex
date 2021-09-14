@@ -207,23 +207,33 @@
         <div class="mt-10 py-10 border-b border-gray-300 text-center">
           <div class="flex flex-wrap justify-center">
             <div>
-
               <h1 class="text-4xl"> Show matches </h1>
               <br>
-              <%= for match <- @match_for_tour do %>
-
-                <%= match.player1_id %>
-                vs
-                <%= match.player2_id %>
-
-                <br>
-
-            <% end %>
-
-
+                <table class="table-auto">
+                  <thead>
+                    <tr>
+                      <th>First Player</th>
+                      <th>Second Player</th>
+                      <th>Score</th>
+                      <th>Where?</th>
+                      <th>Phase?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%= for match <- @match_for_tour do %>
+                      <tr>
+                        <td><%= match.first_player.name %></td>
+                        <td><%= match.second_player.name %></td>
+                        <td>Null</td>
+                        <td><%= match.location.city %></td>
+                        <td><%= match.phase.name %></td>
+                      </tr>
+                    <% end %>  
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
         </div>
       </div>
     </div>
