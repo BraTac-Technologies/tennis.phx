@@ -11,8 +11,6 @@ defmodule TennisPhx.Participants.Player do
     field :name, :string
     field :nickname, :string
 
-    belongs_to :first_players, Match, foreign_key: :first_player_key_id
-    belongs_to :second_players, Match, foreign_key: :second_player_key_id
 
 
     timestamps()
