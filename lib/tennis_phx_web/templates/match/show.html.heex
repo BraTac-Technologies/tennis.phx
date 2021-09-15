@@ -1,0 +1,53 @@
+<h1>Show Match</h1>
+
+<ul>
+
+  <li>
+    <strong>Tour:</strong>
+    <%= @match.tour_id %>
+  </li>
+
+  <li>
+    <strong>Player1:</strong>
+    <%= @match.player1_id %>
+  </li>
+
+  <li>
+    <strong>Player2:</strong>
+    <%= @match.player2_id %>
+  </li>
+
+  <li>
+    <strong>Starting datetime:</strong>
+    <%= @match.starting_datetime %>
+  </li>
+
+  <li>
+    <strong>Score:</strong>
+    <%= @match.score %>
+  </li>
+
+  <li>
+    <strong>Location:</strong>
+    <%= @match.location_id %>
+  </li>
+
+  <li>
+    <strong>Phase:</strong>
+    <%= @match.phase_id %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @match.status_id %>
+  </li>
+
+  <li>
+    <strong>Player unit:</strong>
+    <%= @match.player_unit_id %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.match_path(@conn, :edit, @match) %></span> |
+<span><%= link "Back", to: Routes.match_path(@conn, :index) %></span>

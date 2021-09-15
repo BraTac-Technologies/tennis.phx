@@ -1,0 +1,14 @@
+<form phx-submit="add_match">
+
+  <%= text_input :player1, :player1_id %>
+  <%= text_input :player2, :player2_id %>
+  <%= datetime_select :starting_datetime, :starting_datetime %>
+  <%= text_input :score, :score %>
+  <%= text_input :location_id, :location_id %>
+  <%= text_input :phase_id, :phase_id %>
+  <%= text_input :status_id, :status_id %>
+  <%= text_input :player_unit_id, :player_unit_id %>
+
+<%= submit "Add", phx_disable_with: "Adding...." %>
+
+</form>

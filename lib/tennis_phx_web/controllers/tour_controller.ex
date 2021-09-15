@@ -3,10 +3,12 @@ defmodule TennisPhxWeb.TourController do
 
   alias TennisPhx.Events
   alias TennisPhx.Events.Tour
+  alias TennisPhx.Participants
 
   def index(conn, _params) do
     tours = Events.list_tours()
-    render(conn, "index.html", tours: tours)
+    players = Participants.list_players()
+    render(conn, "index.html", tours: tours, players: players)
   end
 
   def new(conn, _params) do

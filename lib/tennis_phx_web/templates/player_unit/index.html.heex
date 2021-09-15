@@ -1,0 +1,26 @@
+<h1>Listing Player units</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for player_unit <- @player_units do %>
+    <tr>
+      <td><%= player_unit.name %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.player_unit_path(@conn, :show, player_unit) %></span>
+        <span><%= link "Edit", to: Routes.player_unit_path(@conn, :edit, player_unit) %></span>
+        <span><%= link "Delete", to: Routes.player_unit_path(@conn, :delete, player_unit), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Player unit", to: Routes.player_unit_path(@conn, :new) %></span>

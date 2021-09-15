@@ -20,12 +20,19 @@ defmodule TennisPhxWeb.Router do
     get "/", PageController, :index
     resources "/tours", TourController
     resources "/players", PlayerController
+    live "/match/live_form", MatchLive
   end
 
   scope "/", TennisPhxWeb do
     pipe_through :browser
 
     live "/tour_live/:id", TourLive
+    resources "/locations", LocationController
+    resources "/phases", PhaseController
+    resources "/statuses", StatusController
+    resources "/player_units", Player_unitController
+    resources "/matches", MatchController
+
   end
 
   # Other scopes may use custom stacks.

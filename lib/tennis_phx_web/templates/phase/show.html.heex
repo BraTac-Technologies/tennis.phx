@@ -1,0 +1,13 @@
+<h1>Show Phase</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @phase.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.phase_path(@conn, :edit, @phase) %></span> |
+<span><%= link "Back", to: Routes.phase_path(@conn, :index) %></span>

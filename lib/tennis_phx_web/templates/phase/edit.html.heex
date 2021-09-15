@@ -1,0 +1,5 @@
+<h1>Edit Phase</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.phase_path(@conn, :update, @phase)) %>
+
+<span><%= link "Back", to: Routes.phase_path(@conn, :index) %></span>

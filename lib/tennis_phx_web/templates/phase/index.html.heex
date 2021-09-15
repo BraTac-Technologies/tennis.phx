@@ -1,0 +1,26 @@
+<h1>Listing Phases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for phase <- @phases do %>
+    <tr>
+      <td><%= phase.name %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.phase_path(@conn, :show, phase) %></span>
+        <span><%= link "Edit", to: Routes.phase_path(@conn, :edit, phase) %></span>
+        <span><%= link "Delete", to: Routes.phase_path(@conn, :delete, phase), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Phase", to: Routes.phase_path(@conn, :new) %></span>
