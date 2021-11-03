@@ -84,5 +84,34 @@ defmodule TennisPhxWeb.TourLive do
     {:noreply, socket}
   end
 
+  def handle_event("add_match_result", %{
+                  "player1_id_in_score" => %{"player1_id_in_score" => player1_id_in_score},
+                  "player2_id_in_score" => %{"player2_id_in_score" => player2_id_in_score},
+                  "score" => %{
+                    "game1" => %{
+                      "points1_for_first_player" => points1_for_first_player,
+                      "points1_for_second_player" => points1_for_second_player
+                    },
+                    "game2" => %{
+                      "points2_for_first_player" => points2_for_first_player,
+                      "points2_for_second_player" => points2_for_second_player
+                    },
+                    "game3" => %{
+                      "points3_for_first_player" => points3_for_first_player,
+                      "points3_for_second_player" => points3_for_second_player
+                    },
+                    "game4" => %{
+                      "points4_for_first_player" => points4_for_first_player,
+                      "points4_for_second_player" => points4_for_second_player
+                    }
+                  }
+                }, socket) do
+
+    if points1_for_first_player - 2 >= points1_for_second_player do
+      # Create game for first player else for player2
+    end
+    {:noreply, socket}
+  end
+
 
 end
