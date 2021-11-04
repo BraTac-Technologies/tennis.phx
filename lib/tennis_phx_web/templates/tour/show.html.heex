@@ -284,46 +284,26 @@
                                       <h1> Player1: <%= match.first_player.name %> </h1>
                                       <h1> Player2: <%= match.second_player.name %></h1>
 
-
-                                      <!-- <%= f = form_for @changeset, "#", phx_submit: "add_match_result"> %>
+                                      <.form let={f} for={@changeset}, phx_submit: "add_match_result">
+                                        <div>
+                                          <%= hidden_input f, :first_player_id, value: match.first_player.id %>
+                                          <%= hidden_input f, :second_player_id, value: match.second_player.id %>
+                                        </div>
                                         <%= inputs_for f, :score, fn ff -> %>
                                           <div class="mb-4">
-                                            <%= label f, :game1_for_first_player %>
-                                            <%= number_input f, :game1_for_first_player, class: "form-control" %>
-                                            <%= error_tag f, :game1_for_first_player %>
+                                            <%= label ff, :game1_for_first_player %>
+                                            <%= text_input ff, :game1_for_first_player, class: "form-control" %>
+                                            <%= error_tag ff, :game1_for_first_player %>
                                           </div>
                                           <div class="mb-4">
-                                            <%= label f, :game1_for_second_player %>
-                                            <%= number_input f, :game1_for_second_player, class: "form-control" %>
-                                            <%= error_tag f, :game1_for_second_player %>
+                                            <%= label ff, :game1_for_second_player %>
+                                            <%= text_input ff, :game1_for_second_player, class: "form-control" %>
+                                            <%= error_tag ff, :game1_for_second_player %>
                                           </div>
                                         <% end %>
-                                    </form> -->
+                                        <%= submit "Check it" %>
+                                    </.form>
 
-
-
-                                      <form phx-submit="add_match_result">
-
-                                        <%= hidden_input :player1_id_in_score, :player1_id_in_score, value: match.first_player.id %>
-                                        <%= hidden_input :player2_id_in_score, :player2_id_in_score, value: match.second_player.id %>
-
-                                        <%= number_input :game1_for_first_player, :points1_for_first_player, name: "score[game1][points1_for_first_player]", class: "form-control" %>
-                                        <%= number_input :game1_for_second_player, :points1_for_second_player, name: "score[game1][points1_for_second_player]", class: "form-control" %>
-
-                                        <%= number_input :game2_for_first_player, :points2_for_first_player, name: "score[game2][points2_for_first_player]", class: "form-control" %>
-                                        <%= number_input :game2_for_second_player, :points2_for_second_player, name: "score[game2][points2_for_second_player]", class: "form-control" %>
-
-                                        <%= number_input :game3_for_first_player, :points3_for_first_player, name: "score[game3][points3_for_first_player]", class: "form-control" %>
-                                        <%= number_input :game3_for_second_player, :points3_for_second_player, name: "score[game3][points3_for_second_player]", class: "form-control" %>
-
-                                        <%= number_input :game4_for_first_player, :points4_for_first_player, name: "score[game4][points4_for_first_player]", class: "form-control" %>
-                                        <%= number_input :game4_for_second_player, :points4_for_second_player, name: "score[game4][points4_for_second_player]", class: "form-control" %>
-
-
-                                        <%= submit "Add", class: "close-modal w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm", phx_disable_with: "Adding...." %>
-
-
-                                        </form>
                                     </div>
                                   </div>
                                 </div>
