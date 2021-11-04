@@ -11,6 +11,7 @@ defmodule TennisPhxWeb.TourLive do
   alias TennisPhx.PlayerUnits
   alias TennisPhx.Statuses
   alias TennisPhx.Matches
+  alias TennisPhx.Matches.Match
 
 
 
@@ -27,6 +28,7 @@ defmodule TennisPhxWeb.TourLive do
     player_units = PlayerUnits.list_player_units()
     match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase)
     matches = Matches.list_matches()
+    changeset = Matches.change_match(%Match{})
     players_for_tour = tour.players |> Repo.preload(:tours)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
@@ -40,6 +42,7 @@ defmodule TennisPhxWeb.TourLive do
         phases: phases,
         player_units: player_units,
         match_for_tour: match_for_tour,
+        changeset: changeset
       )
     {:ok, socket}
   end
@@ -84,34 +87,20 @@ defmodule TennisPhxWeb.TourLive do
     {:noreply, socket}
   end
 
-  def handle_event("add_match_result", %{
-                  "player1_id_in_score" => %{"player1_id_in_score" => player1_id_in_score},
-                  "player2_id_in_score" => %{"player2_id_in_score" => player2_id_in_score},
-                  "score" => %{
-                    "game1" => %{
-                      "points1_for_first_player" => points1_for_first_player,
-                      "points1_for_second_player" => points1_for_second_player
-                    },
-                    "game2" => %{
-                      "points2_for_first_player" => points2_for_first_player,
-                      "points2_for_second_player" => points2_for_second_player
-                    },
-                    "game3" => %{
-                      "points3_for_first_player" => points3_for_first_player,
-                      "points3_for_second_player" => points3_for_second_player
-                    },
-                    "game4" => %{
-                      "points4_for_first_player" => points4_for_first_player,
-                      "points4_for_second_player" => points4_for_second_player
-                    }
-                  }
-                }, socket) do
+  def handle_event("add_match_result", %{"match" => params}, socket) do
 
-    if points1_for_first_player - 2 >= points1_for_second_player do
-      # Create game for first player else for player2
+    case Matches.create_match(params) do
+      {:ok, match} ->
+        socket = update(socket, :matches, fn matches -> [match | matches ] end)
+        changeset = Matches.assign_players_score(%Match{})
+
+        socket = assign(socket, changeset: changeset)
+        :timer.sleep(500)
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        socket = assign(socket, changeset: changeset)
+        {:noreply, socket}
     end
-    {:noreply, socket}
   end
-
-
 end
