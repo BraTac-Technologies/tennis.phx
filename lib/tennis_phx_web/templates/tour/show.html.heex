@@ -284,25 +284,7 @@
                                       <h1> Player1: <%= match.first_player.name %> </h1>
                                       <h1> Player2: <%= match.second_player.name %></h1>
 
-                                      <.form let={f} for={@changeset}, phx_submit: "add_match_result">
-                                        <div>
-                                          <%= hidden_input f, :first_player_id, value: match.first_player.id %>
-                                          <%= hidden_input f, :second_player_id, value: match.second_player.id %>
-                                        </div>
-                                        <%= inputs_for f, :score, fn ff -> %>
-                                          <div class="mb-4">
-                                            <%= label ff, :game1_for_first_player %>
-                                            <%= text_input ff, :game1_for_first_player, class: "form-control" %>
-                                            <%= error_tag ff, :game1_for_first_player %>
-                                          </div>
-                                          <div class="mb-4">
-                                            <%= label ff, :game1_for_second_player %>
-                                            <%= text_input ff, :game1_for_second_player, class: "form-control" %>
-                                            <%= error_tag ff, :game1_for_second_player %>
-                                          </div>
-                                        <% end %>
-                                        <%= submit "Check it" %>
-                                    </.form>
+
 
                                     </div>
                                   </div>
@@ -329,6 +311,41 @@
               </div>
             </div>
           </div>
+
+
+          <div class="mt-10 py-10 border-b border-gray-300 text-center">
+            <div class="flex flex-wrap justify-center">
+              <div>
+                <%= for match <- @match_for_tour do %>
+                <h1 class="text-4xl"> Show form </h1>
+
+                <.form let={f} for={@changeset}, phx-submit="add_match_result">
+                  <div>
+                    <%= hidden_input f, :first_player_id, value: match.first_player.id %>
+                    <%= hidden_input f, :second_player_id, value: match.second_player.id %>
+                    <%= hidden_input f, :match_id, value: match.id %>
+                  </div>
+                  <%= inputs_for f, :score, fn ff -> %>
+                    <div class="mb-4">
+                      <%= label ff, :game1_for_first_player %>
+                      <%= text_input ff, :game1_for_first_player, class: "form-control" %>
+                      <%= error_tag ff, :game1_for_first_player %>
+                    </div>
+                    <div class="mb-4">
+                      <%= label ff, :game1_for_second_player %>
+                      <%= text_input ff, :game1_for_second_player, class: "form-control" %>
+                      <%= error_tag ff, :game1_for_second_player %>
+                    </div>
+                  <% end %>
+                  <%= submit "Check it" %>
+              </.form>
+                <br>
+                <%= end %>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
     </div>
