@@ -87,15 +87,15 @@ defmodule TennisPhxWeb.TourLive do
     {:noreply, socket}
   end
 
-  def handle_event("add_match_result", %{"match" => params}, socket) do
-
-    case Matches.create_match(params) do
+  def handle_event("add_match_result", %{"match" => attrs}, socket) do
+    
+    case Matches.update_match(attrs) do
       {:ok, match} ->
         socket = update(socket, :matches, fn matches -> [match | matches ] end)
         changeset = Matches.assign_players_score(%Match{})
 
         socket = assign(socket, changeset: changeset)
-        :timer.sleep(500)
+
         {:noreply, socket}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -103,4 +103,5 @@ defmodule TennisPhxWeb.TourLive do
         {:noreply, socket}
     end
   end
+
 end
