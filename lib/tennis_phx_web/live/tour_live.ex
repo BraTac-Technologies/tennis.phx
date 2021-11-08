@@ -11,6 +11,7 @@ defmodule TennisPhxWeb.TourLive do
   alias TennisPhx.PlayerUnits
   alias TennisPhx.Statuses
   alias TennisPhx.Matches
+  alias TennisPhx.Matches.Match
 
 
 
@@ -27,6 +28,7 @@ defmodule TennisPhxWeb.TourLive do
     player_units = PlayerUnits.list_player_units()
     match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase)
     matches = Matches.list_matches()
+    changeset = Matches.change_match(%Match{})
     players_for_tour = tour.players |> Repo.preload(:tours)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
@@ -40,6 +42,7 @@ defmodule TennisPhxWeb.TourLive do
         phases: phases,
         player_units: player_units,
         match_for_tour: match_for_tour,
+        changeset: changeset
       )
     {:ok, socket}
   end
@@ -84,5 +87,22 @@ defmodule TennisPhxWeb.TourLive do
     {:noreply, socket}
   end
 
+  def handle_event("add_match_result", %{"match" => attrs}, socket) do
+    match = Matches.get_match!(attrs["match_id"])
+
+    case Matches.update_match(match, attrs) do
+      {:ok, match} ->
+        
+        changeset = Matches.change_match(%Match{})
+
+        socket = assign(socket, changeset: changeset)
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        socket = assign(socket, changeset: changeset)
+        {:noreply, socket}
+    end
+  end
 
 end

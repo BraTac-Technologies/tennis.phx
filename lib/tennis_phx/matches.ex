@@ -27,6 +27,21 @@ defmodule TennisPhx.Matches do
     Repo.all(query)
   end
 
+  #
+
+
+  def assign_players_score(%Match{} = match, attrs \\ %{}) do
+    mm = match.id
+    query = from(ma in Matches, where: ma.match_id == ^mm and ma.first_player_id == ^first_player_id and ma.second_player_id == ^second_player_id, preload: [:match])
+    assoc = Repo.one(query)
+
+    assoc
+    |> Match.changeset(%{game1_for_first_player: game1_for_first_player, game1_for_second_player: game1_for_second_player})
+    |> Repo.update()
+  end
+
+  #
+
 
   def list_matches do
     Repo.all(Match)
