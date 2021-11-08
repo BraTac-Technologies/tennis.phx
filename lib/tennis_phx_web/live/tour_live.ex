@@ -92,7 +92,7 @@ defmodule TennisPhxWeb.TourLive do
 
     case Matches.update_match(match, attrs) do
       {:ok, match} ->
-        socket = update(socket, :matches, fn matches -> [match | matches ] end)
+        
         changeset = Matches.change_match(%Match{})
 
         socket = assign(socket, changeset: changeset)
