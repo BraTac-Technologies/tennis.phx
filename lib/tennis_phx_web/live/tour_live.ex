@@ -88,11 +88,12 @@ defmodule TennisPhxWeb.TourLive do
   end
 
   def handle_event("add_match_result", %{"match" => attrs}, socket) do
-    
-    case Matches.update_match(attrs) do
+    match = Matches.get_match!(attrs["match_id"])
+
+    case Matches.update_match(match, attrs) do
       {:ok, match} ->
         socket = update(socket, :matches, fn matches -> [match | matches ] end)
-        changeset = Matches.assign_players_score(%Match{})
+        changeset = Matches.change_match(%Match{})
 
         socket = assign(socket, changeset: changeset)
 
