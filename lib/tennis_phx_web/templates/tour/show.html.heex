@@ -97,6 +97,11 @@
                Starts in: <%= @tour.date %>
             </div>
           </div>
+
+<!-- END Tour Intro -->
+
+<!-- Check Players Section -->
+
           <div class="mt-10 py-10 border-t border-b border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
@@ -126,6 +131,10 @@
               </div>
             </div>
           </div>
+
+<!-- END Check Players Section -->
+
+<!-- Create Match Section -->
 
           <div class="mt-10 py-10 border-b border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
@@ -205,7 +214,7 @@
           </div>
         </div>
 
-
+<!-- END Create Match Section -->
 
 <!-- Assign Score Section -->
 
@@ -286,189 +295,171 @@
 
                             </tr>
 
-<!--  ============  modal content  ============    -->
-        <div id={"score-modal-#{match.id}"} class="hidden modal">
-          <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <!--
-          Background overlay, show/hide based on modal state.
+<!--  ============  modal content for match score ============    -->
 
-          Entering: "ease-out duration-300"
-          From: "opacity-0"
-          To: "opacity-100"
-          Leaving: "ease-in duration-200"
-          From: "opacity-100"
-          To: "opacity-0"
-          -->
-          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+                          <div id={"score-modal-#{match.id}"} class="hidden modal">
+                            <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
-          <!-- This element is to trick the browser into centering the modal contents. -->
-          <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-          <!--
-          Modal panel, show/hide based on modal state.
+                            <!-- This element is to trick the browser into centering the modal contents. -->
+                            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-          Entering: "ease-out duration-300"
-          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          To: "opacity-100 translate-y-0 sm:scale-100"
-          Leaving: "ease-in duration-200"
-          From: "opacity-100 translate-y-0 sm:scale-100"
-          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          -->
-          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <.form let={f} for={@changeset}, phx-submit="add_match_result">
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
-          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-            <!-- Heroicon name: outline/exclamation -->
-            <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-          </div>
-          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <!-- <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-              Add match score
-            </h3> -->
-            <!-- <div class="mt-2">
-              <p class="text-sm text-gray-500">
-                Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.
-              </p>
-            </div> -->
+                            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                            <.form let={f} for={@changeset}, phx-submit="add_match_result">
+                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                              <!-- Heroicon name: outline/exclamation -->
+                              <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                              </svg>
+                            </div>
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                              <!-- <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                Add match score
+                              </h3> -->
+                              <!-- <div class="mt-2">
+                                <p class="text-sm text-gray-500">
+                                  Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.
+                                </p>
+                              </div> -->
 
-              <%= hidden_input f, :first_player_id, value: match.first_player.id %>
-              <%= hidden_input f, :second_player_id, value: match.second_player.id %>
-              <%= hidden_input f, :match_id, value: match.id %>
+                                <%= hidden_input f, :first_player_id, value: match.first_player.id %>
+                                <%= hidden_input f, :second_player_id, value: match.second_player.id %>
+                                <%= hidden_input f, :match_id, value: match.id %>
 
-            <div class="flex flex-wrap -mx-3 mb-6">
-              <%= inputs_for f, :score, fn ff -> %>
+                              <div class="flex flex-wrap -mx-3 mb-6">
+                                <%= inputs_for f, :score, fn ff -> %>
 
-              <!-- GAME 1 part 1 -->
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  <%= match.first_player.name %>
-                </label>
+<!-- GAME 1 part 1 -->
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    <%= match.first_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game1_for_first_player, placeholder: "Game 1", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game1_for_first_player %>
+                                    <%= number_input ff, :game1_for_first_player, placeholder: "Game 1", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game1_for_first_player %>
 
-              </div>
+                                </div>
 
-              <!-- GAME 1 part 2 -->
-              <div class="w-full md:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  <%= match.second_player.name %>
-                </label>
+<!-- GAME 1 part 2 -->
+                                <div class="w-full md:w-1/2 px-3">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    <%= match.second_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game1_for_second_player, placeholder: "Game 1", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game1_for_second_player %>
+                                    <%= number_input ff, :game1_for_second_player, placeholder: "Game 1", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game1_for_second_player %>
 
-              </div>
-              <!-- GAME 2 part 1 -->
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  <%= match.first_player.name %>
-                </label>
+                                </div>
+<!-- GAME 2 part 1 -->
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    <%= match.first_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game2_for_first_player, placeholder: "Game 2", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game2_for_first_player %>
+                                    <%= number_input ff, :game2_for_first_player, placeholder: "Game 2", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game2_for_first_player %>
 
-              </div>
+                                </div>
 
-              <!-- GAME 2 part 2 -->
-              <div class="w-full md:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  <%= match.second_player.name %>
-                </label>
+<!-- GAME 2 part 2 -->
+                                <div class="w-full md:w-1/2 px-3">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    <%= match.second_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game2_for_second_player, placeholder: "Game 2", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game2_for_second_player %>
+                                    <%= number_input ff, :game2_for_second_player, placeholder: "Game 2", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game2_for_second_player %>
 
-              </div>
-              <!-- GAME 3 part 1 -->
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  <%= match.first_player.name %>
-                </label>
+                                </div>
+<!-- GAME 3 part 1 -->
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    <%= match.first_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game3_for_first_player, placeholder: "Game 3", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game3_for_first_player %>
+                                    <%= number_input ff, :game3_for_first_player, placeholder: "Game 3", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game3_for_first_player %>
 
-              </div>
+                                </div>
 
-              <!-- GAME 3 part 2 -->
-              <div class="w-full md:w-1/2 px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  <%= match.second_player.name %>
-                </label>
+<!-- GAME 3 part 2 -->
+                                <div class="w-full md:w-1/2 px-3">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    <%= match.second_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game3_for_second_player, placeholder: "Game 3", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game3_for_second_player %>
+                                    <%= number_input ff, :game3_for_second_player, placeholder: "Game 3", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game3_for_second_player %>
 
-              </div>
-              <!-- GAME 4 part 1 -->
-              <div id={"game4_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  <%= match.first_player.name %>
-                </label>
+                                </div>
+<!-- GAME 4 part 1 -->
+                                <div id={"game4_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    <%= match.first_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game4_for_first_player, placeholder: "Game 4", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game4_for_first_player %>
+                                    <%= number_input ff, :game4_for_first_player, placeholder: "Game 4", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game4_for_first_player %>
 
-              </div>
+                                </div>
 
-              <!-- GAME 4 part 2 -->
-              <div id={"game4_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  <%= match.second_player.name %>
-                </label>
+<!-- GAME 4 part 2 -->
+                                <div id={"game4_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    <%= match.second_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game4_for_second_player, placeholder: "Game 4", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game4_for_second_player %>
+                                    <%= number_input ff, :game4_for_second_player, placeholder: "Game 4", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game4_for_second_player %>
 
-              </div>
-              <!-- GAME 5 part 1 -->
-              <div id={"game5_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden ">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  <%= match.first_player.name %>
-                </label>
+                                </div>
+<!-- GAME 5 part 1 -->
+                                <div id={"game5_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden ">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    <%= match.first_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game5_for_first_player, placeholder: "Game 5", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game5_for_first_player %>
+                                    <%= number_input ff, :game5_for_first_player, placeholder: "Game 5", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game5_for_first_player %>
 
-              </div>
+                                </div>
 
-              <!-- GAME 5 part 2 -->
-              <div id={"game5_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  <%= match.second_player.name %>
-                </label>
+<!-- GAME 5 part 2 -->
+                                <div id={"game5_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
+                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    <%= match.second_player.name %>
+                                  </label>
 
-                  <%= number_input ff, :game5_for_second_player, placeholder: "Game 5", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
-                  <%= error_tag ff, :game5_for_second_player %>
+                                    <%= number_input ff, :game5_for_second_player, placeholder: "Game 5", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+                                    <%= error_tag ff, :game5_for_second_player %>
 
-              </div>
-              <button id ={"button_for_game4_#{match.id}"} onclick={"CreateGame4_#{match.id}()"}>Create Game 4</button>
-              <button id ={"button_for_game5_#{match.id}"} onclick={"CreateGame5_#{match.id}()"} class="hidden">Create Game 5</button>
+                                </div>
+                                <button id ={"button_for_game4_#{match.id}"} onclick={"CreateGame4_#{match.id}()"}>Create Game 4</button>
+                                <button id ={"button_for_game5_#{match.id}"} onclick={"CreateGame5_#{match.id}()"} class="hidden">Create Game 5</button>
 
 
-              <% end %>
-            </div>
+                                <% end %>
+                              </div>
 
 
-          </div>
-          </div>
-          </div>
-          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <%= submit "Check it", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
-          <span class={"score-modal-close-#{match.id}"}>&times;</span>
-          </div>
-          </.form>
-          </div>
-          </div>
-          </div>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <%= submit "Check it", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+                            <span class={"score-modal-close-#{match.id}"}>&times;</span>
+                            </div>
+                            </.form>
+                            </div>
+                            </div>
+                            </div>
 
 
-                </div>
+                                  </div>
 
 
 
@@ -487,6 +478,14 @@
           </div>
 
 <!-- End Section Assign score -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- JS script -->
 
 
 <%= for match <- @match_for_tour do %>
@@ -538,23 +537,3 @@ function CreateGame5_<%= match.id %>() {
 </script>
 
 <%= end %>
-
-
-          <!-- Overlay for modal -->
-
-          <div
-          	class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
-          	id="score-modal-overlay"
-          ></div>
-
-          <!-- END Overlay for modal -->
-
-
-
-
-
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
