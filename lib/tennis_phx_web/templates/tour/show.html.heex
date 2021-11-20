@@ -406,7 +406,7 @@
 
               </div>
               <!-- GAME 4 part 1 -->
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <div id={"game4_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                   <%= match.first_player.name %>
                 </label>
@@ -417,7 +417,7 @@
               </div>
 
               <!-- GAME 4 part 2 -->
-              <div class="w-full md:w-1/2 px-3">
+              <div id={"game4_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                   <%= match.second_player.name %>
                 </label>
@@ -427,7 +427,7 @@
 
               </div>
               <!-- GAME 5 part 1 -->
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <div id={"game5_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden ">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                   <%= match.first_player.name %>
                 </label>
@@ -438,7 +438,7 @@
               </div>
 
               <!-- GAME 5 part 2 -->
-              <div class="w-full md:w-1/2 px-3">
+              <div id={"game5_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                   <%= match.second_player.name %>
                 </label>
@@ -447,6 +447,8 @@
                   <%= error_tag ff, :game5_for_second_player %>
 
               </div>
+              <button id ={"button_for_game4_#{match.id}"} onclick={"CreateGame4_#{match.id}()"}>Create Game 4</button>
+              <button id ={"button_for_game5_#{match.id}"} onclick={"CreateGame5_#{match.id}()"} class="hidden">Create Game 5</button>
 
 
               <% end %>
@@ -513,10 +515,30 @@ window.onclick = function(event) {
   }
 }
 
+function CreateGame4_<%= match.id%>() {
+  var game4_part1_<%= match.id %> = document.getElementById("game4_part1_<%= match.id %>");
+  var game4_part2_<%= match.id %> = document.getElementById("game4_part2_<%= match.id %>");
+  var button_for_game4_<%= match.id %> = document.getElementById("button_for_game4_<%= match.id %>");
+  var button_for_game5_<%= match.id %> = document.getElementById("button_for_game5_<%= match.id %>");
+  game4_part1_<%= match.id %>.classList.remove("hidden");
+  game4_part2_<%= match.id %>.classList.remove("hidden");
+  button_for_game5_<%= match.id %>.classList.remove("hidden");
+  button_for_game4_<%= match.id %>.classList.add("hidden");
+}
+function CreateGame5_<%= match.id %>() {
+  var game5_part1_<%= match.id %> = document.getElementById("game5_part1_<%= match.id %>");
+  var game5_part2_<%= match.id %> = document.getElementById("game5_part2_<%= match.id %>");
+  var button_for_game5_<%= match.id %> = document.getElementById("button_for_game5_<%= match.id %>");
+  game5_part1_<%= match.id %>.classList.remove("hidden");
+  game5_part2_<%= match.id %>.classList.remove("hidden");
+  button_for_game5_<%= match.id %>.classList.add("hidden");
+}
+
 
 </script>
 
 <%= end %>
+
 
           <!-- Overlay for modal -->
 
