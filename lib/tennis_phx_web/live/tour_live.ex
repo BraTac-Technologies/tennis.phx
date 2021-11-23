@@ -66,26 +66,6 @@ defmodule TennisPhxWeb.TourLive do
     {:noreply, socket}
   end
 
-  def handle_event("assign_match", %{
-                                    "player1" => %{"player1_id" => player1_id},
-                                    "player2" => %{"player2_id" => player2_id},
-                                    "date" => %{"date" => %{
-                                                            "day" => day,
-                                                            "month" => month,
-                                                            "year" => year
-                                                                          }
-                                                                        },
-                                    "location" => %{"location" => location},
-                                    "phase" => %{"phase" => phase},
-                                    "unit" => %{"unit" => unit},
-                                    }, socket) do
-
-
-    tour = socket.assigns[:tour]
-           |> Repo.preload(:players)
-    Matches.assign_match(tour, player1_id, player2_id, day, month, year, location, phase, unit)
-    {:noreply, socket}
-  end
 
   def handle_event("assign_match_info", %{"match" => attrs}, socket) do
 
@@ -98,8 +78,7 @@ defmodule TennisPhxWeb.TourLive do
         {:noreply, socket}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset.errors, label: "SHOW ERROR")
-
+                
         socket = assign(socket, changeset: changeset)
         {:noreply, socket}
       end
