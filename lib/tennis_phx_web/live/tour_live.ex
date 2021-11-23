@@ -26,7 +26,8 @@ defmodule TennisPhxWeb.TourLive do
     locations = Locations.list_locations()
     phases = Phases.list_phases()
     player_units = PlayerUnits.list_player_units()
-    match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase)
+    statuses = Statuses.list_statuses()
+    match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
     matches = Matches.list_matches()
     changeset = Matches.change_match(%Match{})
     players_for_tour = tour.players |> Repo.preload(:tours)
@@ -41,6 +42,7 @@ defmodule TennisPhxWeb.TourLive do
         locations: locations,
         phases: phases,
         player_units: player_units,
+        statuses: statuses,
         match_for_tour: match_for_tour,
         changeset: changeset
       )
@@ -66,25 +68,22 @@ defmodule TennisPhxWeb.TourLive do
     {:noreply, socket}
   end
 
-  def handle_event("assign_match", %{
-                                    "player1" => %{"player1_id" => player1_id},
-                                    "player2" => %{"player2_id" => player2_id},
-                                    "date" => %{"date" => %{
-                                                            "day" => day,
-                                                            "month" => month,
-                                                            "year" => year
-                                                                          }
-                                                                        },
-                                    "location" => %{"location" => location},
-                                    "phase" => %{"phase" => phase},
-                                    "unit" => %{"unit" => unit},
-                                    }, socket) do
 
+  def handle_event("assign_match_info", %{"match" => attrs}, socket) do
 
-    tour = socket.assigns[:tour]
-           |> Repo.preload(:players)
-    Matches.assign_match(tour, player1_id, player2_id, day, month, year, location, phase, unit)
-    {:noreply, socket}
+    case Matches.create_match(attrs) do
+      {:ok, match} ->
+        changeset = Matches.change_match(%Match{})
+
+        socket = assign(socket, changeset: changeset)
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+
+        socket = assign(socket, changeset: changeset)
+        {:noreply, socket}
+      end
   end
 
   def handle_event("add_match_result", %{"match" => attrs}, socket) do
@@ -92,7 +91,7 @@ defmodule TennisPhxWeb.TourLive do
 
     case Matches.update_match(match, attrs) do
       {:ok, match} ->
-        
+
         changeset = Matches.change_match(%Match{})
 
         socket = assign(socket, changeset: changeset)
