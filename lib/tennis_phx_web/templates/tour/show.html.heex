@@ -171,7 +171,7 @@
                           </label>
                           <%= date_select f, :starting_datetime %>
                       </div>
-                  
+
 
                       <br>
 
@@ -292,9 +292,21 @@
                                 <%= match.phase.name %>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap">
+                                <%= if match.status.id == 1 do %>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  Active
+                                  <%= match.status.name %>
                                 </span>
+                                <%= end %>
+                                <%= if match.status.id == 2 do %>
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-green-800">
+                                  <%= match.status.name %>
+                                </span>
+                                <%= end %>
+                                <%= if match.status.id == 3 do %>
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-green-800">
+                                  <%= match.status.name %>
+                                </span>
+                                <%= end %>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button id ={"score-modal-btn-#{match.id}"} class="text-indigo-600 hover:text-indigo-900"> Open Modal </button>
@@ -343,7 +355,7 @@
 
 <!-- GAME 1 part 1 -->
                                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                  <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                                     <%= match.first_player.name %>
                                   </label>
 
@@ -354,7 +366,7 @@
 
 <!-- GAME 1 part 2 -->
                                 <div class="w-full md:w-1/2 px-3">
-                                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                  <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                                     <%= match.second_player.name %>
                                   </label>
 
@@ -365,7 +377,7 @@
 <!-- GAME 2 part 1 -->
                                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                    <%= match.first_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game2_for_first_player, placeholder: "Game 2", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -376,7 +388,7 @@
 <!-- GAME 2 part 2 -->
                                 <div class="w-full md:w-1/2 px-3">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    <%= match.second_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game2_for_second_player, placeholder: "Game 2", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -386,7 +398,7 @@
 <!-- GAME 3 part 1 -->
                                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                    <%= match.first_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game3_for_first_player, placeholder: "Game 3", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -397,7 +409,7 @@
 <!-- GAME 3 part 2 -->
                                 <div class="w-full md:w-1/2 px-3">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    <%= match.second_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game3_for_second_player, placeholder: "Game 3", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -407,7 +419,7 @@
 <!-- GAME 4 part 1 -->
                                 <div id={"game4_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                    <%= match.first_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game4_for_first_player, placeholder: "Game 4", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -418,7 +430,7 @@
 <!-- GAME 4 part 2 -->
                                 <div id={"game4_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    <%= match.second_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game4_for_second_player, placeholder: "Game 4", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -428,7 +440,7 @@
 <!-- GAME 5 part 1 -->
                                 <div id={"game5_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden ">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                    <%= match.first_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game5_for_first_player, placeholder: "Game 5", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -439,7 +451,7 @@
 <!-- GAME 5 part 2 -->
                                 <div id={"game5_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                                    <%= match.second_player.name %>
+
                                   </label>
 
                                     <%= number_input ff, :game5_for_second_player, placeholder: "Game 5", class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
@@ -456,6 +468,10 @@
 
                             </div>
                             </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
+                            <%= select(f, :status_id, Enum.map(@statuses, &{&1.name, &1.id}), prompt: [key: "Choose a match status"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+
                             </div>
                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                             <%= submit "Check it", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>

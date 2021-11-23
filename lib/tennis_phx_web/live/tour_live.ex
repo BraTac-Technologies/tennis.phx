@@ -26,7 +26,8 @@ defmodule TennisPhxWeb.TourLive do
     locations = Locations.list_locations()
     phases = Phases.list_phases()
     player_units = PlayerUnits.list_player_units()
-    match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase)
+    statuses = Statuses.list_statuses()
+    match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
     matches = Matches.list_matches()
     changeset = Matches.change_match(%Match{})
     players_for_tour = tour.players |> Repo.preload(:tours)
@@ -41,6 +42,7 @@ defmodule TennisPhxWeb.TourLive do
         locations: locations,
         phases: phases,
         player_units: player_units,
+        statuses: statuses,
         match_for_tour: match_for_tour,
         changeset: changeset
       )
@@ -78,7 +80,7 @@ defmodule TennisPhxWeb.TourLive do
         {:noreply, socket}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-                
+
         socket = assign(socket, changeset: changeset)
         {:noreply, socket}
       end
