@@ -87,12 +87,30 @@ defmodule TennisPhxWeb.TourLive do
     {:noreply, socket}
   end
 
+  def handle_event("assign_match_info", %{"match" => attrs}, socket) do
+
+    case Matches.create_match(attrs) do
+      {:ok, match} ->
+        changeset = Matches.change_match(%Match{})
+
+        socket = assign(socket, changeset: changeset)
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect(changeset.errors, label: "SHOW ERROR")
+
+        socket = assign(socket, changeset: changeset)
+        {:noreply, socket}
+      end
+  end
+
   def handle_event("add_match_result", %{"match" => attrs}, socket) do
     match = Matches.get_match!(attrs["match_id"])
 
     case Matches.update_match(match, attrs) do
       {:ok, match} ->
-        
+
         changeset = Matches.change_match(%Match{})
 
         socket = assign(socket, changeset: changeset)
