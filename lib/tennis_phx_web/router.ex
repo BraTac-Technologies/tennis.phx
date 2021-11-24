@@ -94,6 +94,7 @@ defmodule TennisPhxWeb.Router do
     put "/admins/settings", AdminSettingsController, :update
     get "/admins/settings/confirm_email/:token", AdminSettingsController, :confirm_email
     live "/admin/dashboard", DashboardLive
+    live "/admin/tour_live/:id", AdminTourLive
   end
 
   scope "/", TennisPhxWeb do
