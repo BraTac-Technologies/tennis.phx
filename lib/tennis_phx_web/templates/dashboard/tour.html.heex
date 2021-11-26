@@ -52,6 +52,13 @@
               class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
             >
               <div class="py-6 px-3 mt-32 sm:mt-0">
+                  <%= link "New Tour", to: Routes.tour_path(@socket, :new), class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1" %>
+              </div>
+            </div>
+            <div
+              class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
+            >
+              <div class="py-6 px-3 mt-32 sm:mt-0">
 
 
 
@@ -147,7 +154,7 @@
 
 
                     <.form let={f} for={@changeset}, phx-submit="assign_match_info">
-
+                      <%= hidden_input f, :status_id, value: 1 %>
                       <%= hidden_input f, :tour_id, value: @tour.id %>
                       <div class="flex flex-wrap -mx-3 mb-6">
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -251,6 +258,9 @@
                               <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Result
                               </th>
+                              <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Admin
+                              </th>
                             </tr>
                           </thead>
                           <tbody class="bg-white divide-y divide-gray-200">
@@ -296,20 +306,24 @@
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                   <%= match.status.name %>
                                 </span>
-                                <%= end %>
+                                <% end %>
                                 <%= if match.status.id == 2 do %>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-green-800">
                                   <%= match.status.name %>
                                 </span>
-                                <%= end %>
+                                <% end %>
                                 <%= if match.status.id == 3 do %>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-green-800">
                                   <%= match.status.name %>
                                 </span>
-                                <%= end %>
+                                <% end %>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button id ={"score-modal-btn-#{match.id}"} class="text-indigo-600 hover:text-indigo-900"> Open Modal </button>
+                                <!-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Add score</a> -->
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <button class="text-indigo-600 hover:text-indigo-900"> DELETE </button>
                                 <!-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Add score</a> -->
                               </td>
 

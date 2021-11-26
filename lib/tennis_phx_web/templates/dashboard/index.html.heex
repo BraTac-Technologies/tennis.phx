@@ -453,7 +453,7 @@
                       <%= for tour <- @tours do %>
                         <tr>
                           <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                            <%= link tour.title , to: Routes.live_path(@socket, TennisPhxWeb.TourLive, tour) %>
+                            <%= link tour.title , to: Routes.live_path(@socket, TennisPhxWeb.AdminTourLive, tour) %>
                           </th>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                             <%= tour.date %>
