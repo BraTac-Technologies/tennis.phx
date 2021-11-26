@@ -20,6 +20,10 @@ defmodule TennisPhx.Participants do
   def list_players do
     Repo.all(Player)
   end
+  def list_players_ranking do
+    filter = from(p in Player, order_by: [desc: p.points])
+    Repo.all(filter)
+  end
 
   @doc """
   Gets a single player.
