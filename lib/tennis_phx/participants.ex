@@ -38,7 +38,7 @@ defmodule TennisPhx.Participants do
   def get_player!(id) do
     Repo.get!(Player, id)
     |> Repo.preload(:tours)
-  end  
+  end
 
   @doc """
   Creates a player.
@@ -73,6 +73,18 @@ defmodule TennisPhx.Participants do
   def update_player(%Player{} = player, attrs) do
     player
     |> Player.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def assign_player_points(%Player{} = player, points_for_player) do
+    pp = player.points
+    pi = player.id
+    updated_points = pp + String.to_integer(points_for_player)
+    query = from(p in Player, where: p.id == ^pi)
+    assoc = Repo.one(query)
+
+    assoc
+    |> Player.changeset(%{points: updated_points})
     |> Repo.update()
   end
 
