@@ -57,6 +57,6 @@ defmodule TennisPhxWeb.MatchController do
 
     conn
     |> put_flash(:info, "Match deleted successfully.")
-    |> redirect(to: Routes.match_path(conn, :index))
+    
   end
 end
