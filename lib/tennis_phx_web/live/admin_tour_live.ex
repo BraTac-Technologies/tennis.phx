@@ -58,11 +58,12 @@ defmodule TennisPhxWeb.AdminTourLive do
   end
 
 
-
   def handle_event("add_points", %{"player_id" => %{"player_id" => player_id}, "player_points" => %{"points" => points_for_player}}, socket) do
     tour = socket.assigns[:tour]
            |> Repo.preload(:players)
     Events.assign_player_points(tour, player_id, points_for_player)
+    player = Participants.get_player!(player_id)
+    Participants.assign_player_points(player, points_for_player)
     {:noreply, socket}
   end
 
