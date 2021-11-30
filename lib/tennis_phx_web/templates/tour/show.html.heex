@@ -107,62 +107,58 @@
               <div class="w-full lg:w-9/12 px-4">
 
                 <!-- This example requires Tailwind CSS v2.0+ -->
-<ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-  <%= for match <- @match_for_tour do %>
-  <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-    <div class="w-full flex items-center justify-between p-6 space-x-6">
-      <table class="w-full">
-          <thead>
-            <tr>
-              <th class="bg-purple-300 w-full"></th>
-              <th class="bg-purple-300 text-right px-3"></th>
-              <th class="bg-purple-300 text-right px-3"></th>
-              <th class="bg-purple-300 text-right px-3"></th>
-              <th class="bg-purple-300 text-right px-3"></th>
-              <th class="bg-purple-300 text-right px-3"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left"><%= match.first_player.name %></td>
-              <td><%= match.score.game1_for_first_player %></td>
-              <td><%= match.score.game2_for_first_player %></td>
-              <td><%= match.score.game3_for_first_player %></td>
-              <td><%= match.score.game4_for_first_player %></td>
-              <td><%= match.score.game5_for_first_player %></td>
-            </tr>
-            <tr>
-              <td class="text-left"><%= match.second_player.name %></td>
-              <td><%= match.score.game1_for_second_player %></td>
-              <td><%= match.score.game2_for_second_player %></td>
-              <td><%= match.score.game3_for_second_player %></td>
-              <td><%= match.score.game4_for_second_player %></td>
-              <td><%= match.score.game5_for_second_player %></td>
-            </tr>
-          </tbody>
-        </table>
+                <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  <%= for match <- @match_for_tour do %>
+                  <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                    <div class="w-full flex items-center justify-between p-6 space-x-6">
+                      <table class="w-full">
+                          <thead>
+                            <tr>
+                              <th class="bg-purple-300 w-full"></th>
+                              <th class="bg-purple-300 text-right px-3"></th>
+                              <th class="bg-purple-300 text-right px-3"></th>
+                              <th class="bg-purple-300 text-right px-3"></th>
+                              <th class="bg-purple-300 text-right px-3"></th>
+                              <th class="bg-purple-300 text-right px-3"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-left"><%= match.first_player.name %></td>
+                              <td><%= match.score.game1_for_first_player %></td>
+                              <td><%= match.score.game2_for_first_player %></td>
+                              <td><%= match.score.game3_for_first_player %></td>
+                              <td><%= match.score.game4_for_first_player %></td>
+                              <td><%= match.score.game5_for_first_player %></td>
+                            </tr>
+                            <tr>
+                              <td class="text-left"><%= match.second_player.name %></td>
+                              <td><%= match.score.game1_for_second_player %></td>
+                              <td><%= match.score.game2_for_second_player %></td>
+                              <td><%= match.score.game3_for_second_player %></td>
+                              <td><%= match.score.game4_for_second_player %></td>
+                              <td><%= match.score.game5_for_second_player %></td>
+                            </tr>
+                          </tbody>
+                        </table>
 
-    </div>
-    <div>
-      <div class="-mt-px flex divide-x divide-gray-200">
+                    </div>
+                    <div>
+                      <div class="-mt-px flex divide-x divide-gray-200">
 
-        <div class="-ml-px w-0 flex-1 flex">
-          <a href="tel:+1-202-555-0170" class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-            <!-- Heroicon name: solid/phone -->
-            <% unless is_nil(match.status.name) %>
-              <span class="ml-3"><%= match.status.name %> </span>
-            <% end %>
-          </a>
-        </div>
-      </div>
-    </div>
-  </li>
+                        <div class="-ml-px w-0 flex-1 flex">
+                          <a href="tel:+1-202-555-0170" class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                            <!-- Heroicon name: solid/phone -->
 
-  <% end %>
-
-
-  <!-- More people... -->
-</ul>
+                              <span class="ml-3"><%= match.status.name %> </span>
+                            
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <% end %>
+                </ul>
 
               </div>
             </div>
