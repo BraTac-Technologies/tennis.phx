@@ -302,28 +302,29 @@
                                 <%= match.phase.name %>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap">
-                                <%= if match.status.id == 1 do %>
+                                <%# if match.status.id == 1 do %>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                  <%= match.status.name %>
+                                  <%# match.status.name %>
                                 </span>
-                                <% end %>
-                                <%= if match.status.id == 2 do %>
+                                <%# end %>
+                                <%# if match.status.id == 2 do %>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-green-800">
-                                  <%= match.status.name %>
+                                  <%# match.status.name %>
                                 </span>
-                                <% end %>
-                                <%= if match.status.id == 3 do %>
+                                <%# end %>
+                                <%# if match.status.id == 3 do %>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-green-800">
-                                  <%= match.status.name %>
+                                  <%# match.status.name %>
                                 </span>
-                                <% end %>
+                                <%# end %>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button id ={"score-modal-btn-#{match.id}"} class="text-indigo-600 hover:text-indigo-900"> Open Modal </button>
                                 <!-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Add score</a> -->
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <button class="text-indigo-600 hover:text-indigo-900"> DELETE </button>
+
+                                <%= link "Delete", to: Routes.match_path(@socket, :delete, match), method: :delete, class: "text-indigo-600 hover:text-indigo-900", data: [confirm: "Are you sure?"] %>
                                 <!-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Add score</a> -->
                               </td>
 
