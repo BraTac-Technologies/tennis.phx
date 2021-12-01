@@ -21,7 +21,8 @@ defmodule TennisPhxWeb.TourController do
       {:ok, tour} ->
         conn
         |> put_flash(:info, "Tour created successfully.")
-        |> redirect(to: Routes.tour_path(conn, :show, tour))
+        |> redirect(to: Routes.tour_path(conn, :index))
+        # Vremenno
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -46,7 +47,7 @@ defmodule TennisPhxWeb.TourController do
       {:ok, tour} ->
         conn
         |> put_flash(:info, "Tour updated successfully.")
-        |> redirect(to: Routes.tour_path(conn, :show, tour))
+        |> redirect(to: Routes.tour_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", tour: tour, changeset: changeset)
