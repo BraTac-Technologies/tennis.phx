@@ -447,6 +447,9 @@
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                           Players in Tour
                         </th>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
+                          Admin
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -465,6 +468,10 @@
                             <i class="fas fa-arrow-up text-green-500 mr-4"></i>
                             <%= Enum.count(tour.players) %>
                           </td>
+                          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+                            <%= link "Edit", to: Routes.tour_path(@socket, :edit, tour) %> |
+                            <%= link "Delete", to: Routes.tour_path(@socket, :delete, tour), method: :delete, data: [confirm: "Are you sure?"] %>
+                          </td>
                         </tr>
                       <% end %>
 
@@ -473,6 +480,73 @@
                 </div>
               </div>
 
+              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="rounded-t mb-0 px-4 py-3 border-0">
+                  <div class="flex flex-wrap items-center">
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                      <h3 class="font-semibold text-base text-gray-800">
+                        All Players
+                      </h3>
+                    </div>
+                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+
+                      <%= link "New Player", to: Routes.player_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="block w-full overflow-x-auto">
+                  <!-- Projects table -->
+                  <table class="items-center w-full bg-transparent border-collapse">
+                    <thead class="thead-light">
+                      <tr>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                          Name
+                        </th>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-center">
+                          Points
+                        </th>
+                        <th
+                          class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
+                          style="min-width:140px"
+                        >Tours played</th>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
+                          Admin
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%= for player <- @players do %>
+                      <tr>
+                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+                          <%= link player.name , to: Routes.player_path(@socket, :show, player) %>
+                        </th>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-center">
+                          <%= player.points %>
+                        </td>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
+                          <div class="flex items-center">
+                            <span class="mr-2"><%= trunc(Enum.count(player.tours) / 2 * 100) %>%</span>
+                            <div class="relative w-full">
+                              <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
+                                <div
+                                  style={"width:#{Enum.count(player.tours) / 2 * 100 }%"}
+
+                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
+                                ></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+                          <%= link "Edit", to: Routes.player_path(@socket, :edit, player) %> |
+                          <%= link "Delete", to: Routes.player_path(@socket, :delete, player), method: :delete, data: [confirm: "Are you sure?"] %>
+                        </td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">
@@ -507,6 +581,9 @@
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                           Description
                         </th>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
+                          Admin
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -528,7 +605,12 @@
                             <i class="fas fa-arrow-up text-green-500 mr-4"></i>
                             <%= location.description %>
                           </td>
-                        </tr>
+                          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+                            <%= link "Edit", to: Routes.location_path(@socket, :edit, location) %> |
+                            <%= link "Delete", to: Routes.location_path(@socket, :delete, location), method: :delete, data: [confirm: "Are you sure?"] %>
+                          </td>
+
+                      </tr>
                       <% end %>
 
                     </tbody>
@@ -536,6 +618,9 @@
                 </div>
               </div>
 
+
+            </div>
+            <div class="w-full xl:w-4/12 px-4">
               <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">
@@ -561,6 +646,9 @@
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                           Created in
                         </th>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
+                          Admin
+                        </th>
 
                       </tr>
                     </thead>
@@ -573,6 +661,10 @@
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                             <%= phase.inserted_at %>
                           </td>
+                          <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+                            <%= link "Edit", to: Routes.phase_path(@socket, :edit, phase) %> |
+                            <%= link "Delete", to: Routes.phase_path(@socket, :delete, phase), method: :delete, data: [confirm: "Are you sure?"] %>
+                          </td>
 
                         </tr>
                       <% end %>
@@ -581,75 +673,12 @@
                   </table>
                 </div>
               </div>
-            </div>
-            <div class="w-full xl:w-4/12 px-4">
               <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-gray-800">
-                        All Players
-                      </h3>
-                    </div>
-                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-
-                      <%= link "New Player", to: Routes.player_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
-                    </div>
-                  </div>
-                </div>
-                <div class="block w-full overflow-x-auto">
-                  <!-- Projects table -->
-                  <table class="items-center w-full bg-transparent border-collapse">
-                    <thead class="thead-light">
-                      <tr>
-                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Name
-                        </th>
-                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-center">
-                          Points
-                        </th>
-                        <th
-                          class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
-                          style="min-width:140px"
-                        >Tours played</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <%= for player <- @players do %>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          <%= link player.name , to: Routes.player_path(@socket, :show, player) %>
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-center">
-                          <%= player.points %>
-
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          <div class="flex items-center">
-                            <span class="mr-2"><%= trunc(Enum.count(player.tours) / 2 * 100) %>%</span>
-                            <div class="relative w-full">
-                              <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                                <div
-                                  style={"width:#{Enum.count(player.tours) / 2 * 100 }%"}
-
-                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
-                                ></div>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    <% end %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-                <div class="rounded-t mb-0 px-4 py-3 border-0">
-                  <div class="flex flex-wrap items-center">
-                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                      <h3 class="font-semibold text-base text-gray-800">
-                        All  Statuses
+                        All Statuses
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
@@ -669,7 +698,9 @@
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                           Created in
                         </th>
-
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
+                          Admin
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -680,6 +711,10 @@
                         </th>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           <%= status.inserted_at %>
+                        </td>
+                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
+                          <%= link "Edit", to: Routes.status_path(@socket, :edit, status) %> |
+                          <%= link "Delete", to: Routes.status_path(@socket, :delete, status), method: :delete, data: [confirm: "Are you sure?"] %>
                         </td>
                       </tr>
                     <% end %>
