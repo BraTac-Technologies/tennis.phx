@@ -2,7 +2,7 @@
   <section class="relative block" style="height: 500px;">
     <div
       class="absolute top-0 w-full h-full bg-center bg-cover"
-      style='background-image: url("https://www.tabletennisdaily.com/forum/images/malongbollchinaopend.jpg");'
+      style='background-image: url("https://cdn.statically.io/img/butterflyonline.com/wp-content/uploads/2017/10/boll_22_10_17.jpg?quality=90&f=auto");'
     >
       <span
         id="blackOverlay"
@@ -53,8 +53,6 @@
             >
               <div class="py-6 px-3 mt-32 sm:mt-0">
 
-                  <%= link "New player", to: Routes.player_path(@conn, :new), class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1" %>
-
               </div>
             </div>
             <div class="w-full lg:w-4/12 px-4 lg:order-1">
@@ -66,7 +64,7 @@
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
-              Show player
+              <%= @player.name %>
             </h3>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -74,7 +72,7 @@
               <i
                 class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
               ></i>
-
+              Burgas / Bulgaria
             </div>
             <!-- <div class="mb-2 text-gray-700 mt-10">
               <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
@@ -93,31 +91,70 @@
                   >Show more</a
                 > -->
 
-                <ul>
 
-                  <li>
-                    <strong>Name:</strong>
-                    <%= @player.name %>
-                  </li>
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
 
-                  <li>
-                    <strong>Nickname:</strong>
-                    <%= @player.nickname %>
-                  </li>
-                  <li>
-                    <strong>Birthdate:</strong>
-                    <%= @player.birthdate %>
-                  </li>
-                  <li>
-                    <strong>Info:</strong>
-                    <%= @player.info %>
-                  </li>
+                      <div class="border-t border-gray-200">
+                        <dl>
 
-                  <%= link "Edit", to: Routes.player_path(@conn, :edit, @player), class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1" %>
+                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="far fa-user fa-lg"></i>
+                              Nickname
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <%= @player.nickname %>
+                            </dd>
+                          </div>
+                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-birthday-cake fa-lg"></i>
+                              Birthdate
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              01/01/1970
+                            </dd>
+                          </div>
+                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-table-tennis fa-lg"></i>
+                              Plays with
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              Right-handed
+                            </dd>
+                          </div>
+                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-user-plus fa-lg"></i>
+                              Tours Played
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              5
+                            </dd>
+                          </div>
+                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-medal fa-lg"></i>
+                              Win/Loss %
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              100% (2 wins / 0 losses)
+                            </dd>
+                          </div>
+                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-receipt fa-lg"></i>
+                              About
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <%= @player.info %>
+                            </dd>
+                          </div>
 
-                </ul>
-
-
+                        </dl>
+                      </div>
+                    </div>
 
 
               </div>
