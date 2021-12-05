@@ -1,12 +1,16 @@
 defmodule TennisPhxWeb.TourController do
   use TennisPhxWeb, :controller
 
+  alias TennisPhx.Repo
   alias TennisPhx.Events
   alias TennisPhx.Events.Tour
   alias TennisPhx.Participants
+  alias TennisPhx.Statuses.Status
+  alias TennisPhx.Statuses
 
   def index(conn, _params) do
-    tours = Events.list_tours()
+    statuses = Statuses.list_statuses()
+    tours = Events.list_tours() |> Repo.preload(:status)
     players = Participants.list_players()
     render(conn, "index.html", tours: tours, players: players)
   end

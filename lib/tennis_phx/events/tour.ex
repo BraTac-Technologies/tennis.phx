@@ -3,6 +3,7 @@ defmodule TennisPhx.Events.Tour do
   import Ecto.Changeset
 
   alias TennisPhx.Participants.Player
+  alias TennisPhx.Statuses.Status
 
   schema "tours" do
     field :date, :naive_datetime

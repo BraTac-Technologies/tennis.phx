@@ -115,9 +115,9 @@
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Title</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Start Date</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Status</th>
-            <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Start Date</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Status</th>
+
           </tr>
         </thead>
         <tbody>
@@ -125,9 +125,13 @@
           <tr>
             <td class="px-4 py-3">1</td>
             <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
-            <td class="px-4 py-3"><%= tour.date %></td>
+            <td class="px-4 py-3 text-center"><%= tour.date %></td>
 
-            <td class="px-4 py-3 text-lg text-gray-900">-</td>
+            <td class="px-4 py-3 text-lg text-gray-900 text-center">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <%= tour.status.name %>
+              </span>
+            </td>
             <!-- <td class="w-10 text-center">
               <input name="plan" type="radio">
             </td> -->
