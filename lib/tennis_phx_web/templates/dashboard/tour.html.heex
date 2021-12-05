@@ -110,28 +110,44 @@
                 <br>
 
 
-              <%= for player <- @players do %>
-                <label class="inline-flex items-center">
-                  <%= checkbox(:tour, :check, phx_click: "toggle_check", class: "form-checkbox", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
-                  <span class="ml-2"><%= player.name %></span>
-                </label>
-                <br>
-                <%= if Enum.member?(@tour_players, player.id) do %>
-                    <form phx-submit="add_points">
 
+                <fieldset>
 
-                    <%= number_input :player_points, :points, placeholder: "Something" %>
-                    <%= hidden_input :player_id, :player_id, value: player.id %>
+                  <div class="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
+                    <%= for player <- @players do %>
+                    <div class="relative flex items-start py-4">
 
-                    <%= submit "Add", phx_disable_with: "Adding...." %>
+                      <div class="min-w-0 flex-1 text-sm">
+                        <label for="person-1" class="font-medium text-gray-700 select-none"><%= player.name %></label>
+                      </div>
 
-                  </form>
-                <% end %>
-              <% end %>
+                    <%= if Enum.member?(@tour_players, player.id) do %>
+
+                      <div class="ml-3 flex items-center h-5">
+                        <form phx-submit="add_points">
+                        <%= number_input :player_points, :points, placeholder: "Something" %>
+                        <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
+                        <%= hidden_input :player_id, :player_id, value: player.id %>
+                      </form>
+                    </div>
+                    <% end %>
+
+                      <div class="ml-3 flex items-center h-5">
+                        <%= checkbox(:tour, :check, phx_click: "toggle_check", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
+
+                      </div>
+                    </div>
+                    <% end %>
+                  </div>
+                </fieldset>
+
+                <!-- TABLE!!!! -->
 
               </div>
             </div>
           </div>
+
+
 
 <!-- ======== END CHECK PLAYERS ========= -->
 
