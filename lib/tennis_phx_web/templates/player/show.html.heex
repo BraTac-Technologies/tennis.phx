@@ -118,10 +118,10 @@
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-table-tennis fa-lg"></i>
-                              Plays with
+                              Matches Played
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              Right-handed
+                              <%= length(@match_count) %>
                             </dd>
                           </div>
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -130,16 +130,16 @@
                               Tours Played
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              5
+                              <%= Enum.count(@player.tours) %>
                             </dd>
                           </div>
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-medal fa-lg"></i>
-                              Win/Loss %
+                              Win Rate
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                              100% (2 wins / 0 losses)
+                              <%= trunc(length(@winrate) / length(@match_count) * 100) %>% (<%= length(@winrate) %> wins / <%= length(@match_count) - length(@winrate) %> losses)
                             </dd>
                           </div>
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

@@ -30,7 +30,9 @@ defmodule TennisPhxWeb.PlayerController do
 
   def show(conn, %{"id" => id}) do
     player = Participants.get_player!(id)
-    render(conn, "show.html", player: player)
+    winrate = Participants.get_winrate(player)
+    match_count = Participants.get_match_count(player)
+    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count)
   end
 
   def edit(conn, %{"id" => id}) do

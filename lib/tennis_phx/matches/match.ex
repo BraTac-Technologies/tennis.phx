@@ -14,6 +14,8 @@ defmodule TennisPhx.Matches.Match do
 
     belongs_to :first_player, Player
     belongs_to :second_player, Player
+    belongs_to :winner, Player
+    belongs_to :loser, Player
 
     field :starting_datetime, :date
     belongs_to :location, Location
@@ -31,7 +33,7 @@ defmodule TennisPhx.Matches.Match do
   @doc false
   def changeset(match, attrs) do
     match
-    |> cast(attrs, [:tour_id, :first_player_id, :second_player_id, :starting_datetime, :location_id, :phase_id, :status_id, :player_unit_id])
+    |> cast(attrs, [:tour_id, :first_player_id, :second_player_id, :starting_datetime, :location_id, :phase_id, :status_id, :player_unit_id, :winner_id])
     |> validate_required([:tour_id, :location_id, :phase_id])
     |> cast_embed(:score)
 

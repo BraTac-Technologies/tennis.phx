@@ -7,6 +7,7 @@ defmodule TennisPhx.Participants do
   alias TennisPhx.Repo
 
   alias TennisPhx.Participants.Player
+  alias TennisPhx.Matches.Match
 
   @doc """
   Returns the list of players.
@@ -39,6 +40,19 @@ defmodule TennisPhx.Participants do
       ** (Ecto.NoResultsError)
 
   """
+  def get_winrate(%Player{} = player) do
+    pi = player.id
+    query = from(m in Match, where: m.winner_id == ^pi)
+    Repo.all(query)
+  end
+
+  def get_match_count(%Player{} = player) do
+    pi = player.id
+    query = from(m in Match, where: m.first_player_id == ^pi)
+    Repo.all(query)
+  end
+
+
   def get_player!(id) do
     Repo.get!(Player, id)
     |> Repo.preload(:tours)
