@@ -5,6 +5,7 @@ defmodule TennisPhxWeb.AdminTourLive do
   alias TennisPhxWeb.DashboardView
 
   alias TennisPhx.Events
+  alias TennisPhx.Events.Tour
   alias TennisPhx.Participants
   alias TennisPhx.Locations
   alias TennisPhx.Phases
@@ -28,6 +29,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
     matches = Matches.list_matches()
     changeset = Matches.change_match(%Match{})
+    changeset_for_tour = Events.change_tour(%Tour{})
     players_for_tour = tour.players |> Repo.preload(:tours)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
@@ -42,7 +44,8 @@ defmodule TennisPhxWeb.AdminTourLive do
         player_units: player_units,
         statuses: statuses,
         match_for_tour: match_for_tour,
-        changeset: changeset
+        changeset: changeset,
+        changeset_for_tour: changeset_for_tour
       )
     {:ok, socket}
   end
@@ -99,6 +102,24 @@ defmodule TennisPhxWeb.AdminTourLive do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         socket = assign(socket, changeset: changeset)
+        {:noreply, socket}
+    end
+  end
+
+  def handle_event("assign_tour_info", %{"tour" => attrs}, socket) do
+    tour = socket.assigns[:tour]
+
+    case Events.update_tour(tour, attrs) do
+      {:ok, tour} ->
+
+        changeset_for_tour = Events.change_tour(%Tour{})
+
+        socket = assign(socket, changeset_for_tour: changeset_for_tour)
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset_for_tour} ->
+        socket = assign(socket, changeset_for_tour: changeset_for_tour)
         {:noreply, socket}
     end
   end

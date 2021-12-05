@@ -3,11 +3,14 @@ defmodule TennisPhx.Events.Tour do
   import Ecto.Changeset
 
   alias TennisPhx.Participants.Player
+  alias TennisPhx.Statuses.Status
 
   schema "tours" do
     field :date, :naive_datetime
     field :info, :string
     field :title, :string
+
+    belongs_to :status, Status
 
     timestamps()
 
@@ -22,7 +25,7 @@ defmodule TennisPhx.Events.Tour do
   @doc false
   def changeset(tour, attrs) do
     tour
-    |> cast(attrs, [:title, :info, :date])
+    |> cast(attrs, [:title, :info, :date, :status_id])
     |> validate_required([:title, :info, :date])
   end
 end
