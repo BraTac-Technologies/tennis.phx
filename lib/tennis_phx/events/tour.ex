@@ -9,6 +9,8 @@ defmodule TennisPhx.Events.Tour do
     field :info, :string
     field :title, :string
 
+    belongs_to :status, Status
+
     timestamps()
 
     many_to_many(
@@ -22,7 +24,7 @@ defmodule TennisPhx.Events.Tour do
   @doc false
   def changeset(tour, attrs) do
     tour
-    |> cast(attrs, [:title, :info, :date])
+    |> cast(attrs, [:title, :info, :date, :status_id])
     |> validate_required([:title, :info, :date])
   end
 end
