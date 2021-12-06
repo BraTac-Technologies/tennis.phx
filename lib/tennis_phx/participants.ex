@@ -48,7 +48,7 @@ defmodule TennisPhx.Participants do
 
   def get_match_count(%Player{} = player) do
     pi = player.id
-    query = from(m in Match, where: m.first_player_id == ^pi)
+    query = from(m in Match, where: m.first_player_id == ^pi or m.second_player_id == ^pi)
     Repo.all(query)
   end
 
