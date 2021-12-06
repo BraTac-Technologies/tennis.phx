@@ -7,17 +7,19 @@ defmodule TennisPhxWeb.TourController do
   alias TennisPhx.Participants
   alias TennisPhx.Statuses.Status
   alias TennisPhx.Statuses
+  alias TennisPhx.Locations
 
   def index(conn, _params) do
     statuses = Statuses.list_statuses()
-    tours = Events.list_tours() |> Repo.preload(:status)
+    tours = Events.list_tours() |> Repo.preload(:status) |> Repo.preload(:location)
     players = Participants.list_players()
     render(conn, "index.html", tours: tours, players: players)
   end
 
   def new(conn, _params) do
     changeset = Events.change_tour(%Tour{})
-    render(conn, "new.html", changeset: changeset)
+    locations = Locations.list_locations()
+    render(conn, "new.html", changeset: changeset, locations: locations)
   end
 
   def create(conn, %{"tour" => tour_params}) do
@@ -41,7 +43,8 @@ defmodule TennisPhxWeb.TourController do
   def edit(conn, %{"id" => id}) do
     tour = Events.get_tour!(id)
     changeset = Events.change_tour(tour)
-    render(conn, "edit.html", tour: tour, changeset: changeset)
+    locations = Locations.list_locations()
+    render(conn, "edit.html", tour: tour, changeset: changeset, locations: locations)
   end
 
   def update(conn, %{"id" => id, "tour" => tour_params}) do

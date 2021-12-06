@@ -86,6 +86,15 @@
             >
               "<%= @tour.title %>"
             </h3>
+
+            <div
+              class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
+            >
+              <i
+                class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
+              ></i>
+                 <%= @tour.location.name %>
+            </div>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
@@ -151,7 +160,7 @@
                             <!-- Heroicon name: solid/phone -->
 
                               <span class="ml-3"><%= match.status.name %> </span>
-                            
+
                           </a>
                         </div>
                       </div>
