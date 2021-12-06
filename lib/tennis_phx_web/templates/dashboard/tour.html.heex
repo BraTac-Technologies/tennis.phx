@@ -78,7 +78,7 @@
               </div>
             </div>
           </div>
-          <div class="text-center mt-12">
+          <div class="text-center mt-12 border-b-1 border-gray-300">
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
@@ -102,48 +102,68 @@
 
 <!-- ======== START CHECK PLAYERS ========= -->
 
-          <div class="mt-10 py-10 border-t border-gray-300 text-center">
-            <div class="flex flex-wrap justify-center">
-              <div class="w-full lg:w-9/12 px-4">
 
-                <h1> Checked players: <%= length(@tour_players) %> </h1>
-                <br>
+          <br>
+          <div class="text-center flex flex-col">
+            <br>
+            <h1 class="text-4xl"> Add match </h1>
+            <br><br>
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="">
+                      <tr>
+
+                        <th scope="col" class=" px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Player
+                        </th>
+
+                          <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Add Points
+                          </th>
+
+                        <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Plays?
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+
+                      <%= for player <- @players do %>
+                      <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <div class="text-center text-sm text-gray-900"><%= player.name %></div>
+                        </td>
+                        <%= if Enum.member?(@tour_players, player.id) do %>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <!-- <div class="text-center text-sm text-gray-900">input</div> -->
+                            <form phx-submit="add_points">
+                            <%= number_input :player_points, :points, placeholder: "Something" %>
+                            <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
+                            <%= hidden_input :player_id, :player_id, value: player.id %>
+                          </form>
+                          </td>
+                        <% else %>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-center text-sm text-gray-900"><%= player.name %> is not selected</div>
+                          </td>
+                        <% end %>
+
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <%= checkbox(:tour, :check, phx_click: "toggle_check", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
+                        </td>
+                      </tr>
+                      <% end %>
 
 
-
-                <fieldset>
-
-                  <div class="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
-                    <%= for player <- @players do %>
-                    <div class="relative flex items-start py-4">
-
-                      <div class="min-w-0 flex-1 text-sm">
-                        <label for="person-1" class="font-medium text-gray-700 select-none"><%= player.name %></label>
-                      </div>
-
-                    <%= if Enum.member?(@tour_players, player.id) do %>
-
-                      <div class="ml-3 flex items-center h-5">
-                        <form phx-submit="add_points">
-                        <%= number_input :player_points, :points, placeholder: "Something" %>
-                        <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
-                        <%= hidden_input :player_id, :player_id, value: player.id %>
-                      </form>
-                    </div>
-                    <% end %>
-
-                      <div class="ml-3 flex items-center h-5">
-                        <%= checkbox(:tour, :check, phx_click: "toggle_check", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
-
-                      </div>
-                    </div>
-                    <% end %>
-                  </div>
-                </fieldset>
-
-                <!-- TABLE!!!! -->
-
+                      <!-- More people... -->
+                    </tbody>
+                  </table>
+                </div>
               </div>
+              <br>              
             </div>
           </div>
 
