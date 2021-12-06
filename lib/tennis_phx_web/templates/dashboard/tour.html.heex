@@ -526,7 +526,7 @@
                             </div>
                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
                             <%# select(f, :status_id, Enum.map(@statuses, &{&1.name, &1.id}), prompt: [key: "Choose a match status"], , class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                            <%= select(f, :winner_id, ["#{match.first_player.name}": match.first_player.id, "#{match.second_player.name}": match.first_player.id], prompt: [key: "Choose a match winner"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                            <%= select(f, :winner_id, ["#{match.first_player.name}": match.first_player.id, "#{match.second_player.name}": match.second_player.id], prompt: [key: "Choose a match winner"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
 
                             </div>
                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
