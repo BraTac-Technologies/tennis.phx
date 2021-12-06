@@ -11,6 +11,7 @@ defmodule TennisPhx.Participants.Player do
     field :name, :string
     field :nickname, :string
     field :points, :integer
+    field :hand, :string
 
 
 
@@ -27,7 +28,7 @@ defmodule TennisPhx.Participants.Player do
   @doc false
   def changeset(player, attrs) do
     player
-    |> cast(attrs, [:name, :nickname, :info, :birthdate, :points])
+    |> cast(attrs, [:name, :nickname, :info, :birthdate, :points, :hand])
     |> validate_required([:name])
   end
 end
