@@ -21,7 +21,7 @@ defmodule TennisPhxWeb.TourLive do
 
   @impl true
   def mount(params, _, socket) do
-    tour = Events.get_tour!(params["id"])
+    tour = Events.get_tour!(params["id"]) |> Repo.preload(:location)
     players = Participants.list_players()
     locations = Locations.list_locations()
     phases = Phases.list_phases()
