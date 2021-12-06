@@ -27,7 +27,7 @@ defmodule TennisPhx.Matches do
 
   def get_match_for_tour(%Tour{} = tour) do
     tour_id = tour.id
-    query = from(m in Match, where: m.tour_id == ^tour_id)
+    query = from(m in Match, where: m.tour_id == ^tour_id, order_by: [desc: m.phase_id])
     Repo.all(query)
   end
 

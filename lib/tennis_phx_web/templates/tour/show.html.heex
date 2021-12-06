@@ -123,17 +123,24 @@
                       <table class="w-full">
                           <thead>
                             <tr>
-                              <th class="bg-purple-300 w-full"></th>
-                              <th class="bg-purple-300 text-right px-3"></th>
-                              <th class="bg-purple-300 text-right px-3"></th>
-                              <th class="bg-purple-300 text-right px-3"></th>
-                              <th class="bg-purple-300 text-right px-3"></th>
-                              <th class="bg-purple-300 text-right px-3"></th>
+                              <th class="bg-gray-300 w-full"></th>
+                              <th class="bg-gray-300 text-right px-3"></th>
+                              <th class="bg-gray-300 text-right px-3"></th>
+                              <th class="bg-gray-300 text-right px-3"></th>
+                              <th class="bg-gray-300 text-right px-3"></th>
+                              <th class="bg-gray-300 text-right px-3"></th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td class="text-left"><%= match.first_player.name %></td>
+                              <%= if match.winner_id == match.first_player.id do %>
+                                <td class="text-left">
+                                  <i class="fas fa-check"></i>
+                                  <b><%= match.first_player.name %></b>
+                                </td>
+                              <% else %>
+                                <td class="text-left"><%= match.first_player.name %></td>
+                              <% end %>
                               <td><%= match.score.game1_for_first_player %></td>
                               <td><%= match.score.game2_for_first_player %></td>
                               <td><%= match.score.game3_for_first_player %></td>
@@ -141,7 +148,14 @@
                               <td><%= match.score.game5_for_first_player %></td>
                             </tr>
                             <tr>
-                              <td class="text-left"><%= match.second_player.name %></td>
+                              <%= if match.winner_id == match.second_player_id do %>
+                                <td class="text-left">
+                                  <i class="fas fa-check"></i>
+                                  <b><%= match.second_player.name %></b>
+                                </td>
+                              <% else %>
+                                <td class="text-left"><%= match.second_player.name %></td>
+                              <% end %>
                               <td><%= match.score.game1_for_second_player %></td>
                               <td><%= match.score.game2_for_second_player %></td>
                               <td><%= match.score.game3_for_second_player %></td>
@@ -155,15 +169,22 @@
                     <div>
                       <div class="-mt-px flex divide-x divide-gray-200">
 
+                        <div class="w-0 flex-1 flex">
+                          <a class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                            <!-- Heroicon name: solid/mail -->
+                            <i class="fas fa-user-minus"></i>
+                            <span class="ml-3"><%= match.phase.name %></span>
+                          </a>
+                        </div>
                         <div class="-ml-px w-0 flex-1 flex">
-                          <a href="tel:+1-202-555-0170" class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                          <a class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
                             <!-- Heroicon name: solid/phone -->
-
-                              <span class="ml-3"><%= match.status.name %> </span>
-
+                              <i class="fas fa-table-tennis"></i>
+                            <span class="ml-3"><%= match.status.name %></span>
                           </a>
                         </div>
                       </div>
+
                     </div>
                   </li>
                   <% end %>
