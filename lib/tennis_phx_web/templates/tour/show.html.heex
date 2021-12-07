@@ -114,6 +114,8 @@
           <div class="mt-10 py-10 border-t border-b border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
+                <h1 class="text-3xl">Winner: TBA</h1>
+                <br>
 
                 <!-- This example requires Tailwind CSS v2.0+ -->
                 <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -141,11 +143,35 @@
                               <% else %>
                                 <td class="text-left"><%= match.first_player.name %></td>
                               <% end %>
-                              <td><%= match.score.game1_for_first_player %></td>
-                              <td><%= match.score.game2_for_first_player %></td>
-                              <td><%= match.score.game3_for_first_player %></td>
-                              <td><%= match.score.game4_for_first_player %></td>
-                              <td><%= match.score.game5_for_first_player %></td>
+                              <%= if is_nil(match.score) do %>
+                              <% else %>
+                                <%= if match.score.game1_for_first_player > match.score.game1_for_second_player do %>
+                                  <td><b><%= match.score.game1_for_first_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game1_for_first_player %></td>
+                                <% end %>
+                                <%= if match.score.game2_for_first_player > match.score.game2_for_second_player do %>
+                                  <td><b><%= match.score.game2_for_first_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game2_for_first_player %></td>
+                                <% end %>
+                                <%= if match.score.game3_for_first_player > match.score.game3_for_second_player do %>
+                                  <td><b><%= match.score.game3_for_first_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game3_for_first_player %></td>
+                                <% end %>
+                                <%= if match.score.game4_for_first_player > match.score.game4_for_second_player do %>
+                                  <td><b><%= match.score.game4_for_first_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game4_for_first_player %></td>
+                                <% end %>
+                                <%= if match.score.game5_for_first_player > match.score.game5_for_second_player do %>
+                                  <td><b><%= match.score.game5_for_first_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game5_for_first_player %></td>
+                                <% end %>
+                              <% end %>
+
                             </tr>
                             <tr>
                               <%= if match.winner_id == match.second_player_id do %>
@@ -156,11 +182,36 @@
                               <% else %>
                                 <td class="text-left"><%= match.second_player.name %></td>
                               <% end %>
-                              <td><%= match.score.game1_for_second_player %></td>
-                              <td><%= match.score.game2_for_second_player %></td>
-                              <td><%= match.score.game3_for_second_player %></td>
-                              <td><%= match.score.game4_for_second_player %></td>
-                              <td><%= match.score.game5_for_second_player %></td>
+                              <%= if is_nil(match.score) do %>
+                              <td> TBA </td>
+                              <% else %>
+                                <%= if match.score.game1_for_second_player > match.score.game1_for_first_player do %>
+                                  <td><b><%= match.score.game1_for_second_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game1_for_second_player %></td>
+                                <% end %>
+                                <%= if match.score.game2_for_second_player > match.score.game2_for_first_player do %>
+                                  <td><b><%= match.score.game2_for_second_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game2_for_second_player %></td>
+                                <% end %>
+                                <%= if match.score.game3_for_second_player > match.score.game3_for_first_player do %>
+                                  <td><b><%= match.score.game3_for_second_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game3_for_second_player %></td>
+                                <% end %>
+                                <%= if match.score.game4_for_second_player > match.score.game4_for_first_player do %>
+                                  <td><b><%= match.score.game4_for_second_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game4_for_second_player %></td>
+                                <% end %>
+                                <%= if match.score.game5_for_second_player > match.score.game5_for_first_player do %>
+                                  <td><b><%= match.score.game5_for_second_player %></b></td>
+                                <% else %>
+                                  <td><%= match.score.game5_for_second_player %></td>
+                                <% end %>
+
+                              <% end %>
                             </tr>
                           </tbody>
                         </table>
