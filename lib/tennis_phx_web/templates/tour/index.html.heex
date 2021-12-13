@@ -133,8 +133,11 @@
                 <%= tour.status.name %>
               </span>
             </td>
-            
-            <td class="px-4 py-3 text-center"><b>Bai ti Gosho</b></td>
+            <%= if is_nil(tour.winner) do %>
+              <td class="px-4 py-3 text-center">TBA</td>
+            <% else %>
+              <td class="px-4 py-3 text-center"><b><%= tour.winner.name %></b></td>
+            <% end %>
             <!-- <td class="w-10 text-center">
               <input name="plan" type="radio">
             </td> -->
