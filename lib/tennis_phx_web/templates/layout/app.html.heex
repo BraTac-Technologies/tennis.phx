@@ -1,5 +1,110 @@
 <main class="container">
-  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+  <p class="alert alert-info" role="alert"><%# get_flash(@conn, :info) %></p>
+  <p class="alert alert-danger" role="alert"><%# get_flash(@conn, :error) %></p>
 </main>
+
+<%= if get_flash(@conn, :success) do %>
+
+<div id="success-area" aria-live="assertive" class="z-40 fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
+  <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
+    <!--
+      Notification panel, dynamically insert this into the live region when it needs to be displayed
+​
+      Entering: "transform ease-out duration-300 transition"
+        From: "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        To: "translate-y-0 opacity-100 sm:translate-x-0"
+      Leaving: "transition ease-in duration-100"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+
+    <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+      <div class="p-4">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <!-- Heroicon name: outline/check-circle -->
+        <i class="fas fa-check-double"></i>
+          </div>
+          <div class="ml-3 w-0 flex-1 pt-0.5">
+            <p class="text-sm font-medium text-gray-900">
+              <%= get_flash(@conn, :success) %>
+            </p>
+            <p class="mt-1 text-sm text-gray-500">
+              <%= get_flash(@conn, :info) %>
+            </p>
+          </div>
+          <div class="ml-4 flex-shrink-0 flex">
+            <button onclick="CloseSuccess()" class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="sr-only">Close</span>
+              <!-- Heroicon name: solid/x -->
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<%= if get_flash(@conn, :error) do %>
+
+<div id="error-area" aria-live="assertive" class="z-40 fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
+  <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
+    <!--
+      Notification panel, dynamically insert this into the live region when it needs to be displayed
+​
+      Entering: "transform ease-out duration-300 transition"
+        From: "translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        To: "translate-y-0 opacity-100 sm:translate-x-0"
+      Leaving: "transition ease-in duration-100"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+
+    <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+      <div class="p-4">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <!-- Heroicon name: outline/check-circle -->
+        <i class="fas fa-times"></i>
+          </div>
+          <div class="ml-3 w-0 flex-1 pt-0.5">
+            <p class="text-sm font-medium text-gray-900">
+              <%= get_flash(@conn, :error) %>
+            </p>
+            <p class="mt-1 text-sm text-gray-500">
+              error
+            </p>
+          </div>
+          <div class="ml-4 flex-shrink-0 flex">
+            <button onclick="CloseError()" class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <span class="sr-only">Close</span>
+              <!-- Heroicon name: solid/x -->
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<script>
+
+function CloseError() {
+  var error_area = document.getElementById("error-area");
+  error_area.classList.add("hidden");
+}
+
+function CloseSuccess() {
+  var success_area = document.getElementById("success-area");
+  success_area.classList.add("hidden");
+}
+
+</script>
+
   <%= @inner_content %>
