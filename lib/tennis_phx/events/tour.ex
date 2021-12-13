@@ -10,7 +10,7 @@ defmodule TennisPhx.Events.Tour do
     field :date, :naive_datetime
     field :info, :string
     field :title, :string
-
+    belongs_to :winner, Player
     belongs_to :status, Status
     belongs_to :location, Location
 
@@ -27,7 +27,7 @@ defmodule TennisPhx.Events.Tour do
   @doc false
   def changeset(tour, attrs) do
     tour
-    |> cast(attrs, [:title, :info, :date, :status_id, :location_id])
+    |> cast(attrs, [:title, :info, :date, :status_id, :location_id, :winner_id])
     |> validate_required([:title, :info, :date])
   end
 end

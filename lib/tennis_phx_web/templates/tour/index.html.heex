@@ -89,7 +89,7 @@
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
-              
+
 
             </div>
             <!-- <div class="mb-2 text-gray-700 mt-10">
@@ -116,6 +116,7 @@
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Venue</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Start Date</th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Status</th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Winner</th>
 
           </tr>
         </thead>
@@ -132,6 +133,11 @@
                 <%= tour.status.name %>
               </span>
             </td>
+            <%= if is_nil(tour.winner) do %>
+              <td class="px-4 py-3 text-center">TBA</td>
+            <% else %>
+              <td class="px-4 py-3 text-center"><b><%= tour.winner.name %></b></td>
+            <% end %>
             <!-- <td class="w-10 text-center">
               <input name="plan" type="radio">
             </td> -->
