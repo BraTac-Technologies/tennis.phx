@@ -18,8 +18,9 @@ defmodule TennisPhxWeb.LocationController do
     case Locations.create_location(location_params) do
       {:ok, location} ->
         conn
-        |> put_flash(:info, "Location created successfully.")
-        |> redirect(to: Routes.location_path(conn, :show, location))
+        |> put_flash(:success, "Location created successfully.")
+        |> put_flash(:info, "You can now assign it on a tour")
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

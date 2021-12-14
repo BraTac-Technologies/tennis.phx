@@ -67,6 +67,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     Events.assign_player_points(tour, player_id, points_for_player)
     player = Participants.get_player!(player_id)
     Participants.assign_player_points(player, points_for_player)
+
     {:noreply, socket}
   end
 
@@ -75,8 +76,11 @@ defmodule TennisPhxWeb.AdminTourLive do
 
     case Matches.create_match(attrs) do
       {:ok, match} ->
-        changeset = Matches.change_match(%Match{})
+        socket
 
+        changeset = Matches.change_match(%Match{})
+        socket = put_flash(socket, :success, "Match added successfully!")
+        socket = put_flash(socket, :info, "You can now assign score for it")
         socket = assign(socket, changeset: changeset)
 
         {:noreply, socket}
@@ -96,6 +100,8 @@ defmodule TennisPhxWeb.AdminTourLive do
 
         changeset = Matches.change_match(%Match{})
 
+        socket = put_flash(socket, :success, "Score assigned successfully!")
+        socket = put_flash(socket, :info, "Status of this match is auto setted to 'Finished' ")
         socket = assign(socket, changeset: changeset)
 
         {:noreply, socket}
@@ -114,6 +120,8 @@ defmodule TennisPhxWeb.AdminTourLive do
 
         changeset_for_tour = Events.change_tour(%Tour{})
 
+        socket = put_flash(socket, :success, "Match details successfully updated!")
+        socket = put_flash(socket, :info, "You can now view the status and the winner at 'Tours' ")
         socket = assign(socket, changeset_for_tour: changeset_for_tour)
 
         {:noreply, socket}

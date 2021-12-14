@@ -47,8 +47,9 @@ defmodule TennisPhxWeb.PlayerController do
     case Participants.update_player(player, player_params) do
       {:ok, player} ->
         conn
-        |> put_flash(:info, "Player updated successfully.")
-        |> redirect(to: Routes.player_path(conn, :show, player))
+        |> put_flash(:success, "Player created successfully.")
+        |> put_flash(:info, "You can now enroll him in a tour")
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", player: player, changeset: changeset)

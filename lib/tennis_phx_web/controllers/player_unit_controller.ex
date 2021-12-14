@@ -18,8 +18,9 @@ defmodule TennisPhxWeb.Player_unitController do
     case PlayerUnits.create_player_unit(player_unit_params) do
       {:ok, player_unit} ->
         conn
-        |> put_flash(:info, "Player unit created successfully.")
-        |> redirect(to: Routes.player_unit_path(conn, :show, player_unit))
+        |> put_flash(:success, "PlayerUnit created successfully.")
+        |> put_flash(:info, "You can now assign it on matches")
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

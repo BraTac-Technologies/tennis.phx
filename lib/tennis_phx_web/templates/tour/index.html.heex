@@ -125,7 +125,11 @@
           <tr>
             <td class="px-4 py-3">1</td>
             <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
-            <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
+            <%= if is_nil(tour.location) do %>
+              <td class="px-4 py-3 text-left">TBA</td>
+            <% else %>
+              <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
+            <% end %>
             <td class="px-4 py-3 text-center"><%= tour.date %></td>
 
             <td class="px-4 py-3 text-lg text-gray-900 text-center">

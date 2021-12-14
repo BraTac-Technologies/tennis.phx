@@ -18,8 +18,9 @@ defmodule TennisPhxWeb.StatusController do
     case Statuses.create_status(status_params) do
       {:ok, status} ->
         conn
-        |> put_flash(:info, "Status created successfully.")
-        |> redirect(to: Routes.status_path(conn, :show, status))
+        |> put_flash(:success, "Status created successfully.")
+        |> put_flash(:info, "You can now assign it on tours and matches")
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

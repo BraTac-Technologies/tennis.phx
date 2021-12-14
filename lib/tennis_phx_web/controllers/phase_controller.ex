@@ -43,8 +43,9 @@ defmodule TennisPhxWeb.PhaseController do
     case Phases.update_phase(phase, phase_params) do
       {:ok, phase} ->
         conn
-        |> put_flash(:info, "Phase updated successfully.")
-        |> redirect(to: Routes.phase_path(conn, :show, phase))
+        |> put_flash(:success, "Phase created successfully.")
+        |> put_flash(:info, "You can now assign it on a match")
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", phase: phase, changeset: changeset)

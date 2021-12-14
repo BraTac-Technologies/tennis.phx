@@ -26,8 +26,9 @@ defmodule TennisPhxWeb.TourController do
     case Events.create_tour(tour_params) do
       {:ok, tour} ->
         conn
-        |> put_flash(:info, "Tour created successfully.")
-        |> redirect(to: Routes.tour_path(conn, :index))
+        |> put_flash(:success, "Tour created successfully.")
+        |> put_flash(:info, "You can now add players in the tour")
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
         # Vremenno
 
       {:error, %Ecto.Changeset{} = changeset} ->
