@@ -8,6 +8,7 @@ defmodule TennisPhx.Matches do
 
   alias TennisPhx.Matches.Match
   alias TennisPhx.Events.Tour
+  alias TennisPhx.Participants.Player
 
 
   # =========== Assign Player v Player Match =============
@@ -32,6 +33,19 @@ defmodule TennisPhx.Matches do
   end
 
   # =========== END Assign Match in Tour =============
+
+  # =========== Get match by players =============
+
+  def get_match_by_players(%Player{} = first_player, %Player{} = second_player) do
+
+    first_player_id = first_player.id
+    second_player_id = second_player.id
+    query = from(m in Match, where: m.first_player_id == ^first_player_id and m.second_player_id == ^second_player_id)
+    Repo.all(query)
+  end
+
+  # =========== END Get match by players =============
+
 
 
   def list_matches do

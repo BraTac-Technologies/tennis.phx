@@ -53,9 +53,15 @@ defmodule TennisPhx.Participants do
   end
 
 
+  @spec get_player!(any) :: nil | [%{optional(atom) => any}] | %{optional(atom) => any}
   def get_player!(id) do
     Repo.get!(Player, id)
     |> Repo.preload(:tours)
+  end
+
+  def get_player_by_name!(name) do
+    query = from(p in Player, where: p.name == ^name, preload: [:tours])
+    Repo.all(query)
   end
 
   @doc """

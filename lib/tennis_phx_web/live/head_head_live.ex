@@ -25,8 +25,16 @@ defmodule TennisPhxWeb.HeadheadLive do
     {:ok, socket}
   end
 
-  def handle_event("suggest-player", %{"player1" => prefix}, socket) do
-    socket = assign(socket, matches: Participants.suggest(prefix))
+  def handle_event("get_players", %{"match" => attrs}, socket) do
+
+    first_player = Participants.get_player_by_name!(attrs["first_player_name"])
+    second_player = Participants.get_player_by_name!(attrs["second_player_name"])
+
+
+
+    get_match = TennisPhx.Matches.get_match_by_players(first_player, second_player)
+
+     socket = assign(socket, get_match: get_match)
     {:noreply, socket}
 
   end
