@@ -53,11 +53,7 @@ defmodule TennisPhxWeb.AdminTourLive do
 
   def handle_event("toggle_check", %{"player-id" => player_id}, socket) do
     tour = socket.assigns[:tour]
-              |> Repo.preload(:players)
-    Events.toggle_tour_players(tour, player_id)
-    tour_players = Events.tour_players(tour)
-                   |>Enum.map(fn(x) -> x.player_id end)
-                   {:noreply, assign(socket, :tour_players, tour_players)}
+    IO.inspect(tour, label: "MESSAGE===>")
   end
 
 
