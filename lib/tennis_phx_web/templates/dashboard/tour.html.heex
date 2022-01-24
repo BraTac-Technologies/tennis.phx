@@ -204,7 +204,7 @@
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <.form let={f} for={@changeset}, phx-submit="add_match_result">
+          <.form let={g} for={@changeset_for_group}, phx-submit="create_group">
 
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
@@ -226,15 +226,17 @@
 
 
             <div class="flex flex-wrap -mx-3 mb-6">
-              <%= inputs_for f, :score, fn ff -> %>
+
+
+              <%= hidden_input g, :tour_id, value: @tour.id %>
 
 <!-- group player 1 -->
               <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                   Player1
                 </label>
-                  <%= select(ff, :player1, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game1_for_first_player %>
+                  <%= select(g, :player1_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player1_id %>
 
               </div>
 
@@ -244,8 +246,8 @@
                   Player2
                 </label>
 
-                  <%= select(ff, :player2, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game1_for_second_player %>
+                  <%= select(g, :player2_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player2_id %>
 
               </div>
 <!-- group player 3 -->
@@ -254,8 +256,8 @@
                   Player3
                 </label>
 
-                  <%= select(ff, :player3, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game2_for_first_player %>
+                  <%= select(g, :player3_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player3_id %>
 
               </div>
 
@@ -265,8 +267,8 @@
                   Player4
                 </label>
 
-                  <%= select(ff, :player4, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game2_for_second_player %>
+                  <%= select(g, :player4_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player4_id %>
 
               </div>
 <!-- group player 5 -->
@@ -275,8 +277,8 @@
                   Player5
                 </label>
 
-                  <%= select(ff, :player5, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game3_for_first_player %>
+                  <%= select(g, :player5_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player5_id %>
 
               </div>
 
@@ -286,8 +288,8 @@
                   Player6
                 </label>
 
-                  <%= select(ff, :player6, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game3_for_second_player %>
+                  <%= select(g, :player6_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player6_id %>
 
               </div>
 <!-- group player 7 -->
@@ -296,8 +298,8 @@
                   Player7
                 </label>
 
-                  <%= select(ff, :player7, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game4_for_first_player %>
+                  <%= select(g, :player7_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player7_id %>
 
               </div>
 
@@ -307,8 +309,8 @@
                   Player8
                 </label>
 
-                  <%= select(ff, :player8, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game4_for_second_player %>
+                  <%= select(g, :player8_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player8_id %>
 
               </div>
 <!-- group player 9 -->
@@ -317,8 +319,8 @@
                   Player9
                 </label>
 
-                  <%= select(ff, :player9, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game5_for_first_player %>
+                  <%= select(g, :player9_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player9_id %>
 
               </div>
 
@@ -328,15 +330,13 @@
                   Player10
                 </label>
 
-                  <%= select(ff, :player10, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-                  <%= error_tag ff, :game5_for_second_player %>
+                  <%= select(g, :player10_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player10_id %>
 
               </div>
 
 
 
-
-              <% end %>
             </div>
 
 

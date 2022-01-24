@@ -13,6 +13,7 @@ defmodule TennisPhxWeb.AdminTourLive do
   alias TennisPhx.Statuses
   alias TennisPhx.Matches
   alias TennisPhx.Matches.Match
+  alias TennisPhx.Matches.Group
 
   def render(assigns) do
    render DashboardView, "tour.html", assigns
@@ -30,6 +31,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     matches = Matches.list_matches()
     changeset = Matches.change_match(%Match{})
     changeset_for_tour = Events.change_tour(%Tour{})
+    changeset_for_group = Matches.change_group(%Group{})
     players_for_tour = tour.players |> Repo.preload(:tours)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
@@ -45,11 +47,13 @@ defmodule TennisPhxWeb.AdminTourLive do
         statuses: statuses,
         match_for_tour: match_for_tour,
         changeset: changeset,
-        changeset_for_tour: changeset_for_tour
+        changeset_for_tour: changeset_for_tour,
+        changeset_for_group: changeset_for_group
       )
     {:ok, socket}
   end
 
+# Add Players
 
   def handle_event("toggle_check", %{"player-id" => player_id}, socket) do
     tour = socket.assigns[:tour]
@@ -60,6 +64,7 @@ defmodule TennisPhxWeb.AdminTourLive do
                    {:noreply, assign(socket, :tour_players, tour_players)}
   end
 
+# Add Players' points
 
   def handle_event("add_points", %{"player_id" => %{"player_id" => player_id}, "player_points" => %{"points" => points_for_player}}, socket) do
     tour = socket.assigns[:tour]
@@ -71,6 +76,29 @@ defmodule TennisPhxWeb.AdminTourLive do
     {:noreply, socket}
   end
 
+# Create Group
+
+  def handle_event("create_group", %{"group" => attrs}, socket) do
+
+    case Matches.create_group(attrs) do
+      {:ok, group} ->
+        socket
+
+        changeset_for_group = Matches.change_group(%Group{})
+        socket = put_flash(socket, :success, "Group added successfully!")
+        socket = put_flash(socket, :info, "")
+        socket = assign(socket, changeset_for_group: changeset_for_group)
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset_for_group} ->
+
+        socket = assign(socket, changeset_for_group: changeset_for_group)
+        {:noreply, socket}
+      end
+  end
+
+# Create Match
 
   def handle_event("assign_match_info", %{"match" => attrs}, socket) do
 
@@ -92,6 +120,9 @@ defmodule TennisPhxWeb.AdminTourLive do
       end
   end
 
+
+# Assign Match Score
+
   def handle_event("add_match_result", %{"match" => attrs}, socket) do
     match = Matches.get_match!(attrs["match_id"])
 
@@ -111,6 +142,8 @@ defmodule TennisPhxWeb.AdminTourLive do
         {:noreply, socket}
     end
   end
+
+# Assign Tour Details
 
   def handle_event("assign_tour_info", %{"tour" => attrs}, socket) do
     tour = socket.assigns[:tour]
