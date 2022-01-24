@@ -177,6 +177,194 @@
 
 <!-- ======== END CHECK PLAYERS ========= -->
 
+<!-- ======== START GROUP CREATION ========= -->
+
+        <div class="mt-10 py-10 border-t border-gray-300 text-center">
+          <div class="flex flex-wrap justify-center">
+            <div class="">
+
+              <h1 class="text-4xl"> Add group </h1>
+              <br>
+
+              <button id ="open-modal-group" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"> Open Modal </button>
+
+            </div>
+          </div>
+        </div>
+
+<!-- ==================== modal content for group creation -->
+
+        <div id="modal-group" class="hidden modal">
+          <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+          <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+          <!-- This element is to trick the browser into centering the modal contents. -->
+          <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <.form let={f} for={@changeset}, phx-submit="add_match_result">
+
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <!-- Heroicon name: outline/exclamation -->
+            <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <!-- <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+              Add match score
+            </h3> -->
+            <!-- <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone.
+              </p>
+            </div> -->
+
+
+            <div class="flex flex-wrap -mx-3 mb-6">
+              <%= inputs_for f, :score, fn ff -> %>
+
+<!-- group player 1 -->
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                  Player1
+                </label>
+                  <%= select(ff, :player1, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game1_for_first_player %>
+
+              </div>
+
+<!-- group player 2 -->
+              <div class="w-full md:w-1/2 px-3">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Player2
+                </label>
+
+                  <%= select(ff, :player2, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game1_for_second_player %>
+
+              </div>
+<!-- group player 3 -->
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                  Player3
+                </label>
+
+                  <%= select(ff, :player3, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game2_for_first_player %>
+
+              </div>
+
+<!-- group player 4 -->
+              <div class="w-full md:w-1/2 px-3">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Player4
+                </label>
+
+                  <%= select(ff, :player4, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game2_for_second_player %>
+
+              </div>
+<!-- group player 5 -->
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                  Player5
+                </label>
+
+                  <%= select(ff, :player5, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game3_for_first_player %>
+
+              </div>
+
+<!-- group player 6 -->
+              <div class="w-full md:w-1/2 px-3">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Player6
+                </label>
+
+                  <%= select(ff, :player6, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game3_for_second_player %>
+
+              </div>
+<!-- group player 7 -->
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                  Player7
+                </label>
+
+                  <%= select(ff, :player7, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game4_for_first_player %>
+
+              </div>
+
+<!-- group player 8 -->
+              <div class="w-full md:w-1/2 px-3">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Player8
+                </label>
+
+                  <%= select(ff, :player8, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game4_for_second_player %>
+
+              </div>
+<!-- group player 9 -->
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                  Player9
+                </label>
+
+                  <%= select(ff, :player9, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game5_for_first_player %>
+
+              </div>
+
+<!-- group player 10 -->
+              <div class="w-full md:w-1/2 px-3">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Player10
+                </label>
+
+                  <%= select(ff, :player10, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a player"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag ff, :game5_for_second_player %>
+
+              </div>
+
+
+
+
+              <% end %>
+            </div>
+
+
+          </div>
+          </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
+          <%# select(f, :status_id, Enum.map(@statuses, &{&1.name, &1.id}), prompt: [key: "Choose a match status"], , class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+
+
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <%= submit "Check it", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+          <span class="close-modal-group">&times;</span>
+          </div>
+          </.form>
+          </div>
+          </div>
+          </div>
+
+
+      </div>
+
+
+
+<!-- ======== END GROUP CREATION ========= -->
+
+
 <!-- ======== START MATCH CREATION ========= -->
 
         <div class="mt-10 py-10 border-t border-gray-300 text-center">
@@ -609,6 +797,34 @@
 
 
 <!-- JS script -->
+
+<script>
+
+var modal_group = document.getElementById("modal-group");
+
+
+var open_modal_group = document.getElementById("open-modal-group");
+
+var close_modal_group = document.getElementsByClassName("close-modal-group")[0];
+
+open_modal_group.onclick = function() {
+  modal_group.style.display = "block";
+}
+
+
+close_modal_group.onclick = function() {
+  modal_group.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal_group) {
+    modal_group.style.display = "none";
+  }
+}
+
+
+</script>
 
 
 <%= for match <- @match_for_tour do %>
