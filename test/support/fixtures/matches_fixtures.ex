@@ -25,4 +25,18 @@ defmodule TennisPhx.MatchesFixtures do
 
     match
   end
+
+  @doc """
+  Generate a group.
+  """
+  def group_fixture(attrs \\ %{}) do
+    {:ok, group} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> TennisPhx.Matches.create_group()
+
+    group
+  end
 end
