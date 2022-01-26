@@ -27,6 +27,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     phases = Phases.list_phases()
     player_units = PlayerUnits.list_player_units()
     statuses = Statuses.list_statuses()
+    groups = Matches.list_groups() |> Repo.preload(:player1) |> Repo.preload(:player2) |> Repo.preload(:player3) |> Repo.preload(:player4) |> Repo.preload(:player5) |> Repo.preload(:player6) |> Repo.preload(:player7) |> Repo.preload(:player8)
     match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
     matches = Matches.list_matches()
     changeset = Matches.change_match(%Match{})
@@ -45,6 +46,7 @@ defmodule TennisPhxWeb.AdminTourLive do
         phases: phases,
         player_units: player_units,
         statuses: statuses,
+        groups: groups,
         match_for_tour: match_for_tour,
         changeset: changeset,
         changeset_for_tour: changeset_for_tour,
