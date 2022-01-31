@@ -51,6 +51,11 @@ defmodule TennisPhx.Participants do
     |> Repo.preload(:tours)
   end
 
+  def get_id_of_player_by_name(player1_name) do
+    query = from(p in Player, where: p.name == ^player1_name, select: p.id)
+    Repo.one(query)
+  end
+
   @doc """
   Creates a player.
 
