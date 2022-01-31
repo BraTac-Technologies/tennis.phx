@@ -434,20 +434,47 @@
 
                   <tr>
                     <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
-                      <div class="text-center text-sm text-gray-900"><%= group.player1.name %></div>
+                      <div class="text-center text-sm text-gray-900">
+                      <%= group.player1.name %>
+                      </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                       X
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                      vs p2
+                      <%= if Enum.any?(@matches, fn m -> m.tour_id == @tour.id and (m.first_player_id == group.player1.id and m.second_player_id == group.player2.id or m.first_player_id == group.player2.id and m.second_player_id == group.player1.id) end) do %>
+                        <.form let={f} for={@changeset}, phx-change="assign_group_match">
+                          <%= hidden_input f, :player1_id, value: 3 %>
+                          <%= hidden_input f, :player2_id, value: 1 %>
+                          <%= hidden_input f, :tour_id, value: @tour.id %>
+                          <%= number_input f, :games_for_first_player, class: "w-1/5" %>
+                          :
+                          <%= number_input f, :games_for_second_player, class: "w-1/5" %>
+                       </.form>
+                      <% else %>
+                        <.form let={f} for={@changeset}, phx-submit="create_match">
+                          <%= hidden_input f, :tour_id, value: @tour.id %>
+                          <%= hidden_input f, :first_player_id, value: group.player1.id %>
+                          <%= hidden_input f, :second_player_id, value: group.player2.id %>
+                          <%= hidden_input f, :phase_id, value: 1 %>
+                          <%= hidden_input f, :status_id, value: 1 %>
+                          <%= submit "CREATE", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-1 py-1/2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+                        </.form>
+
+                      <% end %>
+
+
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                      vs p3
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
+                      :
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
                     </td>
                     <%= if group.player4 do %>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                      vs p4
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
+                      :
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
                     </td>
                     <% end %>
                     <%= if group.player5 do %>
@@ -813,7 +840,7 @@
               <br>
 
 
-                  <.form let={f} for={@changeset}, phx-submit="assign_match_info">
+                  <.form let={f} for={@changeset}, phx-submit="create_match">
                     <%= hidden_input f, :status_id, value: 1 %>
                     <%= hidden_input f, :tour_id, value: @tour.id %>
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -940,7 +967,7 @@
                                   </div>
                                   <div class="ml-4">
                                     <div class="text-sm font-medium text-gray-900">
-                                      <%= match.first_player.name %>
+                                      <%= match.first_player.name %>(<%= match.first_player.id %>)
                                     </div>
                                     <div class="text-sm text-gray-500">
                                       <!-- Email or smth else -->
@@ -955,7 +982,7 @@
                                   </div>
                                   <div class="ml-4">
                                     <div class="text-sm font-medium text-gray-900">
-                                      <%= match.second_player.name %>
+                                      <%= match.second_player.name %>(<%= match.second_player.id %>)
                                     </div>
                                     <div class="text-sm text-gray-500">
                                       <!-- Email or smth else -->
@@ -966,6 +993,7 @@
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <%= match.phase.name %>
                               </td>
+                              <%= if match.status do %>
                               <td class="px-6 py-4 whitespace-nowrap">
                                 <%= if match.status.id == 1 do %>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
@@ -983,6 +1011,7 @@
                                 </span>
                                 <% end %>
                               </td>
+                              <% end %>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button id ={"score-modal-btn-#{match.id}"} class="text-indigo-600 hover:text-indigo-900"> Open Modal </button>
                                 <!-- <a href="#" class="text-indigo-600 hover:text-indigo-900">Add score</a> -->

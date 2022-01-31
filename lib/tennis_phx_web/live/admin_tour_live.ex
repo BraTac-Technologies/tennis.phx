@@ -48,9 +48,10 @@ defmodule TennisPhxWeb.AdminTourLive do
         statuses: statuses,
         groups: groups,
         match_for_tour: match_for_tour,
+        matches: matches,
         changeset: changeset,
         changeset_for_tour: changeset_for_tour,
-        changeset_for_group: changeset_for_group
+        changeset_for_group: changeset_for_group,
       )
     {:ok, socket}
   end
@@ -100,9 +101,10 @@ defmodule TennisPhxWeb.AdminTourLive do
       end
   end
 
+
 # Create Match
 
-  def handle_event("assign_match_info", %{"match" => attrs}, socket) do
+  def handle_event("create_match", %{"match" => attrs}, socket) do
 
     case Matches.create_match(attrs) do
       {:ok, match} ->
