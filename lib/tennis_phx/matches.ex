@@ -8,6 +8,7 @@ defmodule TennisPhx.Matches do
 
   alias TennisPhx.Matches.Match
   alias TennisPhx.Events.Tour
+  alias TennisPhx.Matches.Group
 
 
   # =========== Assign Player v Player Match =============
@@ -32,6 +33,15 @@ defmodule TennisPhx.Matches do
   end
 
   # =========== END Assign Match in Tour =============
+
+  def get_match_by_ids(first_player_id, second_player_id, tour_id) do
+
+    query = from(m in Match, where: m.tour_id == ^tour_id and m.phase_id == 1 and (m.first_player_id == ^first_player_id and m.second_player_id == ^second_player_id or m.first_player_id == ^second_player_id and m.second_player_id == ^first_player_id), select: m.id)
+    id = Repo.one(query)
+    Repo.get!(Match, id)
+
+  end
+
 
 
   def list_matches do
@@ -64,7 +74,7 @@ defmodule TennisPhx.Matches do
     Match.changeset(match, attrs)
   end
 
-  alias TennisPhx.Matches.Group
+
 
   @doc """
   Returns the list of groups.

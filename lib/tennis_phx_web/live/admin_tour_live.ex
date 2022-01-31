@@ -102,6 +102,34 @@ defmodule TennisPhxWeb.AdminTourLive do
   end
 
 
+# Add Group Match Games
+
+  def handle_event("add_group_match_games", %{"match" => attrs}, socket) do
+    first_player_id = attrs["first_player_id"]
+    second_player_id = attrs["second_player_id"]
+    tour_id = attrs["tour_id"]
+
+    match = Matches.get_match_by_ids(first_player_id, second_player_id, tour_id)
+
+    case Matches.update_match(match, attrs) do
+      {:ok, match} ->
+
+        changeset = Matches.change_match(%Match{})
+
+        socket = put_flash(socket, :success, "Score assigned successfully!")
+        socket = put_flash(socket, :info, "Status of this match is auto setted to 'Finished' ")
+        socket = assign(socket, changeset: changeset)
+
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        IO.puts("error")
+        socket = assign(socket, changeset: changeset)
+        {:noreply, socket}
+    end
+
+  end
+
 # Create Match
 
   def handle_event("create_match", %{"match" => attrs}, socket) do

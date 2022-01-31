@@ -443,11 +443,12 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
                       <%= if Enum.any?(@matches, fn m -> m.tour_id == @tour.id and (m.first_player_id == group.player1.id and m.second_player_id == group.player2.id or m.first_player_id == group.player2.id and m.second_player_id == group.player1.id) end) do %>
-                        <.form let={f} for={@changeset}, phx-change="assign_group_match">
-                          <%= hidden_input f, :player1_id, value: 3 %>
-                          <%= hidden_input f, :player2_id, value: 1 %>
+                        <.form let={f} for={@changeset}, phx-change="add_group_match_games">
+                          <%= hidden_input f, :first_player_id, value: group.player1.id %>
+                          <%= hidden_input f, :second_player_id, value: group.player2.id %>
                           <%= hidden_input f, :tour_id, value: @tour.id %>
-                          <%= number_input f, :games_for_first_player, class: "w-1/5" %>
+
+                          <%= number_input f, :games_for_first_player, class: "w-1/5"  %>
                           :
                           <%= number_input f, :games_for_second_player, class: "w-1/5" %>
                        </.form>
