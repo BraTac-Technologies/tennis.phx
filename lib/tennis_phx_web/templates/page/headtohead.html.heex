@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="awesomplete.css" />
+<script src="awesomplete.js" async></script>
+
 <main class="profile-page">
   <section class="relative block" style="height: 500px;">
     <div
@@ -93,15 +96,23 @@
                 <form phx-submit="search_for_matches">
                   <dt class="text-sm font-medium text-gray-500">
                     <!-- <i class="far fa-user fa-lg"></i> -->
-                    <%= number_input :player1, :player1, placeholder: "Something" %>
+                    <%# number_input :player1, :player1, placeholder: "Something" %>
+                    <%= text_input :player1, :player1, placeholder: "Something", class: "awesomplete", list: "PlayersList" %>
                   </dt>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    <%= number_input :player2, :player2, placeholder: "Something" %>
+                    <%= text_input :player2, :player2, placeholder: "Something", class: "awesomplete", list: "PlayersList" %>
                   </dd>
                   <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                     <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
                   </dd>
                 </form>
+
+                <datalist id="PlayersList">
+                  <%= for player <- @players do %>
+                	<option><%= player.name %></option>
+                  <% end %>
+
+                </datalist>
 
                 <%= if is_nil(@first_player) || is_nil(@second_player) do %>
                 <% else %>
