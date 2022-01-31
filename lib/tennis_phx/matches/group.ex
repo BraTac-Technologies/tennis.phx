@@ -28,6 +28,6 @@ defmodule TennisPhx.Matches.Group do
   def changeset(group, attrs) do
     group
     |> cast(attrs, [:title, :stage, :tour_id, :player1_id, :player2_id, :player3_id, :player4_id, :player5_id, :player6_id, :player7_id, :player8_id])
-    |> validate_required([:name])
+    # |> validate_required([])
   end
 end
