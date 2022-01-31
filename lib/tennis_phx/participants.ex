@@ -26,20 +26,8 @@ defmodule TennisPhx.Participants do
     Repo.all(filter)
   end
 
-  @doc """
-  Gets a single player.
+  # Player Show
 
-  Raises `Ecto.NoResultsError` if the Player does not exist.
-
-  ## Examples
-
-      iex> get_player!(123)
-      %Player{}
-
-      iex> get_player!(456)
-      ** (Ecto.NoResultsError)
-
-  """
   def get_winrate(%Player{} = player) do
     pi = player.id
     query = from(m in Match, where: m.winner_id == ^pi)
@@ -49,6 +37,11 @@ defmodule TennisPhx.Participants do
   def get_match_count(%Player{} = player) do
     pi = player.id
     query = from(m in Match, where: m.first_player_id == ^pi or m.second_player_id == ^pi)
+    Repo.all(query)
+  end
+
+  def get_player_v_player_wins(player1_id, player2_id) do
+    query = from(m in Match, where: (m.first_player_id == ^player1_id and m.second_player_id == ^player2_id or m.first_player_id == ^player2_id and m.second_player_id == ^player1_id) and m.winner_id == ^player1_id)
     Repo.all(query)
   end
 
