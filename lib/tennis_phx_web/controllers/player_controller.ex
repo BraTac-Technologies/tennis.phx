@@ -1,6 +1,7 @@
 defmodule TennisPhxWeb.PlayerController do
   use TennisPhxWeb, :controller
 
+  alias TennisPhx.Repo
   alias TennisPhx.Participants
   alias TennisPhx.Participants.Player
   alias TennisPhx.Events
@@ -32,7 +33,8 @@ defmodule TennisPhxWeb.PlayerController do
     player = Participants.get_player!(id)
     winrate = Participants.get_winrate(player)
     match_count = Participants.get_match_count(player)
-    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count)
+    points_and_tours_by_player = Events.points_and_tours_by_player(player) |> Repo.preload(:tour)
+    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count, points_and_tours_by_player: points_and_tours_by_player)
   end
 
   def edit(conn, %{"id" => id}) do
