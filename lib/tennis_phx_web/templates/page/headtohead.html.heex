@@ -1,0 +1,367 @@
+<link rel="stylesheet" href="awesomplete.css" />
+<script src="awesomplete.js" async></script>
+
+<main class="profile-page">
+  <section class="relative block" style="height: 500px;">
+    <div
+      class="absolute top-0 w-full h-full bg-center bg-cover"
+      style='background-image: url("https://cdn.statically.io/img/butterflyonline.com/wp-content/uploads/2017/10/boll_22_10_17.jpg?quality=90&f=auto");'
+    >
+      <span
+        id="blackOverlay"
+        class="w-full h-full absolute opacity-50 bg-black"
+      ></span>
+    </div>
+    <div
+      class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
+      style="height: 70px; transform: translateZ(0px);"
+    >
+      <svg
+        class="absolute bottom-0 overflow-hidden"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none"
+        version="1.1"
+        viewBox="0 0 2560 100"
+        x="0"
+        y="0"
+      >
+        <polygon
+          class="text-gray-300 fill-current"
+          points="2560 0 2560 100 0 100"
+        ></polygon>
+      </svg>
+    </div>
+  </section>
+  <section class="relative py-16 bg-gray-300">
+    <div class="container mx-auto px-4">
+      <div
+        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+      >
+        <div class="px-6">
+          <div class="flex flex-wrap justify-center">
+            <div
+              class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center"
+            >
+              <div class="relative">
+                <img
+                  alt="..."
+                  src="./assets/img/team-2-800x800.jpg"
+                  class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
+                  style="max-width: 150px;"
+                />
+              </div>
+            </div>
+            <div
+              class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
+            >
+              <div class="py-6 px-3 mt-32 sm:mt-0">
+
+              </div>
+            </div>
+            <div class="w-full lg:w-4/12 px-4 lg:order-1">
+              <div class="flex justify-center py-4 lg:pt-4 pt-8">
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-12">
+            <h3
+              class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
+            >
+            Head 2 Head
+            </h3>
+            <div
+              class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
+            >
+              <i
+                class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
+              ></i>
+              TennisPhx
+            </div>
+            <!-- <div class="mb-2 text-gray-700 mt-10">
+              <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
+              >Solution Manager - Creative Tim Officer
+            </div> -->
+
+          </div>
+          <div class="mt-10 py-10 border-t border-gray-300 text-center">
+            <div class="flex flex-wrap justify-center">
+              <div class="w-full lg:w-9/12 px-4">
+                <!-- <p class="mb-4 text-lg leading-relaxed text-gray-800">
+                  An artist of considerable range, Jenna the name taken by
+
+                </p> -->
+                <!-- <a href="#pablo" class="font-normal text-pink-500"
+                  >Show more</a
+                > -->
+
+
+                <datalist id="PlayersList">
+                  <%= for player <- @players do %>
+                	<option><%= player.name %></option>
+                  <% end %>
+
+                </datalist>
+
+
+                <div class="text-center flex flex-col">
+                  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                          <thead class="bg-gray-50">
+                          <form phx-submit="search_for_matches">
+                            <tr>
+                              <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <%= text_input :player1, :player1, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
+                              </th>
+                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <%= submit "Search", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm", phx_disable_with: "Adding...." %>
+                              </th>
+                              <th scope="col" class="text-right px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <%= text_input :player2, :player2, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
+                              </th>
+                            </tr>
+                          </form>
+                            <%= if is_nil(@first_player) || is_nil(@second_player) do %>
+                            <% else %>
+                            <tr>
+                              <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <%= @first_player.name %>
+                              </th>
+                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <%= length(TennisPhx.Participants.get_player_v_player_wins(@first_player.id, @second_player.id)) %>
+                                vs
+                                <%= length(TennisPhx.Participants.get_player_v_player_wins(@second_player.id, @first_player.id)) %>
+                              </th>
+                              <th scope="col" class="text-right px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <%= @second_player.name %>
+                              </th>
+                            </tr>
+
+                          <% end %>
+                          </thead>
+                          <%= if is_nil(@first_player) || is_nil(@second_player) do %>
+                          <% else %>
+                          <tbody class="bg-white divide-y divide-gray-200">
+
+
+                            <tr>
+                              <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= (DateTime.utc_now.year - @first_player.birthdate.year) %>
+                              </td>
+
+                              <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Age
+                              </td>
+
+                              <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                  <%= (DateTime.utc_now.year - @second_player.birthdate.year) %>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= Macro.camelize(@first_player.hand) %>
+                              </td>
+
+                              <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Plays with
+                              </td>
+
+                              <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                  <%= Macro.camelize(@second_player.hand) %>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= length(TennisPhx.Participants.get_match_count(@first_player)) %>
+                              </td>
+
+                              <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Matches played
+                              </td>
+
+                              <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                  <%= length(TennisPhx.Participants.get_match_count(@second_player)) %>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= Enum.count(@first_player.tours) %>
+                              </td>
+
+                              <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Tours played
+                              </td>
+
+                              <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                  <%= Enum.count(@second_player.tours) %>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= trunc(length(TennisPhx.Participants.get_winrate(@first_player)) / length(TennisPhx.Participants.get_match_count(@first_player)) * 100) %>%
+                              </td>
+
+                              <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                Win rate in all tours
+                              </td>
+
+                              <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= trunc(length(TennisPhx.Participants.get_winrate(@second_player)) / length(TennisPhx.Participants.get_match_count(@second_player)) * 100) %>%
+                              </td>
+                            </tr>
+
+
+
+                            <!-- More people... -->
+                          </tbody>
+                        <% end %>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <br><br>
+                <h1> Event Breakdown </h1>
+
+            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <%= for match <- @matches do %>
+                <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                  <div class="w-full flex items-center justify-between p-6 space-x-6">
+                    <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th class="bg-gray-300 w-full"></th>
+                            <th class="bg-gray-300 text-right px-3"></th>
+                            <th class="bg-gray-300 text-right px-3"></th>
+                            <th class="bg-gray-300 text-right px-3"></th>
+                            <th class="bg-gray-300 text-right px-3"></th>
+                            <th class="bg-gray-300 text-right px-3"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <%= if match.winner_id == match.first_player.id do %>
+                              <td class="text-left">
+                                <i class="fas fa-check"></i>
+                                <b><%= match.first_player.name %></b>
+                              </td>
+                            <% else %>
+                              <td class="text-left"><%= match.first_player.name %></td>
+                            <% end %>
+                            <%= if is_nil(match.score) do %>
+                            <% else %>
+                              <%= if match.score.game1_for_first_player > match.score.game1_for_second_player do %>
+                                <td><b><%= match.score.game1_for_first_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game1_for_first_player %></td>
+                              <% end %>
+                              <%= if match.score.game2_for_first_player > match.score.game2_for_second_player do %>
+                                <td><b><%= match.score.game2_for_first_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game2_for_first_player %></td>
+                              <% end %>
+                              <%= if match.score.game3_for_first_player > match.score.game3_for_second_player do %>
+                                <td><b><%= match.score.game3_for_first_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game3_for_first_player %></td>
+                              <% end %>
+                              <%= if match.score.game4_for_first_player > match.score.game4_for_second_player do %>
+                                <td><b><%= match.score.game4_for_first_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game4_for_first_player %></td>
+                              <% end %>
+                              <%= if match.score.game5_for_first_player > match.score.game5_for_second_player do %>
+                                <td><b><%= match.score.game5_for_first_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game5_for_first_player %></td>
+                              <% end %>
+                            <% end %>
+
+                          </tr>
+                          <tr>
+                            <%= if match.winner_id == match.second_player_id do %>
+                              <td class="text-left">
+                                <i class="fas fa-check"></i>
+                                <b><%= match.second_player.name %></b>
+                              </td>
+                            <% else %>
+                              <td class="text-left"><%= match.second_player.name %></td>
+                            <% end %>
+                            <%= if is_nil(match.score) do %>
+                            <td> TBA </td>
+                            <% else %>
+                              <%= if match.score.game1_for_second_player > match.score.game1_for_first_player do %>
+                                <td><b><%= match.score.game1_for_second_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game1_for_second_player %></td>
+                              <% end %>
+                              <%= if match.score.game2_for_second_player > match.score.game2_for_first_player do %>
+                                <td><b><%= match.score.game2_for_second_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game2_for_second_player %></td>
+                              <% end %>
+                              <%= if match.score.game3_for_second_player > match.score.game3_for_first_player do %>
+                                <td><b><%= match.score.game3_for_second_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game3_for_second_player %></td>
+                              <% end %>
+                              <%= if match.score.game4_for_second_player > match.score.game4_for_first_player do %>
+                                <td><b><%= match.score.game4_for_second_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game4_for_second_player %></td>
+                              <% end %>
+                              <%= if match.score.game5_for_second_player > match.score.game5_for_first_player do %>
+                                <td><b><%= match.score.game5_for_second_player %></b></td>
+                              <% else %>
+                                <td><%= match.score.game5_for_second_player %></td>
+                              <% end %>
+
+                            <% end %>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                  </div>
+                  <%= NimbleStrftime.format(match.inserted_at, "%d %b %Y") %>
+                  
+                  <div>
+                    <div class="-mt-px flex divide-x divide-gray-200">
+
+                      <div class="w-0 flex-1 flex">
+                        <a class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
+                          <!-- Heroicon name: solid/mail -->
+                          <i class="fas fa-user-minus"></i>
+                          <span class="ml-3"><%= match.phase.name %></span>
+                        </a>
+                      </div>
+                      <div class="-ml-px w-0 flex-1 flex">
+                        <a class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                          <!-- Heroicon name: solid/phone -->
+                            <i class="fas fa-table-tennis"></i>
+                          <span class="ml-3"><%= match.tour.title %></span>
+                        </a>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

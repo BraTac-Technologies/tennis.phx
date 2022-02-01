@@ -50,7 +50,8 @@ defmodule TennisPhx.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:phx_gen_tailwind, "~> 0.1.2-rc.0", only: :dev}
+      {:phx_gen_tailwind, "~> 0.1.2-rc.0", only: :dev},
+      {:nimble_strftime, "~> 0.1.1"}
     ]
   end
 

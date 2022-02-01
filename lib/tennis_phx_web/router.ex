@@ -24,6 +24,7 @@ defmodule TennisPhxWeb.Router do
     resources "/tours", TourController
     resources "/players", PlayerController
     live "/match/live_form", MatchLive
+    live "/head2head", HeadtoHeadLive, :h2h
   end
 
   scope "/", TennisPhxWeb do
