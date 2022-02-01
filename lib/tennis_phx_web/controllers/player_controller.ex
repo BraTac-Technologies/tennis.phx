@@ -5,6 +5,7 @@ defmodule TennisPhxWeb.PlayerController do
   alias TennisPhx.Participants
   alias TennisPhx.Participants.Player
   alias TennisPhx.Events
+  alias TennisPhx.Matches
 
   def index(conn, _params) do
     players = Participants.list_players_ranking()
@@ -34,7 +35,8 @@ defmodule TennisPhxWeb.PlayerController do
     winrate = Participants.get_winrate(player)
     match_count = Participants.get_match_count(player)
     points_and_tours_by_player = Events.points_and_tours_by_player(player) |> Repo.preload(:tour)
-    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count, points_and_tours_by_player: points_and_tours_by_player)
+    matches = Matches.get_last3_matches_by_player(player)  |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
+    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count, points_and_tours_by_player: points_and_tours_by_player, matches: matches)
   end
 
   def edit(conn, %{"id" => id}) do
