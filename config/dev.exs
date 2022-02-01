@@ -35,6 +35,10 @@ config :tennis_phx, TennisPhxWeb.Endpoint,
 
   ]
 
+config :waffle,
+  storage: Waffle.Storage.Local
+
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

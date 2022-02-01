@@ -1,5 +1,6 @@
 defmodule TennisPhx.Participants.Player do
   use Ecto.Schema
+  use Waffle.Ecto.Schema
   import Ecto.Changeset
 
   alias TennisPhx.Events.Tour
@@ -12,6 +13,7 @@ defmodule TennisPhx.Participants.Player do
     field :nickname, :string
     field :points, :integer
     field :hand, :string
+    field :avatar, TennisPhx.AvatarUploader.Type
 
 
 
@@ -29,6 +31,9 @@ defmodule TennisPhx.Participants.Player do
   def changeset(player, attrs) do
     player
     |> cast(attrs, [:name, :nickname, :info, :birthdate, :points, :hand])
+    |> cast_attachments(attrs, [:avatar])
     |> validate_required([:name])
   end
+
+
 end
