@@ -20,7 +20,8 @@ defmodule TennisPhx.Events do
 
   """
   def list_tours do
-    Repo.all(Tour)
+    filter = from(t in Tour, order_by: [desc: t.date])
+    Repo.all(filter)
   end
 
   # ========== Player_Tour Many_to_Many ==========
