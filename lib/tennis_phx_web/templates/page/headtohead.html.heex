@@ -102,6 +102,20 @@
 
                 </datalist>
 
+                <form phx-submit="search_for_matches">
+
+                    <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <%= text_input :player1, :player1, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
+                    </th>
+                  <br><br>
+                    <th scope="col" class="text-right px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <%= text_input :player2, :player2, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
+                    </th>
+                    <br><br>
+                    <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <%= submit "Search", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm", phx_disable_with: "Adding...." %>
+                    </th>
+                </form>
 
                 <div class="text-center flex flex-col">
                   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -109,19 +123,6 @@
                       <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
                           <thead class="bg-gray-50">
-                          <form phx-submit="search_for_matches">
-                            <tr>
-                              <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <%= text_input :player1, :player1, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
-                              </th>
-                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <%= submit "Search", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm", phx_disable_with: "Adding...." %>
-                              </th>
-                              <th scope="col" class="text-right px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <%= text_input :player2, :player2, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
-                              </th>
-                            </tr>
-                          </form>
                             <%= if is_nil(@first_player) || is_nil(@second_player) do %>
                             <% else %>
                             <tr>
