@@ -50,58 +50,5 @@ defmodule TennisPhxWeb.TourLive do
   end
 
 
-  def handle_event("toggle_check", %{"player-id" => player_id}, socket) do
-    tour = socket.assigns[:tour]
-              |> Repo.preload(:players)
-    Events.toggle_tour_players(tour, player_id)
-    tour_players = Events.tour_players(tour)
-                   |>Enum.map(fn(x) -> x.player_id end)
-                   {:noreply, assign(socket, :tour_players, tour_players)}
-  end
-
-
-
-  def handle_event("add_points", %{"player_id" => %{"player_id" => player_id}, "player_points" => %{"points" => points_for_player}}, socket) do
-    tour = socket.assigns[:tour]
-           |> Repo.preload(:players)
-    Events.assign_player_points(tour, player_id, points_for_player)
-    {:noreply, socket}
-  end
-
-
-  def handle_event("assign_match_info", %{"match" => attrs}, socket) do
-
-    case Matches.create_match(attrs) do
-      {:ok, match} ->
-        changeset = Matches.change_match(%Match{})
-
-        socket = assign(socket, changeset: changeset)
-
-        {:noreply, socket}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-
-        socket = assign(socket, changeset: changeset)
-        {:noreply, socket}
-      end
-  end
-
-  def handle_event("add_match_result", %{"match" => attrs}, socket) do
-    match = Matches.get_match!(attrs["match_id"])
-
-    case Matches.update_match(match, attrs) do
-      {:ok, match} ->
-
-        changeset = Matches.change_match(%Match{})
-
-        socket = assign(socket, changeset: changeset)
-
-        {:noreply, socket}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        socket = assign(socket, changeset: changeset)
-        {:noreply, socket}
-    end
-  end
 
 end
