@@ -142,7 +142,12 @@
                                 <%= link to: Routes.player_path(@conn, :show, player) do %>
                                 <div class="flex items-center">
                                   <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+                                    <!-- <img class="h-10 w-10 rounded-full" src={"#{OffsidePhx.BannerUploader.url({@post.banner, @post}, signed: true)}"}"https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""> -->
+                                    <%= if is_nil(player.avatar) do %>
+                                      <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+                                    <% else %>
+                                      <img class="h-10 w-10 rounded-full" src={"#{TennisPhx.AvatarUploader.url({player.avatar, player}, signed: true)}"} alt="">
+                                    <% end %>
                                   </div>
                                   <div class="ml-4">
                                     <div class="text-sm font-medium text-gray-900">
