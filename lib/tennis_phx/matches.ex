@@ -8,6 +8,7 @@ defmodule TennisPhx.Matches do
 
   alias TennisPhx.Matches.Match
   alias TennisPhx.Events.Tour
+  alias TennisPhx.Participants.Player
 
 
   # =========== Assign Player v Player Match =============
@@ -39,7 +40,11 @@ defmodule TennisPhx.Matches do
   end
 
 
-
+  def get_last3_matches_by_player(%Player{} = player) do
+    player_id = player.id
+    query = from(m in Match, where: m.first_player_id == ^player_id or m.second_player_id == ^player_id)
+    Repo.all(query) |> Enum.take(3)
+  end
 
   def list_matches do
     Repo.all(Match)

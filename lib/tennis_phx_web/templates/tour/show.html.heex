@@ -62,20 +62,20 @@
                 <div class="mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                    >2021</span>
-                  <span class="text-sm text-gray-500">Season</span>
+                    ><%= DateTime.utc_now.year %></span>
+                  <span class="text-sm text-gray-500">Year</span>
                 </div>
                 <div class="mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                    >5</span>
+                    ><%= length(@tours) %></span>
                   <span class="text-sm text-gray-500">Passed Tours</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                    >35</span>
-                  <span class="text-sm text-gray-500">Competitors</span>
+                    ><%= length(@match_for_tour) %></span>
+                  <span class="text-sm text-gray-500">Matches here</span>
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
-               Starts in: <%= @tour.date %>
+               Starts in: <%= NimbleStrftime.format(@tour.date, "%d %b %Y - %H:%Mh") %>
             </div>
           </div>
 

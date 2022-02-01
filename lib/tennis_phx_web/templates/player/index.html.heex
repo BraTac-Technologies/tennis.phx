@@ -62,8 +62,8 @@
                 <div class="mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                    >2021</span>
-                    <span class="text-sm text-gray-500">Season</span>
+                    ><%= DateTime.utc_now.year %></span>
+                    <span class="text-sm text-gray-500">Year</span>
                 </div>
                 <div class="mr-4 p-3 text-center">
                   <span
@@ -142,7 +142,12 @@
                                 <%= link to: Routes.player_path(@conn, :show, player) do %>
                                 <div class="flex items-center">
                                   <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+                                    <!-- <img class="h-10 w-10 rounded-full" src={"#{OffsidePhx.BannerUploader.url({@post.banner, @post}, signed: true)}"}"https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""> -->
+                                    <%= if is_nil(player.avatar) do %>
+                                      <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+                                    <% else %>
+                                      <img class="h-10 w-10 rounded-full" src={"#{TennisPhx.AvatarUploader.url({player.avatar, player}, signed: true)}"} alt="">
+                                    <% end %>
                                   </div>
                                   <div class="ml-4">
                                     <div class="text-sm font-medium text-gray-900">
@@ -154,8 +159,8 @@
                             </td>
 
                               <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Bulgaria</div>
-                                <div class="text-sm text-gray-500">Burgas</div>
+                                <div class="text-sm text-gray-900"><%= player.country %></div>
+                                <div class="text-sm text-gray-500">гр. <%= player.city %></div>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <%= player.points %>

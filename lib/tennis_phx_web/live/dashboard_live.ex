@@ -24,6 +24,7 @@ defmodule TennisPhxWeb.DashboardLive do
     phases = Phases.list_phases()
     player_units = PlayerUnits.list_player_units()
     statuses = Statuses.list_statuses()
+    matches = Matches.list_matches()
     socket = assign(
         socket,
         tours: tours,
@@ -31,7 +32,8 @@ defmodule TennisPhxWeb.DashboardLive do
         phases: phases,
         player_units: player_units,
         statuses: statuses,
-        players: players
+        players: players,
+        matches: matches
       )
     {:ok, socket}
   end

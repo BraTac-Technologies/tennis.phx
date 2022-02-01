@@ -120,7 +120,7 @@
                           Player
                         </th>
                         <th scope="col" class=" px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Points
+                          Points in tour
                         </th>
 
                           <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -140,7 +140,7 @@
                           <div class="text-center text-sm text-gray-900"><%= player.name %></div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                          <div class="text-center text-sm text-gray-900"><%= player.points %></div>
+                          <div class="text-center text-sm text-gray-900"><%= TennisPhx.Events.get_player_points_by_tour(@tour.id, player.id) %></div>
                         </td>
                         <%= if Enum.member?(@tour_players, player.id) do %>
                           <td class="px-6 py-4 whitespace-nowrap">
@@ -295,6 +295,9 @@
                                 Status
                               </th>
                               <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                has_score?
+                              </th>
+                              <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Result
                               </th>
                               <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -356,6 +359,9 @@
                                   <%= match.status.name %>
                                 </span>
                                 <% end %>
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= if is_nil(match.score) do "0" else "1" end %>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <button id ={"score-modal-btn-#{match.id}"} class="text-indigo-600 hover:text-indigo-900"> Open Modal </button>

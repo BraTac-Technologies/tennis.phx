@@ -20,7 +20,8 @@ defmodule TennisPhx.Events do
 
   """
   def list_tours do
-    Repo.all(Tour)
+    filter = from(t in Tour, order_by: [desc: t.date])
+    Repo.all(filter)
   end
 
   # ========== Player_Tour Many_to_Many ==========
@@ -44,6 +45,17 @@ defmodule TennisPhx.Events do
     tour_id = tour.id
     query_join_table = from(pt in PlayerTour, where: pt.tour_id == ^tour_id)
     Repo.all(query_join_table)
+  end
+
+  def get_player_points_by_tour(tour_id, player_id) do
+    query = from(pt in PlayerTour, where: pt.tour_id == ^tour_id and pt.player_id == ^player_id, select: pt.points)
+    Repo.one(query)
+  end
+
+  def points_and_tours_by_player(%Player{} = player) do
+    player_id = player.id
+    query = from(pt in PlayerTour, where: pt.player_id == ^player_id, order_by: [desc: pt.points])
+    Repo.all(query)
   end
 
   # ========== END Player_Tour Many_to_Many END ==========

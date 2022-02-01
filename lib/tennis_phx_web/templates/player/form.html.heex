@@ -1,5 +1,4 @@
-
-  <.form let={f} for={@changeset}, action={@action}, class:"space-y-8 divide-y divide-gray-200">
+<%= form_for @changeset, @action, [multipart: true], fn f -> %>
     <%= if @changeset.action do %>
       <div class="alert alert-danger">
         <p>Oops, something went wrong! Please check the errors below.</p>
@@ -13,7 +12,7 @@
       <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Name
+            Име(задължително)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
@@ -23,7 +22,7 @@
         </div>
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Nickname
+            Прякор(не е задължително)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
@@ -33,7 +32,27 @@
         </div>
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Birthdate
+            Държава (не е задължително)
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+
+            <%= textarea f, :country, class: "max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md", style: "height: 55px;" %>
+
+          </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Град (не е задължително)
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+
+            <%= textarea f, :city, class: "max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md", style: "height: 55px;" %>
+
+          </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Рожденна Дата (не е задължително)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
@@ -43,7 +62,7 @@
         </div>
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Plays with
+            Играеща ръка (задължително)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
@@ -53,11 +72,22 @@
         </div>
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Info
+            Доп Инфо (не е задължително)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
             <%= textarea f, :info, class: "max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md", style: "height: 55px;" %>
+
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Снимка (не е задължително)
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+
+            <%= file_input f, :avatar, class: "" %>
 
           </div>
         </div>
@@ -72,4 +102,4 @@
 
     </div>
   </div>
-</.form>
+<% end %>
