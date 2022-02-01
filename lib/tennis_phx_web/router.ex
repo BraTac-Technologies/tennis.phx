@@ -21,22 +21,23 @@ defmodule TennisPhxWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/tours", TourController
-    resources "/players", PlayerController
+    resources "/tours", TourController, only: [:index]
+    resources "/players", PlayerController, only: [:index, :show]
     live "/match/live_form", MatchLive
     live "/head2head", HeadtoHeadLive, :h2h
+    live "/tour_live/:id", TourLive
   end
 
   scope "/", TennisPhxWeb do
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_admin]
 
-    live "/tour_live/:id", TourLive
+    resources "/matches", MatchController
+    resources "/player_units", Player_unitController
     resources "/locations", LocationController
     resources "/phases", PhaseController
     resources "/statuses", StatusController
-    resources "/player_units", Player_unitController
-    resources "/matches", MatchController
-
+    resources "/tours", TourController, except: [:index]
+    resources "/players", PlayerController, except: [:index, :show]
   end
 
   # Other scopes may use custom stacks.
