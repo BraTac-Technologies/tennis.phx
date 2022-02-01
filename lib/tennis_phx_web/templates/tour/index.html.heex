@@ -101,63 +101,70 @@
                 <!-- <a href="#pablo" class="font-normal text-pink-500"
                   >Show more</a
                 > -->
-                <table class="table-auto w-full text-left whitespace-no-wrap">
-        <thead>
-          <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Title</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Venue</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Start Date</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Status</th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Winner</th>
+                <div class="text-center flex flex-col">
+                  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
-          </tr>
-        </thead>
-        <tbody>
-          <%= @tours |> Enum.with_index |> Enum.map(fn({tour, index}) ->  %>
-          <tr>
-            <td class="px-4 py-3"><%= index + 1%></td>
-            <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
-            <%= if is_nil(tour.location) do %>
-              <td class="px-4 py-3 text-left">TBA</td>
-            <% else %>
-              <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
-            <% end %>
-            <td class="px-4 py-3 text-center"><%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %></td>
+                        <table class="table-auto w-full text-left whitespace-no-wrap">
+                          <thead>
+                            <tr>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Title</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Venue</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Start Date</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Status</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Winner</th>
 
-            <td class="px-4 py-3 text-lg text-gray-900 text-center">
-              <%= if tour.status do %>
-                <%= if tour.status.id == 1 do %>
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
-                    <%= tour.status.name %>
-                  </span>
-                <% end %>
-                <%= if tour.status.id == 2 do %>
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-green-800">
-                    <%= tour.status.name %>
-                  </span>
-                <% end %>
-                <%= if tour.status.id == 3 do %>
-                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-green-800">
-                    <%= tour.status.name %>
-                  </span>
-                <% end %>
-              <% end %>
-            </td>
-            <%= if is_nil(tour.winner) do %>
-              <td class="px-4 py-3 text-center">TBA</td>
-            <% else %>
-              <td class="px-4 py-3 text-center"><b><%= tour.winner.name %></b></td>
-            <% end %>
-            <!-- <td class="w-10 text-center">
-              <input name="plan" type="radio">
-            </td> -->
-          </tr>
-          <% end) %>
-        </tbody>
-      </table>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <%= @tours |> Enum.with_index |> Enum.map(fn({tour, index}) ->  %>
+                            <tr>
+                              <td class="px-4 py-3"><%= index + 1%></td>
+                              <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
+                              <%= if is_nil(tour.location) do %>
+                                <td class="px-4 py-3 text-left">TBA</td>
+                              <% else %>
+                                <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
+                              <% end %>
+                              <td class="px-4 py-3 text-center"><%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %></td>
 
-
+                              <td class="px-4 py-3 text-lg text-gray-900 text-center">
+                                <%= if tour.status do %>
+                                  <%= if tour.status.id == 1 do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
+                                      <%= tour.status.name %>
+                                    </span>
+                                  <% end %>
+                                  <%= if tour.status.id == 2 do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-green-800">
+                                      <%= tour.status.name %>
+                                    </span>
+                                  <% end %>
+                                  <%= if tour.status.id == 3 do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-green-800">
+                                      <%= tour.status.name %>
+                                    </span>
+                                  <% end %>
+                                <% end %>
+                              </td>
+                              <%= if is_nil(tour.winner) do %>
+                                <td class="px-4 py-3 text-center">TBA</td>
+                              <% else %>
+                                <td class="px-4 py-3 text-center"><b><%= tour.winner.name %></b></td>
+                              <% end %>
+                              <!-- <td class="w-10 text-center">
+                                <input name="plan" type="radio">
+                              </td> -->
+                            </tr>
+                            <% end) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
