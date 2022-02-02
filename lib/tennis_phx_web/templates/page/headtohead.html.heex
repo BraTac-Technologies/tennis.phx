@@ -158,7 +158,7 @@
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                  <%= (DateTime.utc_now.year - @second_player.birthdate.year) %>
+                                  <%= if (DateTime.utc_now.year - @second_player.birthdate.year) > 80 do "-" else (DateTime.utc_now.year - @second_player.birthdate.year) end %>
                               </td>
                             </tr>
 
@@ -333,7 +333,7 @@
                       </table>
 
                   </div>
-                  <%= NimbleStrftime.format(match.inserted_at, "%d %b %Y") %>
+                  <%= NimbleStrftime.format(match.starting_datetime, "%d %b %Y") %>
 
                   <div>
                     <div class="-mt-px flex divide-x divide-gray-200">
