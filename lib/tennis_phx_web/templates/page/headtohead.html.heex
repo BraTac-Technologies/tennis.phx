@@ -67,20 +67,15 @@
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
-            Head 2 Head
+            Състезател с/у Състезател
             </h3>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
-              <i
-                class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
-              ></i>
-              TennisPhx
+
+              Head to Head
             </div>
-            <!-- <div class="mb-2 text-gray-700 mt-10">
-              <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
-              >Solution Manager - Creative Tim Officer
-            </div> -->
+
 
           </div>
           <div class="mt-10 py-10 border-t border-gray-300 text-center">
@@ -105,17 +100,18 @@
                 <form phx-submit="search_for_matches">
 
                     <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <%= text_input :player1, :player1, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
+                      <%= text_input :player1, :player1, placeholder: "Търси играч 1", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
                     </th>
                   <br><br>
                     <th scope="col" class="text-right px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <%= text_input :player2, :player2, placeholder: "Search for players", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
+                      <%= text_input :player2, :player2, placeholder: "Търси играч 2", class: "focus:ring-indigo-500 focus:border-indigo-500 border-red-300 text-center text-lg awesomplete", list: "PlayersList" %>
                     </th>
                     <br><br>
                     <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      <%= submit "Search", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm", phx_disable_with: "Adding...." %>
+                      <%= submit "Намери мач", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm", phx_disable_with: "Adding...." %>
                     </th>
                 </form>
+                <br><br>
 
                 <div class="text-center flex flex-col">
                   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -132,7 +128,7 @@
                               <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
                                 <b>
                                 <%= length(TennisPhx.Participants.get_player_v_player_wins(@first_player.id, @second_player.id)) %>
-                                vs
+                                на
                                 <%= length(TennisPhx.Participants.get_player_v_player_wins(@second_player.id, @first_player.id)) %>
                               </b>
                               </th>
@@ -154,7 +150,7 @@
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Age
+                                Възраст
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -168,7 +164,7 @@
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Plays with
+                                Играеща ръка
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -182,7 +178,7 @@
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Matches played
+                                Общо изиграни мачове
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -196,7 +192,7 @@
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Tours played
+                                Общо участия по турнири
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -210,7 +206,7 @@
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Win rate in all tours
+                                Процент победа във всички турнири
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -232,7 +228,14 @@
 
 
                 <br><br>
-                <h1> Event Breakdown </h1>
+                <%= if is_nil(@first_player) || is_nil(@second_player) do %>
+                <% else %>
+                  <%= if length(TennisPhx.Participants.get_player_v_player_wins(@first_player.id, @second_player.id)) + length(TennisPhx.Participants.get_player_v_player_wins(@second_player.id, @first_player.id)) == 0 do %>
+                    <h1> Все още няма срещи </h1>
+                  <% else %>
+                    <h1> Разбор на срещите: </h1>
+                  <% end %>
+                <% end %>
 
             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <%= for match <- @matches do %>

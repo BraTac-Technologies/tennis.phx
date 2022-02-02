@@ -46,7 +46,7 @@
             >
               <div class="py-6 px-3 mt-32 sm:mt-0">
                 <%= if @current_admin do %>
-                  <%= link "New Tour", to: Routes.tour_path(@conn, :new), class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1" %>
+                  <%= link "Нов Турнир", to: Routes.tour_path(@conn, :new), class: "bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1" %>
                 <% end %>
               </div>
             </div>
@@ -56,19 +56,19 @@
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
                     ><%= DateTime.utc_now.year %></span>
-                    <span class="text-sm text-gray-500">Year</span>
+                    <span class="text-sm text-gray-500">Сезон</span>
                 </div>
                 <div class="mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
                     ><%= length(@tours) %></span>
-                    <span class="text-sm text-gray-500">Tours</span>
+                    <span class="text-sm text-gray-500">Турнира</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
                     ><%= length(@players) %></span>
-                    <span class="text-sm text-gray-500">Players</span>
+                    <span class="text-sm text-gray-500">Състезатели</span>
                 </div>
               </div>
             </div>
@@ -77,7 +77,7 @@
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
-              Tours
+              Турнири
             </h3>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -110,11 +110,11 @@
                           <thead>
                             <tr>
                               <!-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th> -->
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Title</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Venue</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Start Date</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Status</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Winner</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Име</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Зала</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Кога?</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Статус</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Победител</th>
 
                             </tr>
                           </thead>
@@ -124,7 +124,7 @@
                               <!-- <td class="px-4 py-3"></td> -->
                               <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
                               <%= if is_nil(tour.location) do %>
-                                <td class="px-4 py-3 text-left">TBA</td>
+                                <td class="px-4 py-3 text-left">-</td>
                               <% else %>
                                 <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
                               <% end %>
