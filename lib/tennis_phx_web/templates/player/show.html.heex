@@ -109,7 +109,7 @@
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="far fa-user fa-lg"></i>
-                              Nickname
+                              Прякор
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <%= @player.nickname %>
@@ -118,7 +118,7 @@
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-birthday-cake fa-lg"></i>
-                              Age
+                              Възраст
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <%= if (DateTime.utc_now.year - @player.birthdate.year) > 80 do "-" else DateTime.utc_now.year - @player.birthdate.year end %>
@@ -127,7 +127,7 @@
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-table-tennis fa-lg"></i>
-                              Plays with
+                              Играеща ръка
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <%= Macro.camelize(@player.hand) %>
@@ -136,7 +136,7 @@
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-medal fa-lg"></i>
-                              Matches Played
+                              Изиграни мачове
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <%= length(@match_count) %>
@@ -145,7 +145,7 @@
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-user-plus fa-lg"></i>
-                              Tours Played
+                              Участия в турнири
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <%= Enum.count(@player.tours) %>
@@ -154,20 +154,20 @@
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-percentage"></i>
-                              Win Rate
+                              Процент победи
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <%= if Enum.empty?(@winrate) || Enum.empty?(@match_count) do %>
                               -
                               <% else %>
-                              <%= trunc(length(@winrate) / length(@match_count) * 100) %>% (<%= length(@winrate) %> wins / <%= length(@match_count) - length(@winrate) %> losses)
+                              <%= trunc(length(@winrate) / length(@match_count) * 100) %>% (<%= length(@winrate) %> победи / <%= length(@match_count) - length(@winrate) %> загуби)
                               <% end %>
                             </dd>
                           </div>
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-receipt fa-lg"></i>
-                              About
+                              Допълнително инфо
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                               <%= @player.info %>

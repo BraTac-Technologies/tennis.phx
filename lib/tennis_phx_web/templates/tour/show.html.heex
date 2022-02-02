@@ -63,19 +63,19 @@
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
                     ><%= DateTime.utc_now.year %></span>
-                  <span class="text-sm text-gray-500">Year</span>
+                  <span class="text-sm text-gray-500">Сезон</span>
                 </div>
                 <div class="mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
                     ><%= length(@tours) %></span>
-                  <span class="text-sm text-gray-500">Passed Tours</span>
+                  <span class="text-sm text-gray-500">Изминали Турнири</span>
                 </div>
                 <div class="lg:mr-4 p-3 text-center">
                   <span
                     class="text-xl font-bold block uppercase tracking-wide text-gray-700"
                     ><%= length(@match_for_tour) %></span>
-                  <span class="text-sm text-gray-500">Matches here</span>
+                  <span class="text-sm text-gray-500">Мача в този турнир</span>
                 </div>
               </div>
             </div>
@@ -93,17 +93,21 @@
               <i
                 class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
               ></i>
+                <%= if is_nil(@tour.location) do %>
+                  TBA
+                <% else %>
                  <%= @tour.location.name %>
+                <% end %>
             </div>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
-               Info: <%= @tour.info %>
+               Информация: <%= @tour.info %>
             </div>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
-               Starts in: <%= NimbleStrftime.format(@tour.date, "%d %b %Y - %H:%Mh") %>
+               Започва на: <%= NimbleStrftime.format(@tour.date, "%d %b %Y - %H:%Mh") %>
             </div>
           </div>
 
@@ -114,7 +118,7 @@
           <div class="mt-10 py-10 border-t border-b border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
-                <h1 class="text-3xl">Winner: <%= @tour.winner.name %></h1>
+                <h1 class="text-3xl">Победител: <%= if @tour.winner do @tour.winner.name else "TBA" end %></h1>
                 <br>
 
                 <!-- This example requires Tailwind CSS v2.0+ -->
