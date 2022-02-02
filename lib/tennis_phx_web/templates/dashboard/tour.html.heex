@@ -478,7 +478,7 @@
 
                                 </div>
           <!-- GAME 4 part 1 -->
-                                <div id={"game4_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
 
                                   </label>
@@ -489,7 +489,7 @@
                                 </div>
 
           <!-- GAME 4 part 2 -->
-                                <div id={"game4_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
+                                <div class="w-full md:w-1/2 px-3">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
 
                                   </label>
@@ -499,7 +499,7 @@
 
                                 </div>
           <!-- GAME 5 part 1 -->
-                                <div id={"game5_part1_#{match.id}"} class="w-full md:w-1/2 px-3 mb-6 md:mb-0 hidden ">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
 
                                   </label>
@@ -510,7 +510,7 @@
                                 </div>
 
           <!-- GAME 5 part 2 -->
-                                <div id={"game5_part2_#{match.id}"} class="w-full md:w-1/2 px-3 hidden">
+                                <div class="w-full md:w-1/2 px-3">
                                   <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
 
                                   </label>
@@ -519,8 +519,8 @@
                                     <%= error_tag ff, :game5_for_second_player %>
 
                                 </div>
-                                <button id ={"button_for_game4_#{match.id}"} onclick={"CreateGame4_#{match.id}()"}>Create Game 4</button>
-                                <button id ={"button_for_game5_#{match.id}"} onclick={"CreateGame5_#{match.id}()"} class="hidden">Create Game 5</button>
+                                <!-- <button id ={"button_for_game4_#{match.id}"} onclick={"CreateGame4_#{match.id}()"}>Create Game 4</button>
+                                <button id ={"button_for_game5_#{match.id}"} onclick={"CreateGame5_#{match.id}()"} class="hidden">Create Game 5</button> -->
 
 
                                 <% end %>
@@ -580,18 +580,25 @@
                   <br>
 
                   <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                         Status
                       </label>
                       <%= select(f, :status_id, Enum.map(@statuses, &{&1.name, &1.id}), prompt: [key: "Choose a Status"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
 
                     </div>
-                    <div class="w-full md:w-1/2 px-3">
+                    <div class="w-full md:w-1/3 px-3">
                       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                         Winner
                       </label>
                       <%= select(f, :winner_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a tour winner"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+
+                    </div>
+                    <div class="w-full md:w-1/3 px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                        Location
+                      </label>
+                      <%= select(f, :location_id, Enum.map(@locations, &{&1.name, &1.id}), prompt: [key: "Choose a location"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
 
                     </div>
                   </div>
