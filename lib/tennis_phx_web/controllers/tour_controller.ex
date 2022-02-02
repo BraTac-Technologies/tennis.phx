@@ -13,6 +13,7 @@ defmodule TennisPhxWeb.TourController do
     statuses = Statuses.list_statuses()
     tours = Events.list_tours() |> Repo.preload(:status) |> Repo.preload(:location) |> Repo.preload(:winner)
     players = Participants.list_players()
+    locations = Locations.list_locations()
     render(conn, "index.html", tours: tours, players: players)
   end
 
@@ -23,6 +24,7 @@ defmodule TennisPhxWeb.TourController do
   end
 
   def create(conn, %{"tour" => tour_params}) do
+    locations = Locations.list_locations()
     case Events.create_tour(tour_params) do
       {:ok, tour} ->
         conn
@@ -37,6 +39,7 @@ defmodule TennisPhxWeb.TourController do
   end
 
   def show(conn, %{"id" => id}) do
+    locations = Locations.list_locations()
     tour = Events.get_tour!(id)
     render(conn, "show.html", tour: tour)
   end
@@ -50,12 +53,13 @@ defmodule TennisPhxWeb.TourController do
 
   def update(conn, %{"id" => id, "tour" => tour_params}) do
     tour = Events.get_tour!(id)
+    locations = Locations.list_locations()
 
     case Events.update_tour(tour, tour_params) do
       {:ok, tour} ->
         conn
         |> put_flash(:info, "Tour updated successfully.")
-        |> redirect(to: Routes.tour_path(conn, :index))
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", tour: tour, changeset: changeset)
@@ -68,6 +72,6 @@ defmodule TennisPhxWeb.TourController do
 
     conn
     |> put_flash(:info, "Tour deleted successfully.")
-    |> redirect(to: Routes.tour_path(conn, :index))
+    |> redirect(to: Routes.admin_dashboard_path(conn, :index))
   end
 end

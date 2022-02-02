@@ -157,7 +157,11 @@
                               Win Rate
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <%= if Enum.empty?(@winrate) || Enum.empty?(@match_count) do %>
+                              -
+                              <% else %>
                               <%= trunc(length(@winrate) / length(@match_count) * 100) %>% (<%= length(@winrate) %> wins / <%= length(@match_count) - length(@winrate) %> losses)
+                              <% end %>
                             </dd>
                           </div>
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -326,6 +330,7 @@
                             </table>
 
                         </div>
+                        <%= NimbleStrftime.format(match.starting_datetime, "%d %b %Y") %>
                         <div>
                           <div class="-mt-px flex divide-x divide-gray-200">
 
@@ -340,7 +345,7 @@
                               <a class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
                                 <!-- Heroicon name: solid/phone -->
                                   <i class="fas fa-table-tennis"></i>
-                                <span class="ml-3"><%= match.status.name %></span>
+                                <span class="ml-3"><%= match.tour.title %></span>
                               </a>
                             </div>
                           </div>

@@ -28,6 +28,6 @@ defmodule TennisPhx.Events.Tour do
   def changeset(tour, attrs) do
     tour
     |> cast(attrs, [:title, :info, :date, :status_id, :location_id, :winner_id])
-    |> validate_required([:title, :info, :date])
+    |> validate_required([:title, :date])
   end
 end

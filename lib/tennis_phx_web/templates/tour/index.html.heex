@@ -109,7 +109,7 @@
                         <table class="table-auto w-full text-left whitespace-no-wrap">
                           <thead>
                             <tr>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th>
+                              <!-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th> -->
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Title</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Venue</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Start Date</th>
@@ -121,7 +121,7 @@
                           <tbody>
                             <%= @tours |> Enum.with_index |> Enum.map(fn({tour, index}) ->  %>
                             <tr>
-                              <td class="px-4 py-3"><%= index + 1%></td>
+                              <!-- <td class="px-4 py-3"></td> -->
                               <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
                               <%= if is_nil(tour.location) do %>
                                 <td class="px-4 py-3 text-left">TBA</td>
