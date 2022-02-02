@@ -22,7 +22,7 @@ defmodule TennisPhxWeb.Router do
 
     get "/", PageController, :index
     resources "/tours", TourController, only: [:index]
-    resources "/players", PlayerController, only: [:index, :show]
+    resources "/players", PlayerController, except: [:create, :edit]
     live "/match/live_form", MatchLive
     live "/head2head", HeadtoHeadLive, :h2h
     live "/tour_live/:id", TourLive
@@ -37,7 +37,10 @@ defmodule TennisPhxWeb.Router do
     resources "/phases", PhaseController
     resources "/statuses", StatusController
     resources "/tours", TourController, except: [:index]
-    resources "/players", PlayerController, except: [:index, :show]
+    # resources "/players", PlayerController, except: [:index, :show]
+    get "/players/new", PlayerController, :new
+    post "/players", PlayerController, :create
+    get "players/:id/edit", PlayerController, :edit
   end
 
   # Other scopes may use custom stacks.
