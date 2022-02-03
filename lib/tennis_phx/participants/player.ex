@@ -11,7 +11,7 @@ defmodule TennisPhx.Participants.Player do
     field :info, :string
     field :name, :string
     field :nickname, :string
-    field :points, :integer
+    field :points, :integer, default: 0
     field :hand, :string
     field :avatar, TennisPhx.AvatarUploader.Type
     field :country, :string
