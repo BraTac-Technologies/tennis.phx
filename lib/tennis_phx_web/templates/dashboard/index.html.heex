@@ -517,10 +517,11 @@
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           <div class="flex items-center">
                             <span class="mr-2">
-                              <%= if Enum.empty?(@tours) %>
+                              <%= if Enum.empty?(@tours) do %>
                               -
                               <% else %>
-                              <%= trunc(Enum.count(player.tours) / length(@tours) * 100) %>%</span>
+                              <%= trunc(Enum.count(player.tours) / length(@tours) * 100) %>%
+                            </span>
                             <% end %>
                             <div class="relative w-full">
                               <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
