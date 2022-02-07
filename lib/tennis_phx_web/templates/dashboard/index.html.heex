@@ -152,43 +152,23 @@
                   class="text-pink-500 hover:text-pink-600 text-xs uppercase py-3 font-bold block"
                   href="/"
                   ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                  Home</a>
+                  Начало</a>
               </li>
               <li class="items-center">
                 <a
                   class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
                   href="/tours"
                   ><i class="fas fa-newspaper text-gray-500 mr-2 text-sm"></i>
-                  Tours</a>
+                  Турнири</a>
               </li>
               <li class="items-center">
                 <a
                   class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
                   href="/players"
                   ><i class="fas fa-user-circle text-gray-500 mr-2 text-sm"></i>
-                  Players</a>
+                  Ранглиста</a>
               </li>
-              <li class="items-center">
-                <a
-                  class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  href="/locations"
-                  ><i class="fas fa-fingerprint text-gray-500 mr-2 text-sm"></i>
-                  Locations</a>
-              </li>
-              <li class="items-center">
-                <a
-                  class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  href="/phases"
-                  ><i class="fas fa-fingerprint text-gray-500 mr-2 text-sm"></i>
-                  Phases</a>
-              </li>
-              <li class="items-center">
-                <a
-                  class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  href="/statuses"
-                  ><i class="fas fa-fingerprint text-gray-500 mr-2 text-sm"></i>
-                  Statuses</a>
-              </li>
+
               <li class="items-center">
                 <!-- <a
                   class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
@@ -202,7 +182,7 @@
                   class="text-gray-400 text-xs uppercase py-3 font-bold block"
                   href="/admins/settings"
                   ><i class="fas fa-tools text-gray-400 mr-2 text-sm"></i>
-                  Settings</a>
+                  АДМИН НАСТРОЙКИ</a>
               </li>
             </ul>
             <hr class="my-4 md:min-w-full" />
@@ -217,7 +197,7 @@
               <li class="inline-flex">
                 <a
                   class="text-gray-800 hover:text-gray-600 text-sm block mb-4 no-underline font-semibold"
-                  href="https://bratac.net/"
+                  href="https://docs.bratac.net/"
                   target="_blank"
                   ><i
                     class="fas fa-paint-brush mr-2 text-gray-500 text-base"
@@ -289,7 +269,7 @@
                       <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                           <h5 class="text-gray-500 uppercase font-bold text-xs">
-                            Created Players
+                            Създадени играчи
                           </h5>
                           <span class="font-semibold text-xl text-gray-800">
                             <%= length(@players) %>
@@ -318,7 +298,7 @@
                       <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                           <h5 class="text-gray-500 uppercase font-bold text-xs">
-                            Matches played
+                            Изиграни мачове
                           </h5>
                           <span class="font-semibold text-xl text-gray-800">
                             <%= length(@matches) %>
@@ -347,7 +327,7 @@
                       <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                           <h5 class="text-gray-500 uppercase font-bold text-xs">
-                            Created Tours
+                            Създадени Турнири
                           </h5>
                           <span class="font-semibold text-xl text-gray-800">
                             <%= length(@tours) %>
@@ -376,7 +356,7 @@
                       <div class="flex flex-wrap">
                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
                           <h5 class="text-gray-500 uppercase font-bold text-xs">
-                            Year
+                            Създадени тагове
                           </h5>
                           <span class="font-semibold text-xl text-gray-800">
                             <%= DateTime.utc_now.year %>
@@ -412,12 +392,12 @@
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-gray-800">
-                        All tours
+                        Всички турнири
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
 
-                      <%= link "New Tour", to: Routes.tour_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <%= link "Нов турнир", to: Routes.tour_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
                     </div>
                   </div>
                 </div>
@@ -427,19 +407,19 @@
                     <thead>
                       <tr>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Title
+                          Заглавие
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Start date
+                          Кога започва?
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Created in
+                          Кога е създаден?
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Players in Tour
+                          Играчи в турнир
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
-                          Admin
+                          Админ
                         </th>
                       </tr>
                     </thead>
@@ -450,18 +430,18 @@
                             <%= link tour.title , to: Routes.live_path(@socket, TennisPhxWeb.AdminTourLive, tour) %>
                           </th>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <%= tour.date %>
+                            <%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %>
                           </td>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <%= tour.inserted_at %>
+                            <%= NimbleStrftime.format(tour.inserted_at, "%d %b %Y") %>
                           </td>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
 
                             <%= Enum.count(tour.players) %>
                           </td>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                            <%= link "Edit", to: Routes.tour_path(@socket, :edit, tour) %> |
-                            <%= link "Delete", to: Routes.tour_path(@socket, :delete, tour), method: :delete, data: [confirm: "Are you sure?"] %>
+                            <%= link "Редактирай", to: Routes.tour_path(@socket, :edit, tour) %> |
+                            <%= link "Изтрий", to: Routes.tour_path(@socket, :delete, tour), method: :delete, data: [confirm: "Are you sure?"] %>
                           </td>
                         </tr>
                       <% end %>
@@ -476,12 +456,12 @@
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-gray-800">
-                        All Players
+                        Всички играчи
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
 
-                      <%= link "New Player", to: Routes.player_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <%= link "Нов играч", to: Routes.player_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
                     </div>
                   </div>
                 </div>
@@ -491,17 +471,17 @@
                     <thead class="thead-light">
                       <tr>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Name
+                          Име
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-center">
-                          Points
+                          Общо точки
                         </th>
                         <th
                           class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left"
                           style="min-width:140px"
-                        >Tours played</th>
+                        >% Участия в турнири</th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
-                          Admin
+                          Админ
                         </th>
                       </tr>
                     </thead>
@@ -516,7 +496,13 @@
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
                           <div class="flex items-center">
-                            <span class="mr-2"><%= trunc(Enum.count(player.tours) / length(@tours) * 100) %>%</span>
+                            <span class="mr-2">
+                              <%= if Enum.empty?(@tours) do %>
+                              -
+                              <% else %>
+                              <%= trunc(Enum.count(player.tours) / length(@tours) * 100) %>%
+                            <% end %>
+                            </span>
                             <div class="relative w-full">
                               <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
                                 <div
@@ -529,8 +515,8 @@
                           </div>
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                          <%= link "Edit", to: Routes.player_path(@socket, :edit, player) %> |
-                          <%= link "Delete", to: Routes.player_path(@socket, :delete, player), method: :delete, data: [confirm: "Are you sure?"] %>
+                          <%= link "Редактирай", to: Routes.player_path(@socket, :edit, player) %> |
+                          <%= link "Изтрий", to: Routes.player_path(@socket, :delete, player), method: :delete, data: [confirm: "Are you sure?"] %>
                         </td>
                       </tr>
                     <% end %>
@@ -543,12 +529,12 @@
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-gray-800">
-                        All locations
+                        Всички локации
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
 
-                      <%= link "New Location", to: Routes.location_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <%= link "Нова Локация", to: Routes.location_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
                     </div>
                   </div>
                 </div>
@@ -558,22 +544,22 @@
                     <thead>
                       <tr>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Name
+                          Име
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          City
+                          Град
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Country
+                          Държава
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Created in
+                          Кога е създаден?
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Description
+                          Описание
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
-                          Admin
+                          Админ
                         </th>
                       </tr>
                     </thead>
@@ -590,7 +576,7 @@
                             <%= location.country %>
                           </td>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <%= location.inserted_at %>
+                            <%= NimbleStrftime.format(location.inserted_at, "%d %b %Y") %>
                           </td>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
 
@@ -617,12 +603,12 @@
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-gray-800">
-                        All phases
+                        Всички фази
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
 
-                      <%= link "New Phase", to: Routes.phase_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <%= link "Нова Фаза", to: Routes.phase_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
                     </div>
                   </div>
                 </div>
@@ -632,10 +618,13 @@
                     <thead>
                       <tr>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Name
+                          ИД
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Created in
+                          Име
+                        </th>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                          Кога е създадена?
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
                           Admin
@@ -647,14 +636,18 @@
                       <%= for phase <- @phases do %>
                         <tr>
                           <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+                            <%= phase.id %>
+                          </th>
+                          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                             <%= link phase.name , to: Routes.phase_path(@socket, :show, phase) %>
                           </th>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                            <%= phase.inserted_at %>
+                            <%= NimbleStrftime.format(phase.inserted_at, "%d %b %Y") %>
                           </td>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                            <%= link "Edit", to: Routes.phase_path(@socket, :edit, phase) %>
-                            <%# link "Delete", to: Routes.phase_path(@socket, :delete, phase), method: :delete, data: [confirm: "Are you sure?"] %>
+                            <%= link "Ред.", to: Routes.phase_path(@socket, :edit, phase) %>
+                            |
+                            <%= link "Изтрий", to: Routes.phase_path(@socket, :delete, phase), method: :delete, data: [confirm: "Are you sure?"] %>
                           </td>
 
                         </tr>
@@ -669,12 +662,13 @@
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-gray-800">
-                        All Statuses
+                        Всички статуси
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-
-                      <%= link "New Status", to: Routes.status_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <%= if length(@statuses) < 3 do %>
+                        <%= link "Нов Статус", to: Routes.status_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <% end %>
                     </div>
                   </div>
                 </div>
@@ -684,13 +678,13 @@
                     <thead class="thead-light">
                       <tr>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Name
+                          Име
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Created in
+                          Кога е създаден?
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-right">
-                          Admin
+                          Админ
                         </th>
                       </tr>
                     </thead>
@@ -701,10 +695,10 @@
                           <%= link status.name , to: Routes.status_path(@socket, :show, status) %>
                         </th>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          <%= status.inserted_at %>
+                          <%= NimbleStrftime.format(status.inserted_at, "%d %b %Y") %>
                         </td>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
-                          <%= link "Edit", to: Routes.status_path(@socket, :edit, status) %>
+                          <%= link "Редактирай", to: Routes.status_path(@socket, :edit, status) %>
                           <%# link "Delete", to: Routes.status_path(@socket, :delete, status), method: :delete, data: [confirm: "Are you sure?"] %>
                         </td>
                       </tr>
