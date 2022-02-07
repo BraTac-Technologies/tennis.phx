@@ -13,6 +13,6 @@ defmodule TennisPhx.Tags.Tag do
   @doc false
   def changeset(tag, attrs) do
     tag
-    |> cast(attrs, [:name, :player_id, :points])    
+    |> cast(attrs, [:name, :player_id, :points])
   end
 end

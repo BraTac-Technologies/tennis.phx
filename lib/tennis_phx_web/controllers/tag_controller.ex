@@ -19,7 +19,7 @@ defmodule TennisPhxWeb.TagController do
       {:ok, tag} ->
         conn
         |> put_flash(:info, "Tag created successfully.")
-        |> redirect(to: Routes.tag_path(conn, :show, tag))
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -44,7 +44,7 @@ defmodule TennisPhxWeb.TagController do
       {:ok, tag} ->
         conn
         |> put_flash(:info, "Tag updated successfully.")
-        |> redirect(to: Routes.tag_path(conn, :show, tag))
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", tag: tag, changeset: changeset)
@@ -57,6 +57,6 @@ defmodule TennisPhxWeb.TagController do
 
     conn
     |> put_flash(:info, "Tag deleted successfully.")
-    |> redirect(to: Routes.tag_path(conn, :index))
+    |> redirect(to: Routes.admin_dashboard_path(conn, :index))
   end
 end

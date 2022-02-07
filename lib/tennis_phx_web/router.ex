@@ -23,6 +23,7 @@ defmodule TennisPhxWeb.Router do
     get "/", PageController, :index
     resources "/tours", TourController, only: [:index]
     resources "/players", PlayerController, except: [:create, :edit]
+    resources "/tags", TagController
     live "/match/live_form", MatchLive
     live "/head2head", HeadtoHeadLive, :h2h
     live "/tour_live/:id", TourLive

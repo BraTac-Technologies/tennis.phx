@@ -12,6 +12,7 @@ defmodule TennisPhxWeb.DashboardLive do
   alias TennisPhx.Statuses
   alias TennisPhx.Matches
   alias TennisPhx.Matches.Match
+  alias TennisPhx.Tags
 
   def render(assigns) do
    render DashboardView, "index.html", assigns
@@ -25,6 +26,7 @@ defmodule TennisPhxWeb.DashboardLive do
     player_units = PlayerUnits.list_player_units()
     statuses = Statuses.list_statuses()
     matches = Matches.list_matches()
+    tags = Tags.list_tags()
     socket = assign(
         socket,
         tours: tours,
@@ -33,7 +35,8 @@ defmodule TennisPhxWeb.DashboardLive do
         player_units: player_units,
         statuses: statuses,
         players: players,
-        matches: matches
+        matches: matches,
+        tags: tags
       )
     {:ok, socket}
   end
