@@ -1,0 +1,23 @@
+<h1>Show Tag</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @tag.name %>
+  </li>
+
+  <li>
+    <strong>Player:</strong>
+    <%= @tag.player_id %>
+  </li>
+
+  <li>
+    <strong>Points:</strong>
+    <%= @tag.points %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.tag_path(@conn, :edit, @tag) %></span> |
+<span><%= link "Back", to: Routes.tag_path(@conn, :index) %></span>
