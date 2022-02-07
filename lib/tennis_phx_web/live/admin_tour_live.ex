@@ -13,6 +13,7 @@ defmodule TennisPhxWeb.AdminTourLive do
   alias TennisPhx.Statuses
   alias TennisPhx.Matches
   alias TennisPhx.Matches.Match
+  alias TennisPhx.Tags
 
   def render(assigns) do
    render DashboardView, "tour.html", assigns
@@ -31,6 +32,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     changeset = Matches.change_match(%Match{})
     changeset_for_tour = Events.change_tour(%Tour{})
     players_for_tour = tour.players |> Repo.preload(:tours)
+    tags = Tags.list_tags()
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
     socket = assign(
@@ -43,6 +45,7 @@ defmodule TennisPhxWeb.AdminTourLive do
         phases: phases,
         player_units: player_units,
         statuses: statuses,
+        tags: tags,
         match_for_tour: match_for_tour,
         changeset: changeset,
         changeset_for_tour: changeset_for_tour
