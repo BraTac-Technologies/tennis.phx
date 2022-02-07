@@ -638,6 +638,9 @@
                     <thead>
                       <tr>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
+                          ID
+                        </th>
+                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
                           Name
                         </th>
                         <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
@@ -653,6 +656,9 @@
                       <%= for phase <- @phases do %>
                         <tr>
                           <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
+                            <%= phase.id %>
+                          </th>
+                          <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
                             <%= link phase.name , to: Routes.phase_path(@socket, :show, phase) %>
                           </th>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
@@ -660,7 +666,8 @@
                           </td>
                           <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-right">
                             <%= link "Edit", to: Routes.phase_path(@socket, :edit, phase) %>
-                            <%# link "Delete", to: Routes.phase_path(@socket, :delete, phase), method: :delete, data: [confirm: "Are you sure?"] %>
+                            |
+                            <%= link "Delete", to: Routes.phase_path(@socket, :delete, phase), method: :delete, data: [confirm: "Are you sure?"] %>
                           </td>
 
                         </tr>
@@ -679,8 +686,9 @@
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-
-                      <%= link "New Status", to: Routes.status_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <%= if length(@statuses) < 3 do %>
+                        <%= link "New Status", to: Routes.status_path(@socket, :new), class: "bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1" %>
+                      <% end %>
                     </div>
                   </div>
                 </div>
