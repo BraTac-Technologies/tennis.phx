@@ -18,7 +18,8 @@ defmodule TennisPhx.Phases do
 
   """
   def list_phases do
-    Repo.all(Phase)
+    filter = from(p in Phase, order_by: [desc: p.inserted_at])
+    Repo.all(filter)
   end
 
   @doc """
