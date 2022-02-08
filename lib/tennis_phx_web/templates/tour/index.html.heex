@@ -111,10 +111,11 @@
                             <tr>
                               <!-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th> -->
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Име</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-left">Серия</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Зала</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Кога?</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Статус</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Победител</th>
+
 
                             </tr>
                           </thead>
@@ -123,6 +124,14 @@
                             <tr>
                               <!-- <td class="px-4 py-3"></td> -->
                               <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
+
+                              <td class="px-4 py-3 text-left">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-green-800">
+                              <%= if tour.tag do tour.tag.name else "-" end %>
+                                </span>
+                              </td>
+
+
                               <%= if is_nil(tour.location) do %>
                                 <td class="px-4 py-3 text-left">-</td>
                               <% else %>
@@ -149,11 +158,7 @@
                                   <% end %>
                                 <% end %>
                               </td>
-                              <%= if is_nil(tour.winner) do %>
-                                <td class="px-4 py-3 text-center">TBA</td>
-                              <% else %>
-                                <td class="px-4 py-3 text-center"><b><%= tour.winner.name %></b></td>
-                              <% end %>
+
                               <!-- <td class="w-10 text-center">
                                 <input name="plan" type="radio">
                               </td> -->

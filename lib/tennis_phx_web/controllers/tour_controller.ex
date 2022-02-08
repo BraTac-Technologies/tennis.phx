@@ -12,7 +12,7 @@ defmodule TennisPhxWeb.TourController do
 
   def index(conn, _params) do
     statuses = Statuses.list_statuses()
-    tours = Events.list_tours() |> Repo.preload(:status) |> Repo.preload(:location) |> Repo.preload(:winner)
+    tours = Events.list_tours() |> Repo.preload(:status) |> Repo.preload(:location) |> Repo.preload(:winner) |> Repo.preload(:tag)
     players = Participants.list_players()
     locations = Locations.list_locations()
     render(conn, "index.html", tours: tours, players: players)
