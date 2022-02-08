@@ -14,6 +14,7 @@ defmodule TennisPhxWeb.AdminTourLive do
   alias TennisPhx.Matches
   alias TennisPhx.Matches.Match
   alias TennisPhx.Tags
+  alias TennisPhx.PlayerTag
 
   def render(assigns) do
    render DashboardView, "tour.html", assigns
@@ -54,7 +55,8 @@ defmodule TennisPhxWeb.AdminTourLive do
         match_for_tour: match_for_tour,
         changeset: changeset,
         changeset_for_tour: changeset_for_tour,
-        tag_players: tag_players
+        tag_players: tag_players,
+        tag: tag
       )
     {:ok, socket}
   end
@@ -85,9 +87,15 @@ defmodule TennisPhxWeb.AdminTourLive do
   def handle_event("add_points", %{"player_id" => %{"player_id" => player_id}, "player_points" => %{"points" => points_for_player}}, socket) do
     tour = socket.assigns[:tour]
            |> Repo.preload(:players)
+
+    # Assign points in player_tour
     Events.assign_player_points(tour, player_id, points_for_player)
+    # Assign points in player
     player = Participants.get_player!(player_id)
     Participants.assign_player_points(player, points_for_player)
+    # Assign points in player_tag
+    tag = socket.assigns[:tag]
+    PlayerTag.assign_player_points(tag, player_id, points_for_player)
 
     {:noreply, socket}
   end

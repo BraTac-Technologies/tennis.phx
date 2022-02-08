@@ -12,4 +12,24 @@ defmodule TennisPhx.PlayerTag do
   Returns the list of player_tour.
   """
 
+  def assign_player_points(%Tag{} = tag, player_id, points_for_player) do
+    tt = tag.id
+
+    filter = from(pt in PlayerTag, where: pt.tag_id == ^tt and pt.player_id == ^player_id, select: pt.points)
+    current_points = Repo.one(filter)
+    
+
+    updated_points = String.to_integer(points_for_player) + Decimal.to_integer(current_points)
+
+    query = from(pt in PlayerTag, where: pt.tag_id == ^tt and pt.player_id == ^player_id, preload: [:tag, :player])
+    assoc = Repo.one(query)
+
+    assoc
+    |> PlayerTag.changeset(%{points: updated_points})
+    |> Repo.update()
+
+  end
+
+
+
 end

@@ -198,7 +198,11 @@
                           <td class="px-6 py-4 whitespace-nowrap">
                             <!-- <div class="text-center text-sm text-gray-900">input</div> -->
                             <form phx-submit="add_points">
-                            <%= number_input :player_points, :points, placeholder: "Something" %>
+                            <%= if Enum.member?(@tag_players, player.id) do %>
+                              <%= number_input :player_points, :points, placeholder: "Точки" %>
+                            <% else %>
+                              <%= number_input :player_points, :points, placeholder: "НЕ е избран Таг" %>
+                            <% end %>
                             <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
                             <%= hidden_input :player_id, :player_id, value: player.id %>
                             <%= hidden_input :tag_id, :tag_id, value: @tour.tag_id %>
