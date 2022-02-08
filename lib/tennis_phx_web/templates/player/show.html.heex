@@ -135,6 +135,15 @@
                           </div>
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-fist-raised fa-lg"></i>
+                              Спечелени турнири
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <%= length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) %>
+                            </dd>
+                          </div>
+                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-medal fa-lg"></i>
                               Изиграни мачове
                             </dt>
@@ -178,6 +187,65 @@
                       </div>
                     </div>
 
+                    <%= if length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) do %>
+                    <br>
+                      <h1> Спечелени турнири </h1>
+                      <br>
+                        <div class="text-center flex flex-col">
+                          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                  <thead class="bg-gray-50">
+
+
+                                    <tr>
+                                      <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Дата
+                                      </th>
+                                      <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Турнир
+                                      </th>
+                                      <th scope="col" class="text-left px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Таг
+                                      </th>
+                                      <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Точки
+                                      </th>
+                                    </tr>
+
+
+                                  </thead>
+
+                                  <tbody class="bg-white divide-y divide-gray-200">
+                                    <%= for tour <- @won_tours do %>
+                                    <tr>
+                                      <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <%= NimbleStrftime.format(tour.date, "%d %b %Y") %>
+                                      </td>
+                                      <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <%= tour.title %>
+                                      </td>
+
+                                        <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                          <%= if tour.tag do tour.tag.name else "-" end %>
+                                        </td>
+
+                                      <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <%= TennisPhx.Participants.get_points_by_player_tour(@player.id, tour.id) %>
+                                      </td>
+                                    </tr>
+
+                                    <% end %>
+                                    <!-- More people... -->
+                                  </tbody>
+
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    <% end %>
                     <br>
                     <h1> Спечелени точки </h1>
                     <br>

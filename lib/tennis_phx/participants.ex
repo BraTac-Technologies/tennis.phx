@@ -9,7 +9,9 @@ defmodule TennisPhx.Participants do
   alias TennisPhx.Participants.Player
   alias TennisPhx.Matches.Match
   alias TennisPhx.Participants.PlayerTag
+  alias TennisPhx.Events.PlayerTour
   alias TennisPhx.Tags.Tag
+  alias TennisPhx.Events.Tour
 
   @doc """
   Returns the list of players.
@@ -79,18 +81,17 @@ defmodule TennisPhx.Participants do
     Repo.all(query_join_table)
   end
 
-  @doc """
-  Creates a player.
+  def get_length_of_tour_wins(player_id) do
+    query = from(t in Tour, where: t.winner_id == ^player_id)
+    Repo.all(query)
+  end
 
-  ## Examples
+  def get_points_by_player_tour(player_id, tour_id) do
+    query = from(pt in PlayerTour, where: pt.player_id == ^player_id and pt.tour_id == ^tour_id, select: pt.points)
+    Repo.one(query)
+  end
 
-      iex> create_player(%{field: value})
-      {:ok, %Player{}}
 
-      iex> create_player(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_player(attrs \\ %{}) do
     %Player{}
     |> Player.changeset(attrs)

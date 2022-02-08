@@ -38,7 +38,8 @@ defmodule TennisPhxWeb.PlayerController do
     match_count = Participants.get_match_count(player)
     points_and_tours_by_player = Events.points_and_tours_by_player(player) |> Repo.preload(:tour)
     matches = Matches.get_last3_matches_by_player(player)  |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status) |> Repo.preload(:tour)
-    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count, points_and_tours_by_player: points_and_tours_by_player, matches: matches)
+    won_tours = Participants.get_length_of_tour_wins(player.id) |> Repo.preload(:tag)
+    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count, points_and_tours_by_player: points_and_tours_by_player, matches: matches, won_tours: won_tours)
   end
 
   def edit(conn, %{"id" => id}) do
