@@ -21,6 +21,7 @@ defmodule TennisPhxWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/ranking", PageController, :ranking
     resources "/tours", TourController, only: [:index]
     resources "/players", PlayerController, except: [:create, :edit]
     resources "/tags", TagController
