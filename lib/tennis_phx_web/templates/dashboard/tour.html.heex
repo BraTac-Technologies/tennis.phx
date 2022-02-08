@@ -100,6 +100,43 @@
 
           </div>
 
+
+          <!-- =========== START TOUR STATUS =============== -->
+
+          <div class="mt-10 py-10 border-b border-gray-300 text-center">
+            <div class="flex flex-wrap justify-center">
+              <div>
+                <h1 class="text-4xl"> Add tour details </h1>
+
+                <.form let={f} for={@changeset_for_tour}, phx-submit="assign_tour_info">
+
+                  <br>
+
+                  <div class="flex flex-wrap -mx-3 mb-6">
+
+                    <div class="w-full px-3">
+                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                        Winner
+                      </label>
+                      <%= select(f, :winner_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a tour winner"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+
+                    </div>
+
+                  </div>
+          
+                  <%= submit "Add tour", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+
+                </.form>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- =========== END TOUR STATUS =============== -->
+
+
+
+
 <!-- ======== START CHECK PLAYERS ========= -->
 
 
@@ -128,7 +165,10 @@
                           </th>
 
                         <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Plays?
+                          Plays in Tour?
+                        </th>
+                        <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Plays in Tag?
                         </th>
                       </tr>
                     </thead>
@@ -145,11 +185,23 @@
                         <%= if Enum.member?(@tour_players, player.id) do %>
                           <td class="px-6 py-4 whitespace-nowrap">
                             <!-- <div class="text-center text-sm text-gray-900">input</div> -->
-                            <form phx-submit="add_points">
-                            <%= number_input :player_points, :points, placeholder: "Something" %>
-                            <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
-                            <%= hidden_input :player_id, :player_id, value: player.id %>
-                          </form>
+                            <%= if Enum.member?(@tag_players, player.id) do %>
+                              <form phx-submit="add_points_2_factor">
+                                <%= number_input :player_points, :points, placeholder: "Точки" %>
+                                <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
+                                <%= hidden_input :player_id, :player_id, value: player.id %>
+                                <%= hidden_input :tag_id, :tag_id, value: @tour.tag_id %>
+                              </form>
+                            <% else %>
+                              <form phx-submit="add_points_1_factor">
+                                <%= number_input :player_points, :points, placeholder: "НЕ е избран Таг" %>
+                                <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
+                                <%= hidden_input :player_id, :player_id, value: player.id %>
+                                <%= hidden_input :tag_id, :tag_id, value: @tour.tag_id %>
+                              </form>
+
+                            <% end %>
+
                           </td>
                         <% else %>
                           <td class="px-6 py-4 whitespace-nowrap">
@@ -159,6 +211,9 @@
 
                         <td class="px-6 py-4 whitespace-nowrap">
                           <%= checkbox(:tour, :check, phx_click: "toggle_check", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded", phx_value_player_id: player.id, value: Enum.member?(@tour_players, player.id)) %>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <%= checkbox(:tag, :check, phx_click: "toggle_check_player_tag", class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded", phx_value_player_id: player.id, value: Enum.member?(@tag_players, player.id)) %>
                         </td>
                       </tr>
                       <% end %>
@@ -568,50 +623,6 @@
 
 <!-- =========== END ASSIGN MATCH SCORE ========== -->
 
-<!-- =========== START TOUR STATUS =============== -->
-
-          <div class="mt-10 py-10 border-b border-gray-300 text-center">
-            <div class="flex flex-wrap justify-center">
-              <div>
-                <h1 class="text-4xl"> Add tour details </h1>
-
-                <.form let={f} for={@changeset_for_tour}, phx-submit="assign_tour_info">
-
-                  <br>
-
-                  <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                        Status
-                      </label>
-                      <%= select(f, :status_id, Enum.map(@statuses, &{&1.name, &1.id}), prompt: [key: "Choose a Status"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-
-                    </div>
-                    <div class="w-full md:w-1/3 px-3">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                        Winner
-                      </label>
-                      <%= select(f, :winner_id, Enum.map(@players_for_tour, &{&1.name, &1.id}), prompt: [key: "Choose a tour winner"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-
-                    </div>
-                    <div class="w-full md:w-1/3 px-3">
-                      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                        Location
-                      </label>
-                      <%= select(f, :location_id, Enum.map(@locations, &{&1.name, &1.id}), prompt: [key: "Choose a location"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
-
-                    </div>
-                  </div>
-          <br>
-                  <%= submit "Add tour", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
-
-                </.form>
-
-              </div>
-            </div>
-          </div>
-
-<!-- =========== END TOUR STATUS =============== -->
 
         </div>
       </div>

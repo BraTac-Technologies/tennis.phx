@@ -9,6 +9,18 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
     <script src="https://kit.fontawesome.com/33e4ec6f9a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="awesomplete.css" />
+    <script src="awesomplete.js" async></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5QR6W0D40"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-P5QR6W0D40');
+    </script>
   </head>
   <body>
     <header>
@@ -55,9 +67,11 @@
 
             <a href="/tours" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Турнири</a>
 
-            <a href="/players" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ранглиста</a>
+            <a href="/ranking" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Класиране</a>
 
             <a href="/head2head" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">H2H</a>
+
+            <a href="/players" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Всички играчи</a>
 
             <a href="https://offside24.net" target="_blank" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Новини</a>
 
@@ -117,9 +131,11 @@
 
       <a href="/tours" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Турнири</a>
 
-      <a href="/players" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Ранглиста</a>
+      <a href="/ranking" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Класиране</a>
 
       <a href="/head2head" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">H2H</a>
+
+      <a href="/players" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Всички играчи</a>
 
       <a href="https://offside24.net" target="_blank" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Новини</a>
     </div>

@@ -5,6 +5,7 @@ defmodule TennisPhx.Events.Tour do
   alias TennisPhx.Participants.Player
   alias TennisPhx.Statuses.Status
   alias TennisPhx.Locations.Location
+  alias TennisPhx.Tags.Tag
 
   schema "tours" do
     field :date, :naive_datetime
@@ -13,6 +14,7 @@ defmodule TennisPhx.Events.Tour do
     belongs_to :winner, Player
     belongs_to :status, Status
     belongs_to :location, Location
+    belongs_to :tag, Tag
 
     timestamps()
 
@@ -27,7 +29,7 @@ defmodule TennisPhx.Events.Tour do
   @doc false
   def changeset(tour, attrs) do
     tour
-    |> cast(attrs, [:title, :info, :date, :status_id, :location_id, :winner_id])
-    |> validate_required([:title, :date])
+    |> cast(attrs, [:title, :info, :date, :status_id, :location_id, :winner_id, :tag_id])
+    |> validate_required([:title, :date, :tag_id])
   end
 end

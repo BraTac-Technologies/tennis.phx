@@ -8,6 +8,10 @@ defmodule TennisPhx.Participants do
 
   alias TennisPhx.Participants.Player
   alias TennisPhx.Matches.Match
+  alias TennisPhx.Participants.PlayerTag
+  alias TennisPhx.Events.PlayerTour
+  alias TennisPhx.Tags.Tag
+  alias TennisPhx.Events.Tour
 
   @doc """
   Returns the list of players.
@@ -56,18 +60,38 @@ defmodule TennisPhx.Participants do
     Repo.one(query)
   end
 
-  @doc """
-  Creates a player.
 
-  ## Examples
+  def toggle_player_tag(tag_id, player_id) do
 
-      iex> create_player(%{field: value})
-      {:ok, %Player{}}
+    query = from(pt in PlayerTag, where: pt.tag_id == ^tag_id and pt.player_id == ^player_id)
+    assoc = Repo.one(query)
+    # require IEx; IEx.pry
+    if assoc == nil do
+      %PlayerTag{}
+      |> PlayerTag.changeset(%{player_id: player_id, tag_id: tag_id})
+      |> Repo.insert()
+    else
+      Repo.delete(assoc)
+    end
+  end
 
-      iex> create_player(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
+  def tag_players(%Tag{} = tag) do
+    tag_id = tag.id
+    query_join_table = from(pt in PlayerTag, where: pt.tag_id == ^tag_id)
+    Repo.all(query_join_table)
+  end
 
-  """
+  def get_length_of_tour_wins(player_id) do
+    query = from(t in Tour, where: t.winner_id == ^player_id)
+    Repo.all(query)
+  end
+
+  def get_points_by_player_tour(player_id, tour_id) do
+    query = from(pt in PlayerTour, where: pt.player_id == ^player_id and pt.tour_id == ^tour_id, select: pt.points)
+    Repo.one(query)
+  end
+
+
   def create_player(attrs \\ %{}) do
     %Player{}
     |> Player.changeset(attrs)

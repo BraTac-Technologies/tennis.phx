@@ -19,7 +19,7 @@ defmodule TennisPhxWeb.PhaseController do
       {:ok, phase} ->
         conn
         |> put_flash(:info, "Phase created successfully.")
-        |> redirect(to: Routes.phase_path(conn, :show, phase))
+        |> redirect(to: Routes.admin_dashboard_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -58,6 +58,6 @@ defmodule TennisPhxWeb.PhaseController do
 
     conn
     |> put_flash(:info, "Phase deleted successfully.")
-    |> redirect(to: Routes.phase_path(conn, :index))
+    |> redirect(to: Routes.admin_dashboard_path(conn, :index))
   end
 end

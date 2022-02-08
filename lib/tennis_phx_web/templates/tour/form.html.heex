@@ -12,7 +12,7 @@
       <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Title
+            Заглавие
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
@@ -25,7 +25,7 @@
 
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Description
+            Описание
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
@@ -35,7 +35,17 @@
         </div>
         <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
           <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-            Date
+            Избери Таг(задължително)
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+
+            <%= select(f, :tag_id, Enum.map(@tags, &{&1.name, &1.id}), prompt: [key: "Избери таг"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+
+          </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Дата и час на провеждане (важно)
           </label>
           <div class="mt-1 sm:mt-0 sm:col-span-2">
 
@@ -44,7 +54,6 @@
           </div>
         </div>
 
-        <%= hidden_input f, :status_id, value: 1 %>
 
 
       </div>

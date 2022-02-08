@@ -5,6 +5,7 @@ defmodule TennisPhx.Participants.Player do
 
   alias TennisPhx.Events.Tour
   alias TennisPhx.Matches.Match
+  alias TennisPhx.Tags.Tag
 
   schema "players" do
     field :birthdate, :naive_datetime
@@ -26,6 +27,13 @@ defmodule TennisPhx.Participants.Player do
       join_through: "player_tour",
       on_replace: :delete
     )
+
+    many_to_many(
+     :tags,
+     Tag,
+     join_through: "player_tag",
+     on_replace: :delete
+   )
   end
 
   @doc false
