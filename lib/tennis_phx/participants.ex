@@ -8,6 +8,8 @@ defmodule TennisPhx.Participants do
 
   alias TennisPhx.Participants.Player
   alias TennisPhx.Matches.Match
+  alias TennisPhx.Participants.PlayerTag
+  alias TennisPhx.Tags.Tag
 
   @doc """
   Returns the list of players.
@@ -54,6 +56,27 @@ defmodule TennisPhx.Participants do
   def get_id_of_player_by_name(player1_name) do
     query = from(p in Player, where: p.name == ^player1_name, select: p.id)
     Repo.one(query)
+  end
+
+
+  def toggle_player_tag(tag_id, player_id) do
+
+    query = from(pt in PlayerTag, where: pt.tag_id == ^tag_id and pt.player_id == ^player_id)
+    assoc = Repo.one(query)
+    # require IEx; IEx.pry
+    if assoc == nil do
+      %PlayerTag{}
+      |> PlayerTag.changeset(%{player_id: player_id, tag_id: tag_id})
+      |> Repo.insert()
+    else
+      Repo.delete(assoc)
+    end
+  end
+
+  def tag_players(%Tag{} = tag) do
+    tag_id = tag.id
+    query_join_table = from(pt in PlayerTag, where: pt.tag_id == ^tag_id)
+    Repo.all(query_join_table)
   end
 
   @doc """

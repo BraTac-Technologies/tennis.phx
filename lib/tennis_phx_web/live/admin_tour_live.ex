@@ -22,6 +22,8 @@ defmodule TennisPhxWeb.AdminTourLive do
   @impl true
   def mount(params, _, socket) do
     tour = Events.get_tour!(params["id"])
+    tag_id = tour.id
+    tag = Tags.get_tag!(tag_id)
     players = Participants.list_players()
     locations = Locations.list_locations()
     phases = Phases.list_phases()
@@ -35,6 +37,9 @@ defmodule TennisPhxWeb.AdminTourLive do
     tags = Tags.list_tags()
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
+    tag_players = Participants.tag_players(tag)
+                  |> Enum.map(fn(x) -> x.player_id end)
+
     socket = assign(
         socket,
         tour: tour,
@@ -48,7 +53,8 @@ defmodule TennisPhxWeb.AdminTourLive do
         tags: tags,
         match_for_tour: match_for_tour,
         changeset: changeset,
-        changeset_for_tour: changeset_for_tour
+        changeset_for_tour: changeset_for_tour,
+        tag_players: tag_players
       )
     {:ok, socket}
   end
@@ -61,6 +67,18 @@ defmodule TennisPhxWeb.AdminTourLive do
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
                    {:noreply, assign(socket, :tour_players, tour_players)}
+  end
+
+  def handle_event("toggle_check_player_tag", %{"player-id" => player_id}, socket) do
+    tour = socket.assigns[:tour]
+              |> Repo.preload(:players)
+    tag_id = tour.id
+    tag = Tags.get_tag!(tag_id)
+    Participants.toggle_player_tag(tag_id, player_id)
+    tag_players = Participants.tag_players(tag)
+                  |> Enum.map(fn(x) -> x.player_id end)
+                  {:noreply, assign(socket, :tag_players, tag_players)}
+
   end
 
 
