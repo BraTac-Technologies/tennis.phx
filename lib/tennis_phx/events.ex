@@ -63,13 +63,20 @@ defmodule TennisPhx.Events do
 
   def assign_player_points(%Tour{} = tour, player_id, points_for_player) do
     tt = tour.id
+
+    filter = from(pt in PlayerTour, where: pt.tour_id == ^tt and pt.player_id == ^player_id, select: pt.points)
+    current_points = Repo.one(filter)
+    updated_points = String.to_integer(points_for_player) + Decimal.to_integer(current_points)
+
     query = from(pt in PlayerTour, where: pt.tour_id == ^tt and pt.player_id == ^player_id, preload: [:tour, :player])
     assoc = Repo.one(query)
 
     assoc
-    |> PlayerTour.changeset(%{points: points_for_player})
+    |> PlayerTour.changeset(%{points: updated_points})
     |> Repo.update()
   end
+
+  
 
   @doc """
   Gets a single tour.
