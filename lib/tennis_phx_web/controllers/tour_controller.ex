@@ -51,7 +51,7 @@ defmodule TennisPhxWeb.TourController do
     changeset = Events.change_tour(tour)
     locations = Locations.list_locations()
     tags = Tags.list_tags()
-    render(conn, "edit.html", tour: tour, changeset: changeset, tags: tags)
+    render(conn, "edit.html", tour: tour, changeset: changeset, locations: locations, tags: tags)
   end
 
   def update(conn, %{"id" => id, "tour" => tour_params}) do
