@@ -6,11 +6,13 @@ defmodule TennisPhxWeb.PlayerController do
   alias TennisPhx.Participants.Player
   alias TennisPhx.Events
   alias TennisPhx.Matches
+  alias TennisPhx.Tags
 
   def index(conn, _params) do
     players = Participants.list_players_ranking()
     tours = Events.list_tours()
-    render(conn, "index.html", players: players, tours: tours)
+    tags = Tags.list_tags()
+    render(conn, "index.html", players: players, tours: tours, tags: tags)
   end
 
   def new(conn, _params) do

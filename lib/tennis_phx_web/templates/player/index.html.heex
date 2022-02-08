@@ -84,7 +84,7 @@
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
-              Ранглиста
+              Класиране
             </h3>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -94,95 +94,23 @@
               ></i>
                Tennis.Phx
             </div>
-            <!-- <div class="mb-2 text-gray-700 mt-10">
-              <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
-              >Solution Manager - Creative Tim Officer
-            </div> -->
+
 
           </div>
-          <div class="mt-10 py-10 border-t border-gray-300 text-center">
+
+          <div class="mt-10 py-10 border-b border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
-              <div class="w-full lg:w-9/12 px-4">
-                <!-- <p class="mb-4 text-lg leading-relaxed text-gray-800">
-                  An artist of considerable range, Jenna the name taken by
-
-                </p> -->
-                <!-- <a href="#pablo" class="font-normal text-pink-500"
-                  >Show more</a
-                > -->
-                <div class="text-center flex flex-col">
-                  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                          <thead class="bg-gray-50">
-                            <tr>
-                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Позиция
-                              </th>
-                              <th scope="col" class=" px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Състезател
-                              </th>
-                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Националност
-                              </th>
-                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Общо точки
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody class="bg-white divide-y divide-gray-200">
-
-                            <%= @players |> Enum.with_index |> Enum.map(fn({player, index}) ->  %>
-                            <tr>
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-center text-sm text-gray-900"><%= index + 1 %></div>
-                              </td>
-                              <td class="text-center px-6 py-4 whitespace-nowrap">
-                                <%= link to: Routes.player_path(@conn, :show, player) do %>
-                                <div class="flex items-center">
-                                  <div class="flex-shrink-0 h-10 w-10">
-                                    <!-- <img class="h-10 w-10 rounded-full" src={"#{OffsidePhx.BannerUploader.url({@post.banner, @post}, signed: true)}"}"https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""> -->
-                                    <%= if is_nil(player.avatar) do %>
-                                      <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
-                                    <% else %>
-                                      <img class="h-10 w-10 rounded-full" src={"#{TennisPhx.AvatarUploader.url({player.avatar, player}, signed: true)}"} alt="">
-                                    <% end %>
-                                  </div>
-                                  <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                      <%= player.name %>
-                                    </div>
-                                  </div>
-                                </div>
-                                <% end %>
-                            </td>
-
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900"><%= player.country %></div>
-                                <div class="text-sm text-gray-500">гр. <%= player.city %></div>
-                              </td>
-                              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <%= player.points %>
-                              </td>
-                            </tr>
-
-                            <% end) %>
-
-                            <!-- More people... -->
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-<!-- END -->
-
-
+              <div>
+                <%= for tag <- @tags do %>
+                  <%= link to: Routes.tag_path(@conn, :show, tag) do %>
+                    <button class = "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"><%= tag.name %></button>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
+
+
         </div>
       </div>
     </div>

@@ -3,6 +3,10 @@ defmodule TennisPhxWeb.TagController do
 
   alias TennisPhx.Tags
   alias TennisPhx.Tags.Tag
+  alias TennisPhx.Events
+  alias TennisPhx.Participants
+  alias TennisPhx.PlayerTag
+  alias TennisPhx.Repo
 
   def index(conn, _params) do
     tags = Tags.list_tags()
@@ -28,7 +32,9 @@ defmodule TennisPhxWeb.TagController do
 
   def show(conn, %{"id" => id}) do
     tag = Tags.get_tag!(id)
-    render(conn, "show.html", tag: tag)
+    tours = Events.list_tours()
+    rankings = PlayerTag.list_players_ranking_by_tag(tag)  |> Repo.preload(:player)
+    render(conn, "show.html", tag: tag, tours: tours, rankings: rankings)
   end
 
   def edit(conn, %{"id" => id}) do
