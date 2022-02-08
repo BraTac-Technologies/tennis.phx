@@ -24,7 +24,7 @@ defmodule TennisPhxWeb.Router do
     get "/ranking", PageController, :ranking
     resources "/tours", TourController, only: [:index]
     resources "/players", PlayerController, except: [:create, :edit]
-    resources "/tags", TagController
+    resources "/tags", TagController, only: [:show]
     live "/match/live_form", MatchLive
     live "/head2head", HeadtoHeadLive, :h2h
     live "/tour_live/:id", TourLive
@@ -43,6 +43,7 @@ defmodule TennisPhxWeb.Router do
     get "/players/new", PlayerController, :new
     post "/players", PlayerController, :create
     get "players/:id/edit", PlayerController, :edit
+    resources "/tags", TagController, except: [:show]
   end
 
   # Other scopes may use custom stacks.
