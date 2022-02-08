@@ -2,7 +2,7 @@
   <section class="relative block" style="height: 500px;">
     <div
       class="absolute top-0 w-full h-full bg-center bg-cover"
-      style='background-image: url("https://www.tabletennisdaily.com/forum/images/malongbollchinaopend.jpg");'
+      style='background-image: url("https://news.cgtn.com/news/3d3d674e32516a4d34457a6333566d54/img/2974f78c57864cc897dbcd5ba073da00/2974f78c57864cc897dbcd5ba073da00.jpg");'
     >
       <span
         id="blackOverlay"
@@ -140,23 +140,22 @@
                               <td class="px-4 py-3 text-center"><%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %></td>
 
                               <td class="px-4 py-3 text-lg text-gray-900 text-center">
-                                <%= if tour.status do %>
-                                  <%= if tour.status.id == 1 do %>
+                                <%= if Date.compare(tour.date, DateTime.utc_now()) == :gt do %>
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
-                                      <%= tour.status.name %>
+                                      Ще се играе
                                     </span>
-                                  <% end %>
-                                  <%= if tour.status.id == 2 do %>
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-green-800">
-                                      <%= tour.status.name %>
-                                    </span>
-                                  <% end %>
-                                  <%= if tour.status.id == 3 do %>
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-green-800">
-                                      <%= tour.status.name %>
-                                    </span>
-                                  <% end %>
                                 <% end %>
+                                <%= if Date.compare(tour.date, DateTime.utc_now()) == :lt do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-green-800">
+                                      Свършил
+                                    </span>
+                                <% end %>
+                                <%= if Date.compare(tour.date, DateTime.utc_now()) == :eq do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-green-800">
+                                      В момента се играе
+                                    </span>
+                                <% end %>
+
                               </td>
 
                               <!-- <td class="w-10 text-center">
