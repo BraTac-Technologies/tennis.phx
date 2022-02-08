@@ -197,16 +197,23 @@
                         <%= if Enum.member?(@tour_players, player.id) do %>
                           <td class="px-6 py-4 whitespace-nowrap">
                             <!-- <div class="text-center text-sm text-gray-900">input</div> -->
-                            <form phx-submit="add_points">
                             <%= if Enum.member?(@tag_players, player.id) do %>
-                              <%= number_input :player_points, :points, placeholder: "Точки" %>
+                              <form phx-submit="add_points_2_factor">
+                                <%= number_input :player_points, :points, placeholder: "Точки" %>
+                                <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
+                                <%= hidden_input :player_id, :player_id, value: player.id %>
+                                <%= hidden_input :tag_id, :tag_id, value: @tour.tag_id %>
+                              </form>
                             <% else %>
-                              <%= number_input :player_points, :points, placeholder: "НЕ е избран Таг" %>
+                              <form phx-submit="add_points_1_factor">
+                                <%= number_input :player_points, :points, placeholder: "НЕ е избран Таг" %>
+                                <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
+                                <%= hidden_input :player_id, :player_id, value: player.id %>
+                                <%= hidden_input :tag_id, :tag_id, value: @tour.tag_id %>
+                              </form>
+
                             <% end %>
-                            <%= submit "Add", class: "bg-green-600 hover:bg-blue-400 text-white font-bold py-1/2 px-1 rounded-full", phx_disable_with: "Adding...." %>
-                            <%= hidden_input :player_id, :player_id, value: player.id %>
-                            <%= hidden_input :tag_id, :tag_id, value: @tour.tag_id %>
-                          </form>
+
                           </td>
                         <% else %>
                           <td class="px-6 py-4 whitespace-nowrap">
