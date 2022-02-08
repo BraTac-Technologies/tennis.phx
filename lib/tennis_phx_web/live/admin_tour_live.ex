@@ -23,7 +23,7 @@ defmodule TennisPhxWeb.AdminTourLive do
   @impl true
   def mount(params, _, socket) do
     tour = Events.get_tour!(params["id"])
-    tag_id = tour.id
+    tag_id = tour.tag_id
     tag = Tags.get_tag!(tag_id)
     players = Participants.list_players()
     locations = Locations.list_locations()
@@ -92,7 +92,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     # Assign points in player
     player = Participants.get_player!(player_id)
     Participants.assign_player_points(player, points_for_player)
-  
+
     {:noreply, socket}
   end
 
