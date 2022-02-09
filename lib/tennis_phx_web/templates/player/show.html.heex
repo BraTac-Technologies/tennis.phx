@@ -187,7 +187,7 @@
                       </div>
                     </div>
 
-                    <%= if length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) do %>
+                    <%= if length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) > 0 do %>
                     <br>
                       <h1> Спечелени турнири </h1>
                       <br>
@@ -247,7 +247,7 @@
                         </div>
                     <% end %>
                     <br>
-                    
+
                     <br>
 
                     <br>
