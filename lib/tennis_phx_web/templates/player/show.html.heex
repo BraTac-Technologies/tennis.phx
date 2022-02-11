@@ -133,7 +133,7 @@
                               <%= Macro.camelize(@player.hand) %>
                             </dd>
                           </div>
-                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-fist-raised fa-lg"></i>
                               Спечелени турнири
@@ -187,9 +187,13 @@
                       </div>
                     </div>
 
+                      
+                    
+                    
+
                     <%= if length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) > 0 do %>
                     <br>
-                      <h1> Спечелени турнири </h1>
+                      <h1> Спечелени турнири (<%= length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) %>) </h1>
                       <br>
                         <div class="text-center flex flex-col">
                           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -224,7 +228,7 @@
                                         <%= NimbleStrftime.format(tour.date, "%d %b %Y") %>
                                       </td>
                                       <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <%= tour.title %>
+                                        <b><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></b>                                       
                                       </td>
 
                                         <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -251,7 +255,7 @@
                     <br>
 
                     <br>
-                    <h1> Последни 3 мача </h1>
+                    <h1> Последни 6 мача </h1>
                     <br>
                     <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                       <%= for match <- @matches do %>
@@ -273,10 +277,16 @@
                                   <%= if match.winner_id == match.first_player.id do %>
                                     <td class="text-left">
                                       <i class="fas fa-check"></i>
+                                      <%= link to: Routes.player_path(@conn, :show, match.first_player) do %>
                                       <b><%= match.first_player.name %></b>
+                                      <% end %>
                                     </td>
                                   <% else %>
-                                    <td class="text-left"><%= match.first_player.name %></td>
+                                    <td class="text-left">
+                                    <%= link to: Routes.player_path(@conn, :show, match.first_player) do %>
+                                      <%= match.first_player.name %>
+                                    <% end %>
+                                    </td>
                                   <% end %>
                                   <%= if is_nil(match.score) do %>
                                   <% else %>
@@ -312,10 +322,16 @@
                                   <%= if match.winner_id == match.second_player_id do %>
                                     <td class="text-left">
                                       <i class="fas fa-check"></i>
-                                      <b><%= match.second_player.name %></b>
+                                      <%= link to: Routes.player_path(@conn, :show, match.second_player) do %>
+                                        <b><%= match.second_player.name %></b>
+                                      <% end %>
                                     </td>
                                   <% else %>
-                                    <td class="text-left"><%= match.second_player.name %></td>
+                                    <td class="text-left">
+                                    <%= link to: Routes.player_path(@conn, :show, match.second_player) do %>
+                                      <%= match.second_player.name %>
+                                    <% end %>  
+                                      </td>
                                   <% end %>
                                   <%= if is_nil(match.score) do %>
                                   <td> TBA </td>

@@ -40,10 +40,10 @@ defmodule TennisPhx.Matches do
   end
 
 
-  def get_last3_matches_by_player(%Player{} = player) do
+  def get_last6_matches_by_player(%Player{} = player) do
     player_id = player.id
-    query = from(m in Match, where: m.first_player_id == ^player_id or m.second_player_id == ^player_id)
-    Repo.all(query) |> Enum.take(3)
+    query = from(m in Match, where: m.first_player_id == ^player_id or m.second_player_id == ^player_id, order_by: [desc: m.starting_datetime])
+    Repo.all(query) |> Enum.take(6)
   end
 
   def list_matches do

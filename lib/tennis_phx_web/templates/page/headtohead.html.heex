@@ -155,48 +155,98 @@
                                   <%= Macro.camelize(@second_player.hand) %>
                               </td>
                             </tr>
+                            
 
                             <tr>
                               <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= if length(TennisPhx.Participants.get_match_count(@second_player)) <= length(TennisPhx.Participants.get_match_count(@first_player)) do %>
+                                  <b><%= length(TennisPhx.Participants.get_match_count(@first_player)) %></b>
+                              <% else %>  
                                 <%= length(TennisPhx.Participants.get_match_count(@first_player)) %>
+                              <% end %>   
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Общо изиграни мачове
+                                <b>Общо изиграни мачове</b>
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                  <%= length(TennisPhx.Participants.get_match_count(@second_player)) %>
+                              <%= if length(TennisPhx.Participants.get_match_count(@second_player)) >= length(TennisPhx.Participants.get_match_count(@first_player)) do %>
+                                  <b><%= length(TennisPhx.Participants.get_match_count(@second_player)) %></b>
+                              <% else %>  
+                                <%= length(TennisPhx.Participants.get_match_count(@second_player)) %>
+                              <% end %>    
                               </td>
                             </tr>
 
                             <tr>
                               <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <%= Enum.count(@first_player.tours) %>
+                                 <%= if Enum.count(@first_player.tours) >= Enum.count(@second_player.tours) do %>
+                                    <b><%= Enum.count(@first_player.tours) %></b>
+                                  <% else %>
+                                    <%= Enum.count(@first_player.tours) %>
+                                  <% end %> 
+
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Общо участия по турнири
+                                <b>Общо участия по турнири</b>
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                  <%= Enum.count(@second_player.tours) %>
+                                  <%= if Enum.count(@second_player.tours) >= Enum.count(@first_player.tours) do %>
+                                    <b><%= Enum.count(@second_player.tours) %></b>
+                                  <% else %>
+                                    <%= Enum.count(@second_player.tours) %>
+                                  <% end %>  
                               </td>
                             </tr>
 
                             <tr>
                               <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <%= trunc(length(TennisPhx.Participants.get_winrate(@first_player)) / length(TennisPhx.Participants.get_match_count(@first_player)) * 100) %>%
+                                <%= if @first_player.points >= @second_player.points do %>
+                                  <b><%= @first_player.points %></b>
+                                <% else %>
+                                  <%= @first_player.points %>
+                                <% end %>
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                Процент победа във всички турнири
+                                <b>Общо точки във всички турнири</b>
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <%= trunc(length(TennisPhx.Participants.get_winrate(@second_player)) / length(TennisPhx.Participants.get_match_count(@second_player)) * 100) %>%
+                                  <%= if @first_player.points <= @second_player.points do %>
+                                    <b><%= @second_player.points %></b>
+                                  <% else %>
+                                    <%= @second_player.points %>
+                                  <% end %>  
                               </td>
                             </tr>
+
+                            <tr>
+                              <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= if trunc(length(TennisPhx.Participants.get_winrate(@second_player)) / length(TennisPhx.Participants.get_match_count(@second_player)) * 100) <= trunc(length(TennisPhx.Participants.get_winrate(@first_player)) / length(TennisPhx.Participants.get_match_count(@first_player)) * 100) do %>
+                                  <b><%= trunc(length(TennisPhx.Participants.get_winrate(@first_player)) / length(TennisPhx.Participants.get_match_count(@first_player)) * 100) %>%</b>
+                                <% else %>
+                                  <%= trunc(length(TennisPhx.Participants.get_winrate(@first_player)) / length(TennisPhx.Participants.get_match_count(@first_player)) * 100) %>%
+                                <% end %>
+                              </td>
+
+                              <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <b>Процент победа във всички турнири</b>
+                              </td>
+
+                              <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= if trunc(length(TennisPhx.Participants.get_winrate(@second_player)) / length(TennisPhx.Participants.get_match_count(@second_player)) * 100) >= trunc(length(TennisPhx.Participants.get_winrate(@first_player)) / length(TennisPhx.Participants.get_match_count(@first_player)) * 100) do %>
+                                  <b><%= trunc(length(TennisPhx.Participants.get_winrate(@second_player)) / length(TennisPhx.Participants.get_match_count(@second_player)) * 100) %>%</b>
+                                <% else %>
+                                  <%= trunc(length(TennisPhx.Participants.get_winrate(@second_player)) / length(TennisPhx.Participants.get_match_count(@second_player)) * 100) %>%
+                                <% end %>
+                              </td>
+                            </tr>
+
+                            
 
 
 
@@ -241,10 +291,16 @@
                             <%= if match.winner_id == match.first_player.id do %>
                               <td class="text-left">
                                 <i class="fas fa-check"></i>
+                                <%= link to: Routes.player_path(@socket, :show, match.first_player) do %>
                                 <b><%= match.first_player.name %></b>
+                                <% end %>
                               </td>
                             <% else %>
-                              <td class="text-left"><%= match.first_player.name %></td>
+                              <td class="text-left">
+                              <%= link to: Routes.player_path(@socket, :show, match.first_player) do %>
+                                <%= match.first_player.name %>
+                              <% end %>
+                                </td>
                             <% end %>
                             <%= if is_nil(match.score) do %>
                             <% else %>
@@ -280,10 +336,16 @@
                             <%= if match.winner_id == match.second_player_id do %>
                               <td class="text-left">
                                 <i class="fas fa-check"></i>
-                                <b><%= match.second_player.name %></b>
+                                <%= link to: Routes.player_path(@socket, :show, match.second_player) do %>
+                                  <b><%= match.second_player.name %></b>
+                                <% end %>  
                               </td>
                             <% else %>
-                              <td class="text-left"><%= match.second_player.name %></td>
+                              <td class="text-left">
+                              <%= link to: Routes.player_path(@socket, :show, match.second_player) do %>
+                                <%= match.second_player.name %>
+                              <% end %>
+                                </td>
                             <% end %>
                             <%= if is_nil(match.score) do %>
                             <td> TBA </td>
@@ -320,7 +382,9 @@
                       </table>
 
                   </div>
-                  <%= NimbleStrftime.format(match.starting_datetime, "%d %b %Y") %>
+                  <% if match.starting_datetime do %>
+                    <%= NimbleStrftime.format(match.starting_datetime, "%d %b %Y") %>
+                  <% end %>
 
                   <div>
                     <div class="-mt-px flex divide-x divide-gray-200">
