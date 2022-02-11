@@ -382,7 +382,7 @@
                       </table>
 
                   </div>
-                  <% if match.starting_datetime do %>
+                  <%= if match.starting_datetime do %>
                     <%= NimbleStrftime.format(match.starting_datetime, "%d %b %Y") %>
                   <% end %>
 
