@@ -115,19 +115,19 @@
                 <br>
 
                 <!-- This example requires Tailwind CSS v2.0+ -->
-                <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <%= for match <- @match_for_tour do %>
-                  <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">                  
+                  <%= @match_for_tour |> Enum.with_index |> Enum.map(fn({match, index}) ->  %>                 
+                  <li class={"col-span-1 bg-teal-500 rounded-lg shadow divide-y divide-gray-200"}>                 
                     <div class="w-full flex items-center justify-between p-6 space-x-6">
                       <table class="w-full">
                           <thead>
                             <tr>
-                              <th class="bg-gray-300 w-full"></th>
-                              <th class="bg-gray-300 text-right px-3"></th>
-                              <th class="bg-gray-300 text-right px-3"></th>
-                              <th class="bg-gray-300 text-right px-3"></th>
-                              <th class="bg-gray-300 text-right px-3"></th>
-                              <th class="bg-gray-300 text-right px-3"></th>
+                              <th class="bg-gray-200 w-full"></th>
+                              <th class="bg-gray-200 text-right px-3"></th>
+                              <th class="bg-gray-200 text-right px-3"></th>
+                              <th class="bg-gray-200 text-right px-3"></th>
+                              <th class="bg-gray-200 text-right px-3"></th>
+                              <th class="bg-gray-200 text-right px-3"></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -232,8 +232,10 @@
                         <div class="w-0 flex-1 flex">
                           <a class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500">
                             <!-- Heroicon name: solid/mail -->
+                            <b>
                             <i class="fas fa-user-minus"></i>
                             <span class="ml-3"><%= match.phase.name %></span>
+                            </b>
                           </a>
                         </div>
                         <div class="-ml-px w-0 flex-1 flex">
@@ -247,7 +249,7 @@
 
                     </div>
                   </li>
-                  <% end %>
+                  <% end) %>
                 </ul>
 
               </div>

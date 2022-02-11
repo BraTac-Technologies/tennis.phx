@@ -91,6 +91,13 @@ defmodule TennisPhx.Participants do
     Repo.one(query)
   end
 
+  def get_alltime_ranking(player_id) do
+
+    query = from(p in Player, select: row_number() |> over(partition_by: p.id == ^player_id, order_by: p.points))
+    Repo.all(query)
+
+  end
+
 
   def create_player(attrs \\ %{}) do
     %Player{}
