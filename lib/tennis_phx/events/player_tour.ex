@@ -6,7 +6,7 @@ defmodule TennisPhx.Events.PlayerTour do
   alias TennisPhx.Participants.Player
 
   schema "player_tour" do
-    field :points, :decimal
+    field :points, :decimal, default: 0
 
     belongs_to :tour, Tour
     belongs_to :player, Player
