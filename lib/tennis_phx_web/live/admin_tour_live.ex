@@ -74,7 +74,7 @@ defmodule TennisPhxWeb.AdminTourLive do
   def handle_event("toggle_check_player_tag", %{"player-id" => player_id}, socket) do
     tour = socket.assigns[:tour]
               |> Repo.preload(:players)
-    tag_id = tour.id
+    tag_id = tour.tag_id
     tag = Tags.get_tag!(tag_id)
     Participants.toggle_player_tag(tag_id, player_id)
     tag_players = Participants.tag_players(tag)
