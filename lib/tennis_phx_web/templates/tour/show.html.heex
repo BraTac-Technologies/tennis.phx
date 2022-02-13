@@ -91,7 +91,7 @@
                 <% else %>
                  <%= @tour.location.name %>
                 <% end %>
-            </div>
+            </div>t
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
@@ -255,6 +255,75 @@
               </div>
             </div>
           </div>
+
+          <br><br>
+
+           <div class="text-center flex flex-col">
+                  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-200">
+                          <thead class="bg-gray-50">
+                            <tr>
+                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Позиция
+                              </th>
+                              <th scope="col" class=" px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Състезател
+                              </th>
+                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Националност
+                              </th>
+                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Общо точки
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody class="bg-white divide-y divide-gray-200">
+
+                            <%= @players_in_tour |> Enum.with_index |> Enum.map(fn({player_in_tour, index}) ->  %>
+                            <tr>
+                              <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-center text-sm text-gray-900"><%= index + 1 %></div>
+                              </td>
+                              <td class="text-center px-6 py-4 whitespace-nowrap">
+                                <%= link to: Routes.player_path(@socket, :show, player_in_tour.player) do %>
+                                <div class="flex items-center">
+                                  <div class="flex-shrink-0 h-10 w-10">
+                                    <!-- <img class="h-10 w-10 rounded-full" src={"#{OffsidePhx.BannerUploader.url({@post.banner, @post}, signed: true)}"}"https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""> -->
+                                    <%= if is_nil(player_in_tour.player.avatar) do %>
+                                      <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
+                                    <% else %>
+                                      <img class="h-10 w-10 rounded-full" src={"#{TennisPhx.AvatarUploader.url({player_in_tour.player.avatar, player_in_tour.player}, signed: true)}"} alt="">
+                                    <% end %>
+                                  </div>
+                                  <div class="ml-4">
+                                    <div class="text-sm font-medium text-gray-900">
+                                      <%= player_in_tour.player.name %>
+                                    </div>
+                                  </div>
+                                </div>
+                                <% end %>
+                            </td>
+
+                              <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900"><%= player_in_tour.player.country %></div>
+                                <div class="text-sm text-gray-500">гр. <%= player_in_tour.player.city %></div>
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <%= player_in_tour.points %>
+                              </td>
+                            </tr>
+
+                            <% end) %>
+
+                            <!-- More people... -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
 
 

@@ -12,7 +12,7 @@ defmodule TennisPhxWeb.TourLive do
   alias TennisPhx.Statuses
   alias TennisPhx.Matches
   alias TennisPhx.Matches.Match
-
+  alias TennisPhx.PlayerTour
 
 
   def render(assigns) do
@@ -32,6 +32,7 @@ defmodule TennisPhxWeb.TourLive do
     tours = Events.list_tours()
     changeset = Matches.change_match(%Match{})
     players_for_tour = tour.players |> Repo.preload(:tours)
+    players_in_tour = PlayerTour.list_players_in_tour(tour) |> Repo.preload(:player)
     tour_players = Events.tour_players(tour)
                    |>Enum.map(fn(x) -> x.player_id end)
     socket = assign(
@@ -46,6 +47,7 @@ defmodule TennisPhxWeb.TourLive do
         player_units: player_units,
         statuses: statuses,
         match_for_tour: match_for_tour,
+        players_in_tour: players_in_tour,
         changeset: changeset
       )
     {:ok, socket}
