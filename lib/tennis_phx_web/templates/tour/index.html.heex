@@ -133,8 +133,14 @@
                               <% else %>
                                 <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
                               <% end %>
-                              <td class="px-4 py-3 text-center"><%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %></td>
-
+                              <td class="px-4 py-3 text-center">
+                                <%= if tour.date do %>
+                                  <%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %>
+                                <% else %>
+                                Ще се определи
+                                <% end %>
+                              </td>
+                              <%= if tour.date do %>
                               <td class="px-4 py-3 text-lg text-gray-900 text-center">
                                 <%= if Date.compare(tour.date, DateTime.utc_now()) == :gt do %>
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
@@ -146,6 +152,7 @@
                                       Свършил
                                     </span>
                                 <% end %>
+                                
                                 <%= if Date.compare(tour.date, DateTime.utc_now()) == :eq do %>
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-green-800">
                                       Играе се днес
@@ -153,6 +160,9 @@
                                 <% end %>
 
                               </td>
+                              <% else %>
+                              <td class="px-4 py-3 text-lg text-gray-900 text-center">Ще се определи</td>
+                              <% end %>
 
                               <!-- <td class="w-10 text-center">
                                 <input name="plan" type="radio">
