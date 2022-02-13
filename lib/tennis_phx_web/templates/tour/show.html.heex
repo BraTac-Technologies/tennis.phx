@@ -271,11 +271,9 @@
                               <th scope="col" class=" px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Състезател
                               </th>
+                             
                               <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Националност
-                              </th>
-                              <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Общо точки
+                                Получени точки
                               </th>
                             </tr>
                           </thead>
@@ -306,10 +304,7 @@
                                 <% end %>
                             </td>
 
-                              <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900"><%= player_in_tour.player.country %></div>
-                                <div class="text-sm text-gray-500">гр. <%= player_in_tour.player.city %></div>
-                              </td>
+                              
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <%= player_in_tour.points %>
                               </td>
