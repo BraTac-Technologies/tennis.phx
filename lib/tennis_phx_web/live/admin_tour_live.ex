@@ -34,6 +34,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     statuses = Statuses.list_statuses()
     match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
     matches = Matches.list_matches()
+    groups = Groups.list_groups() |> Repo.preload(:player1) |> Repo.preload(:player2) |> Repo.preload(:player3) |> Repo.preload(:player4) |> Repo.preload(:player5) |> Repo.preload(:player6) |> Repo.preload(:player7) |> Repo.preload(:player8)
     changeset = Matches.change_match(%Match{})
     changeset_for_tour = Events.change_tour(%Tour{})
     changeset_for_group = Groups.change_group(%Group{})
@@ -55,7 +56,9 @@ defmodule TennisPhxWeb.AdminTourLive do
         player_units: player_units,
         statuses: statuses,
         tags: tags,
+        groups: groups,
         match_for_tour: match_for_tour,
+        matches: matches,
         changeset: changeset,
         changeset_for_tour: changeset_for_tour,
         changeset_for_group: changeset_for_group,
@@ -117,8 +120,24 @@ defmodule TennisPhxWeb.AdminTourLive do
     {:noreply, socket}
   end
 
+  def handle_event("create_group", %{"group" => attrs}, socket) do
 
-  def handle_event("assign_match_info", %{"match" => attrs}, socket) do
+    case Groups.create_group(attrs) do
+      {:ok, group} ->
+        socket
+
+        changeset_for_group = Groups.change_group(%Group{})
+        socket = assign(socket, changeset_for_grup: changeset_for_group)
+        {:noreply, socket}
+
+      {:error, %Ecto.Changeset{} = changeset_for_group} ->
+        socket = assign(socket, changeset_for_group: changeset_for_group)
+        {:noreply, socket}
+    end
+  end
+
+
+  def handle_event("create_group", %{"match" => attrs}, socket) do
 
     case Matches.create_match(attrs) do
       {:ok, match} ->
