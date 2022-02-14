@@ -455,6 +455,17 @@
                   <%= error_tag g, :player8_id %>
 
               </div>
+              <br>
+
+              <div class="w-full px-3">
+                <label class="text-center block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                  Избери фаза
+                </label>
+
+                  <%= select(g, :phase_id, Enum.map(@phases, &{&1.name, &1.id}), prompt: [key: "Choose a phase"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+                  <%= error_tag g, :player8_id %>
+
+              </div>
 
             </div>
 
@@ -503,6 +514,7 @@
          
           <%= link "Изтрий", to: Routes.group_path(@socket, :delete, group), method: :delete, data: [confirm: "Are you sure?"], class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-1 bg-red-400 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <h1> Фаза: <%= group.phase.name %> </h1>
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
