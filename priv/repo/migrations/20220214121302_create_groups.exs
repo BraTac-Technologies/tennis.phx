@@ -3,18 +3,10 @@ defmodule TennisPhx.Repo.Migrations.CreateGroups do
 
   def change do
     create table(:groups) do
-      add(:player1_id, references(:players, on_delete: :delete_all))
-      add(:player2_id, references(:players, on_delete: :delete_all))
-      add(:player3_id, references(:players, on_delete: :delete_all))
-      add(:player4_id, references(:players, on_delete: :delete_all))
-      add(:player5_id, references(:players, on_delete: :delete_all))
-      add(:player6_id, references(:players, on_delete: :delete_all))
-      add(:player7_id, references(:players, on_delete: :delete_all))
-      add(:player8_id, references(:players, on_delete: :delete_all))
-
-      add(:tour_id, references(:tours, on_delete: :delete_all))
-      add(:title, :string)
-      add(:info, :string)
+      add :player1_id, :string
+      add :tour_id, :string
+      add :title, :string
+      add :info, :string
 
       timestamps()
     end
