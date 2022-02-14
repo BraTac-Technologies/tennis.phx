@@ -1,0 +1,28 @@
+<h1>Show Group</h1>
+
+<ul>
+
+  <li>
+    <strong>Player1:</strong>
+    <%= @group.player1_id %>
+  </li>
+
+  <li>
+    <strong>Tour:</strong>
+    <%= @group.tour_id %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @group.title %>
+  </li>
+
+  <li>
+    <strong>Info:</strong>
+    <%= @group.info %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.group_path(@conn, :edit, @group) %></span> |
+<span><%= link "Back", to: Routes.group_path(@conn, :index) %></span>
