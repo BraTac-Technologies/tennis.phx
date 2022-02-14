@@ -345,6 +345,7 @@
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          
           <.form let={g} for={@changeset_for_group}, phx-submit="create_group">
 
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -479,6 +480,474 @@
       </div>
 
 <!-- ======== START GROUP CREATION ========= -->
+
+
+<!-- ======== START SHOW GROUPS ========= -->
+
+
+<div class="mt-10 py-10 border-t border-gray-300 text-center">
+  <div class="flex flex-wrap justify-center">
+    <div class="w-full lg:w-9/12 px-4">
+      <!-- <p class="mb-4 text-lg leading-relaxed text-gray-800">
+        An artist of considerable range, Jenna the name taken by
+      </p> -->
+      <!-- <a href="#pablo" class="font-normal text-pink-500"
+        >Show more</a
+      > -->
+
+      <%= for group <- @groups do %>
+
+      <div class="text-center flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+         
+          <%= link "Изтрий", to: Routes.group_path(@socket, :delete, group), method: :delete, data: [confirm: "Are you sure?"], class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-2 py-1 bg-red-400 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="text-center px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Players
+                    </th>
+
+                    <th scope="col" class=" px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    1
+                    </th>
+                    <th scope="col" class="text-center px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      2
+                    </th>
+                    <th scope="col" class="text-center px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      3
+                    </th>
+                    <%= if group.player4 do %>
+                    <th scope="col" class="text-center px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      4
+                    </th>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <th scope="col" class="text-center px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      5
+                    </th>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <th scope="col" class="text-center px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      6
+                    </th>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <th scope="col" class="text-center px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      7
+                    </th>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <th scope="col" class="text-center px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      8
+                    </th>
+                    <% end %>
+
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+
+                  <!-- Player 1 -->
+
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900">
+                      <%= group.player1.name %>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      <%= if Enum.any?(@matches, fn m -> m.tour_id == @tour.id and (m.first_player_id == group.player1.id and m.second_player_id == group.player2.id or m.first_player_id == group.player2.id and m.second_player_id == group.player1.id) end) do %>
+                        <.form let={f} for={@changeset}, phx-change="add_group_match_games">
+                          <%= hidden_input f, :first_player_id, value: group.player1.id %>
+                          <%= hidden_input f, :second_player_id, value: group.player2.id %>
+                          <%= hidden_input f, :tour_id, value: @tour.id %>
+
+                          <%= number_input f, :games_for_first_player, class: "w-1/5"  %>
+                          :
+                          <%= number_input f, :games_for_second_player, class: "w-1/5" %>
+                       </.form>
+                      <% else %>
+                        <.form let={f} for={@changeset}, phx-submit="create_match">
+                          <%= hidden_input f, :tour_id, value: @tour.id %>
+                          <%= hidden_input f, :first_player_id, value: group.player1.id %>
+                          <%= hidden_input f, :second_player_id, value: group.player2.id %>
+                          <%= hidden_input f, :phase_id, value: 1 %>
+                          <%= hidden_input f, :status_id, value: 1 %>
+                          <%= submit "CREATE", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-1 py-1/2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+                        </.form>
+
+                      <% end %>
+
+
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
+                      :
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
+                      :
+                      <%= number_input :player_points, :points, class: "w-1/5" %>
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p5
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p6
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p7
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p8
+                    </td>
+                    <% end %>
+                  </tr>
+
+                  <!-- Player 2 -->
+
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900"><%= group.player2.name %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p1
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p3
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p4
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p5
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p6
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p7
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p8
+                    </td>
+                    <% end %>
+                  </tr>
+
+                  <!-- Player 3 -->
+
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900"><%= group.player3.name %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p1
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p2
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p4
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p5
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p6
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p7
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p8
+                    </td>
+                    <% end %>
+                  </tr>
+                  <!-- Player 4 -->
+
+                  <%= if group.player4 do %>
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900"><%= group.player1.name %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p1
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p2
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p3
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p5
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p6
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p7
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p8
+                    </td>
+                    <% end %>
+                  </tr>
+
+                  <% end %>
+
+                  <%= if group.player5 do %>
+                  <!-- Player 5 -->
+
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900"><%= group.player5.name %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p1
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p2
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p3
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p4
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p6
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p7
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p8
+                    </td>
+                    <% end %>
+                  </tr>
+
+                  <% end %>
+
+                  <%= if group.player6 do %>
+                  <!-- Player 6 -->
+
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900"><%= group.player6.name %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p1
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p2
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p3
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p4
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p5
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p7
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p8
+                    </td>
+                    <% end %>
+                  </tr>
+
+                  <% end %>
+
+                  <%= if group.player7 do %>
+                  <!-- Player 7 -->
+
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900"><%= group.player7.name %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p1
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p2
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p3
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p4
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p5
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p6
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p8
+                    </td>
+                    <% end %>
+                  </tr>
+
+                  <% end %>
+
+                  <%= if group.player8 do %>
+                  <!-- Player 8 -->
+
+                  <tr>
+                    <td class="bg-gray-50 px-6 py-4 whitespace-nowrap">
+                      <div class="text-center text-sm text-gray-900"><%= group.player8.name %></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p1
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p2
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p3
+                    </td>
+                    <%= if group.player4 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p4
+                    </td>
+                    <% end %>
+                    <%= if group.player5 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p5
+                    </td>
+                    <% end %>
+                    <%= if group.player6 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p6
+                    </td>
+                    <% end %>
+                    <%= if group.player7 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      vs p7
+                    </td>
+                    <% end %>
+                    <%= if group.player8 do %>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                      X
+                    </td>
+                    <% end %>
+                  </tr>
+
+                  <% end %>
+
+
+
+                  <!-- More people... -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br><br><br>
+
+      <% end %>
+
+<!-- END -->
+
+    </div>
+  </div>
+</div>
+
+<!-- ======== END SHOW GROUP ========= -->
 
 
 <!-- ======== START ASSIGN MATCH SCORE ========= -->

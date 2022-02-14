@@ -44,6 +44,7 @@ defmodule TennisPhxWeb.Router do
     post "/players", PlayerController, :create
     get "players/:id/edit", PlayerController, :edit
     resources "/tags", TagController, except: [:show]
+    resources "/groups", GroupController
   end
 
   # Other scopes may use custom stacks.
