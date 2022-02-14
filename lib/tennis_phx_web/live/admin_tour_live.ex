@@ -15,6 +15,8 @@ defmodule TennisPhxWeb.AdminTourLive do
   alias TennisPhx.Matches.Match
   alias TennisPhx.Tags
   alias TennisPhx.PlayerTag
+  alias TennisPhx.Groups
+  alias TennisPhx.Groups.Group
 
   def render(assigns) do
    render DashboardView, "tour.html", assigns
@@ -34,6 +36,7 @@ defmodule TennisPhxWeb.AdminTourLive do
     matches = Matches.list_matches()
     changeset = Matches.change_match(%Match{})
     changeset_for_tour = Events.change_tour(%Tour{})
+    changeset_for_group = Groups.change_group(%Group{})
     players_for_tour = tour.players |> Repo.preload(:tours)
     tags = Tags.list_tags()
     tour_players = Events.tour_players(tour)
@@ -55,6 +58,7 @@ defmodule TennisPhxWeb.AdminTourLive do
         match_for_tour: match_for_tour,
         changeset: changeset,
         changeset_for_tour: changeset_for_tour,
+        changeset_for_group: changeset_for_group,
         tag_players: tag_players,
         tag: tag
       )
