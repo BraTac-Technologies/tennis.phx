@@ -224,6 +224,7 @@
                               </td>
                             </tr>
 
+                          <%= if length(TennisPhx.Participants.get_winrate(@second_player)) > 0 && length(TennisPhx.Participants.get_winrate(@first_player)) > 0 do %>
                             <tr>
                               <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 <%= if trunc(length(TennisPhx.Participants.get_winrate(@second_player)) / length(TennisPhx.Participants.get_match_count(@second_player)) * 100) <= trunc(length(TennisPhx.Participants.get_winrate(@first_player)) / length(TennisPhx.Participants.get_match_count(@first_player)) * 100) do %>
@@ -245,6 +246,7 @@
                                 <% end %>
                               </td>
                             </tr>
+                          <% end %>
 
                             
 

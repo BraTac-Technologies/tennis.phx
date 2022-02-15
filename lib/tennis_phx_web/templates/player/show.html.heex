@@ -169,7 +169,7 @@
                               <%= if Enum.empty?(@winrate) || Enum.empty?(@match_count) do %>
                               -
                               <% else %>
-                              <%= trunc(length(@winrate) / length(@match_count) * 100) %>% (<%= length(@winrate) %> победи / <%= length(@match_count) - length(@winrate) %> загуби)
+                              <%= trunc(length(@winrate) / length(@match_count) * 100) %>% (<%= length(@winrate) %> <%= if length(@winrate) == 1 do "победа" else "победи" end %> / <%= length(@match_count) - length(@winrate) %> <%= if length(@match_count) - length(@winrate) == 1 do "загуба" else "загуби" end %> )
                               <% end %>
                             </dd>
                           </div>
