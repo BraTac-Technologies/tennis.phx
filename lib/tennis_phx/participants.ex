@@ -98,6 +98,12 @@ defmodule TennisPhx.Participants do
 
   end
 
+  def get_tours_by_player(%Player{} = player) do
+    player_id = player.id
+    query = from(pt in PlayerTour, where: pt.player_id == ^player_id, order_by: [desc: pt.points])
+    Repo.all(query)
+  end
+
 
   def create_player(attrs \\ %{}) do
     %Player{}
