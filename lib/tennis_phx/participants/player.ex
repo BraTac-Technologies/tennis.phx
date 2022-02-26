@@ -4,7 +4,6 @@ defmodule TennisPhx.Participants.Player do
   import Ecto.Changeset
 
   alias TennisPhx.Events.Tour
-  alias TennisPhx.Matches.Match
   alias TennisPhx.Tags.Tag
 
   schema "players" do

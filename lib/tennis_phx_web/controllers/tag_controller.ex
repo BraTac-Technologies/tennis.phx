@@ -4,7 +4,6 @@ defmodule TennisPhxWeb.TagController do
   alias TennisPhx.Tags
   alias TennisPhx.Tags.Tag
   alias TennisPhx.Events
-  alias TennisPhx.Participants
   alias TennisPhx.PlayerTag
   alias TennisPhx.Repo
 

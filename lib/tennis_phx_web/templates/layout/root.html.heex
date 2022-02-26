@@ -113,7 +113,7 @@
             <a href="/admin/dashboard" class="block px-4 py-2 text-sm text-gray-700">АДМИН ТАБЛО</a>
               <%= link "Настройки", to: Routes.admin_settings_path(@conn, :edit), class: "block px-4 py-2 text-sm text-gray-700" %>
               <%= link "Излез", to: Routes.admin_session_path(@conn, :delete), class: "block px-4 py-2 text-sm text-gray-700", method: :delete %>
-            <%= else %>
+            <% else %>
               <%# link "Register", to: Routes.admin_registration_path(@conn, :new), class: "block px-4 py-2 text-sm text-gray-700" %>
               <%= link "Влез", to: Routes.admin_session_path(@conn, :new), class: "block px-4 py-2 text-sm text-gray-700" %>
             <% end %>

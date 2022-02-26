@@ -31,7 +31,6 @@ defmodule TennisPhxWeb.AdminTourLive do
     player_units = PlayerUnits.list_player_units()
     statuses = Statuses.list_statuses()
     match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
-    matches = Matches.list_matches()
     changeset = Matches.change_match(%Match{})
     changeset_for_tour = Events.change_tour(%Tour{})
     players_for_tour = tour.players |> Repo.preload(:tours)
@@ -118,7 +117,6 @@ defmodule TennisPhxWeb.AdminTourLive do
 
     case Matches.create_match(attrs) do
       {:ok, match} ->
-        socket
 
         changeset = Matches.change_match(%Match{})
         socket = put_flash(socket, :success, "Match added successfully!")

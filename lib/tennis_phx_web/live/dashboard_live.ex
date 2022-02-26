@@ -11,14 +11,13 @@ defmodule TennisPhxWeb.DashboardLive do
   alias TennisPhx.PlayerUnits
   alias TennisPhx.Statuses
   alias TennisPhx.Matches
-  alias TennisPhx.Matches.Match
   alias TennisPhx.Tags
 
   def render(assigns) do
    render DashboardView, "index.html", assigns
   end
 
-  def mount(params, _, socket) do
+  def mount(_params, _, socket) do
     tours = Events.list_tours() |> Repo.preload(:players)
     players = Participants.list_players_ranking() |> Repo.preload(:tours)
     locations = Locations.list_locations()

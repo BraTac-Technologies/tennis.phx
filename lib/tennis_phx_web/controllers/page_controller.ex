@@ -1,7 +1,6 @@
 defmodule TennisPhxWeb.PageController do
   use TennisPhxWeb, :controller
 
-  alias TennisPhx.Repo
   alias TennisPhx.Participants
   alias TennisPhx.Events
   alias TennisPhx.Tags

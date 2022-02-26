@@ -28,7 +28,6 @@ defmodule TennisPhxWeb.TourLive do
     player_units = PlayerUnits.list_player_units()
     statuses = Statuses.list_statuses()
     match_for_tour = Matches.get_match_for_tour(tour) |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status)
-    matches = Matches.list_matches()
     tours = Events.list_tours()
     changeset = Matches.change_match(%Match{})
     players_for_tour = tour.players |> Repo.preload(:tours)

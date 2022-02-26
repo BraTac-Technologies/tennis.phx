@@ -7,7 +7,7 @@ defmodule TennisPhx.Matches.Match do
   alias TennisPhx.Locations.Location
   alias TennisPhx.Phases.Phase
   alias TennisPhx.Statuses.Status
-  alias TennisPhx.PlayerUnits.Player_unit
+  alias TennisPhx.PlayerUnits.PlayerUnit
   alias TennisPhx.Matches.Score
 
   schema "matches" do

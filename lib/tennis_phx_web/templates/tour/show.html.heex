@@ -116,7 +116,7 @@
 
                 <!-- This example requires Tailwind CSS v2.0+ -->
                 <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">                  
-                  <%= @match_for_tour |> Enum.with_index |> Enum.map(fn({match, index}) ->  %>                 
+                  <%= for match <- @match_for_tour do %>                 
                   <li class={"shadow-lg col-span-1 bg-teal-500 rounded-lg shadow divide-y divide-gray-200"}>                 
                     <div class="w-full flex items-center justify-between p-6 space-x-6">
                       <table class="w-full">
@@ -249,7 +249,7 @@
 
                     </div>
                   </li>
-                  <% end) %>
+                  <% end %>
                 </ul>
 
               </div>
@@ -329,54 +329,3 @@
 </main>
 
 <!-- JS script -->
-
-
-<%= for match <- @match_for_tour do %>
-
-<script>
-var modal_<%= match.id %> = document.getElementById("score-modal-<%= match.id %>");
-
-
-var btn_<%= match.id %> = document.getElementById("score-modal-btn-<%= match.id %>");
-
-var span_<%= match.id %> = document.getElementsByClassName("score-modal-close-<%= match.id %>")[0];
-
-btn_<%= match.id %>.onclick = function() {
-  modal_<%= match.id %>.style.display = "block";
-}
-
-
-span_<%= match.id %>.onclick = function() {
-  modal_<%= match.id %>.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal_<%= match.id %>) {
-    modal_<%= match.id %>.style.display = "none";
-  }
-}
-
-function CreateGame4_<%= match.id%>() {
-  var game4_part1_<%= match.id %> = document.getElementById("game4_part1_<%= match.id %>");
-  var game4_part2_<%= match.id %> = document.getElementById("game4_part2_<%= match.id %>");
-  var button_for_game4_<%= match.id %> = document.getElementById("button_for_game4_<%= match.id %>");
-  var button_for_game5_<%= match.id %> = document.getElementById("button_for_game5_<%= match.id %>");
-  game4_part1_<%= match.id %>.classList.remove("hidden");
-  game4_part2_<%= match.id %>.classList.remove("hidden");
-  button_for_game5_<%= match.id %>.classList.remove("hidden");
-  button_for_game4_<%= match.id %>.classList.add("hidden");
-}
-function CreateGame5_<%= match.id %>() {
-  var game5_part1_<%= match.id %> = document.getElementById("game5_part1_<%= match.id %>");
-  var game5_part2_<%= match.id %> = document.getElementById("game5_part2_<%= match.id %>");
-  var button_for_game5_<%= match.id %> = document.getElementById("button_for_game5_<%= match.id %>");
-  game5_part1_<%= match.id %>.classList.remove("hidden");
-  game5_part2_<%= match.id %>.classList.remove("hidden");
-  button_for_game5_<%= match.id %>.classList.add("hidden");
-}
-
-
-</script>
-
-<%= end %>

@@ -604,7 +604,7 @@
 
 
 
-                            <%= end %>
+                            <% end %>
 
 
                           </tbody>
@@ -661,26 +661,8 @@ window.onclick = function(event) {
   }
 }
 
-function CreateGame4_<%= match.id%>() {
-  var game4_part1_<%= match.id %> = document.getElementById("game4_part1_<%= match.id %>");
-  var game4_part2_<%= match.id %> = document.getElementById("game4_part2_<%= match.id %>");
-  var button_for_game4_<%= match.id %> = document.getElementById("button_for_game4_<%= match.id %>");
-  var button_for_game5_<%= match.id %> = document.getElementById("button_for_game5_<%= match.id %>");
-  game4_part1_<%= match.id %>.classList.remove("hidden");
-  game4_part2_<%= match.id %>.classList.remove("hidden");
-  button_for_game5_<%= match.id %>.classList.remove("hidden");
-  button_for_game4_<%= match.id %>.classList.add("hidden");
-}
-function CreateGame5_<%= match.id %>() {
-  var game5_part1_<%= match.id %> = document.getElementById("game5_part1_<%= match.id %>");
-  var game5_part2_<%= match.id %> = document.getElementById("game5_part2_<%= match.id %>");
-  var button_for_game5_<%= match.id %> = document.getElementById("button_for_game5_<%= match.id %>");
-  game5_part1_<%= match.id %>.classList.remove("hidden");
-  game5_part2_<%= match.id %>.classList.remove("hidden");
-  button_for_game5_<%= match.id %>.classList.add("hidden");
-}
 
 
 </script>
 
-<%= end %>
+<% end %>

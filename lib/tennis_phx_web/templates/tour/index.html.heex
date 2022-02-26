@@ -116,7 +116,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <%= @tours |> Enum.with_index |> Enum.map(fn({tour, index}) ->  %>
+                            <%= for tour <- @tours do %>
                             <tr>
                               <!-- <td class="px-4 py-3"></td> -->
                               <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
@@ -168,7 +168,7 @@
                                 <input name="plan" type="radio">
                               </td> -->
                             </tr>
-                            <% end) %>
+                            <% end %>
                           </tbody>
                         </table>
                       </div>

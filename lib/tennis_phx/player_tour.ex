@@ -5,7 +5,7 @@ defmodule TennisPhx.PlayerTour do
   import Ecto.Query, warn: false
   alias TennisPhx.Repo
   alias TennisPhx.Events.Tour
-  alias TennisPhx.Participants.Player
+
   alias TennisPhx.Events.PlayerTour
 
   @doc """

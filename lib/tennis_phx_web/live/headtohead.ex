@@ -13,7 +13,7 @@ defmodule TennisPhxWeb.HeadtoHeadLive do
 
 
   @impl true
-  def mount(params, _, socket) do
+  def mount(_params, _, socket) do
     changeset = Matches.change_match(%Match{})
     players = Participants.list_players()
     socket = assign(

@@ -42,7 +42,7 @@ defmodule TennisPhxWeb.Router do
     # resources "/players", PlayerController, except: [:index, :show]
     get "/players/new", PlayerController, :new
     post "/players", PlayerController, :create
-    get "players/:id/edit", PlayerController, :edit
+    get "/players/:id/edit", PlayerController, :edit
     resources "/tags", TagController, except: [:show]
   end
 

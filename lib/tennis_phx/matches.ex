@@ -11,16 +11,7 @@ defmodule TennisPhx.Matches do
   alias TennisPhx.Participants.Player
 
 
-  # =========== Assign Player v Player Match =============
 
-  def assign_match(%Tour{} = tour, player1_id, player2_id, day, month, year, location, phase, unit) do
-    tt = tour.id
-
-    %Match{}
-    |> Match.changeset(%{tour_id: tour.id, first_player_id: player1_id, second_player_id: player2_id, location_id: location, phase_id: phase, player_unit_id: unit})
-    |> Repo.insert()
-
-  end
 
   # =========== END Assign Player v Player Match =============
 
