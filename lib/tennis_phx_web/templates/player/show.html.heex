@@ -1,8 +1,8 @@
 <main class="profile-page">
   <section class="relative block" style="height: 500px;">
     <div
-      class="absolute top-0 w-full h-full bg-center bg-cover"
-      style='background-image: url("https://cdn.statically.io/img/butterflyonline.com/wp-content/uploads/2017/10/boll_22_10_17.jpg?quality=90&f=auto");'
+      class="absolute top-0 w-full h-full bg-top bg-cover"
+      style='background-image: url("https://img3.goodfon.com/wallpaper/nbig/e/83/nastolnyy-tennis-ping-pong.jpg");'
     >
       <span
         id="blackOverlay"
@@ -189,17 +189,12 @@
 
                     <br><br>
 
-                      
-               
+                                  
                         <div class="shadow-lg rounded-lg overflow-hidden">
-                          <div class="py-3 px-5 bg-gray-50">Последни 10 турнири</div>
-                          <canvas class="p-10" id="chartLine"></canvas>
+                          <div class="py-3 px-5 bg-gray-50">Последни турнири</div>
+                          <canvas class="p-10" id="twodata"></canvas>
                         </div>
-                                       
-
-
-
-                    
+   
 
                     <%= if length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) > 0 do %>
                     <br>
@@ -407,7 +402,6 @@
                       <% end %>
                     </ul>
 
-
               </div>
             </div>
           </div>
@@ -416,40 +410,59 @@
     </div>
   </section>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <!-- Chart line -->
 <script>
-  const labels = [
-    <%= for tour <- @tours do %>
-    "<%= tour.tour.title %>", 
-    <% end %>
-    ];
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: "Спечелени точки",
-        backgroundColor: "hsl(252, 82.9%, 67.8%)",
-        borderColor: "hsl(252, 82.9%, 67.8%)",
-        data: [
-          <%= for tour <- @tours do %>
-          <%= tour.points %>,
+
+  const ctx = document.getElementById("twodata").getContext("2d");
+ 
+  const mixedChart = new Chart(ctx, {
+    data: {
+        datasets: [{
+            type: 'line',
+            label: 'Спечелени точки',
+            backgroundColor: "#ffa600",
+            borderColor: "#ffa600",
+            data: [
+              <%= for playertour <- @last5_tours do %>
+                <%= TennisPhx.Participants.get_points_by_player_tour(@player.id, playertour.tour.id) %>,
+              <% end %> 
+            ]
+        },
+        {
+            type: 'bar',
+            label: 'Победи',
+            backgroundColor: "#a05195",
+            borderColor: "#a05195",
+            data: [
+              <%= for playertour <- @last5_tours do %>
+                <%= length(TennisPhx.Matches.get_winner_matches_by_player_and_tour(@player.id, playertour.tour_id)) %>,
+              <% end %>
+              ]
+        },
+         {
+            type: 'bar',
+            label: 'Общо мачове',
+            backgroundColor: "#f95d6a",
+            borderColor: "#f95d6a",
+            data: [
+              <%= for playertour <- @last5_tours do %>
+                <%= length(TennisPhx.Matches.get_matches_by_player_and_tour(@player.id, playertour.tour_id)) %>,
+              <% end %>
+            ],
+        }],
+        labels: [
+          <%= for playertour <- @last5_tours do %>
+          '<%= playertour.tour.title %>',
           <% end %>
-          ], 
-          
-      },
-    ],
-  };
+          ]
+    },
+    options: 
+    {
+      responsive: true,
+    }
+});
+  
 
-  const configLineChart = {
-    type: "line",
-    data,
-    options: {},
-  };
-
-  var chartLine = new Chart(
-    document.getElementById("chartLine"),
-    configLineChart
-  );
 </script>

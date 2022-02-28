@@ -35,7 +35,17 @@ defmodule TennisPhx.Matches do
     player_id = player.id
     query = from(m in Match, where: m.first_player_id == ^player_id or m.second_player_id == ^player_id, order_by: [desc: m.starting_datetime, desc: m.phase_id])
     Repo.all(query) |> Enum.take(6)
+  end
 
+
+  def get_matches_by_player_and_tour(player_id, tour_id) do
+    query = from(m in Match, where: m.tour_id == ^tour_id and (m.first_player_id == ^player_id or m.second_player_id == ^player_id))
+    Repo.all(query)
+  end
+
+  def get_winner_matches_by_player_and_tour(player_id, tour_id) do
+    query = from(m in Match, where: m.tour_id == ^tour_id and m.winner_id == ^player_id)
+    Repo.all(query)
   end
 
   def list_matches do
