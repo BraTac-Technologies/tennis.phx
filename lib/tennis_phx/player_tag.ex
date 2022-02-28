@@ -36,4 +36,9 @@ defmodule TennisPhx.PlayerTag do
     Repo.all(filter)
   end
 
+  def get_rows_by_player_and_tag(tag_id, player_id) do
+    filter = from(pt in PlayerTag, where: pt.player_id == ^player_id and pt.tag_id == ^tag_id)
+    Repo.all(filter)
+  end
+
 end
