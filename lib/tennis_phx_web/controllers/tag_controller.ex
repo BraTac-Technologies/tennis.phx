@@ -31,9 +31,9 @@ defmodule TennisPhxWeb.TagController do
 
   def show(conn, %{"id" => id}) do
     tag = Tags.get_tag!(id)
-    tours = Events.list_tours()
+    tours_for_tag = Events.get_tours_by_tag(tag) |> Repo.preload([:tag, :location])
     rankings = PlayerTag.list_players_ranking_by_tag(tag)  |> Repo.preload(:player)
-    render(conn, "show.html", tag: tag, tours: tours, rankings: rankings)
+    render(conn, "show.html", tag: tag, tours: tours_for_tag, rankings: rankings)
   end
 
   def edit(conn, %{"id" => id}) do

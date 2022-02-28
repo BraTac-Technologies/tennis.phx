@@ -9,6 +9,7 @@ defmodule TennisPhx.Events do
   alias TennisPhx.Events.Tour
   alias TennisPhx.Participants.Player
   alias TennisPhx.Events.PlayerTour
+  alias TennisPhx.Tags.Tag
 
   @doc """
   Returns the list of tours.
@@ -76,7 +77,13 @@ defmodule TennisPhx.Events do
     |> Repo.update()
   end
 
-  
+  def get_tours_by_tag(%Tag{} = tag) do
+    tag_id = tag.id
+    query = from(t in Tour, where: t.tag_id == ^tag_id, order_by: [desc: t.date])
+    Repo.all(query)
+  end
+
+
 
   @doc """
   Gets a single tour.

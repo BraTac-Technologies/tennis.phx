@@ -73,15 +73,12 @@
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
-              Класиране в "<%= @tag.name %>"
+              "<%= @tag.name %>"
             </h3>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
-              <i
-                class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
-              ></i>
-               Tennis.Phx
+             
             </div>
             <!-- <div class="mb-2 text-gray-700 mt-10">
               <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i
@@ -92,13 +89,91 @@
           <div class="mt-10 py-10 border-t border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-9/12 px-4">
-                <!-- <p class="mb-4 text-lg leading-relaxed text-gray-800">
-                  An artist of considerable range, Jenna the name taken by
+                <p class="mb-4 text-lg leading-relaxed text-gray-800">
+                  Виж класирането по-долу
 
-                </p> -->
-                <!-- <a href="#pablo" class="font-normal text-pink-500"
-                  >Show more</a
-                > -->
+                </p>               
+
+                <h1 class="text-3xl">Турнири в <%= @tag.name %></h1><br>
+                <div class="shadow-lg text-center flex flex-col">
+                  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
+                        <table class="table-auto w-full text-left whitespace-no-wrap">
+                          <thead>
+                            <tr>
+                              <!-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th> -->
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Име</th>                              
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Зала</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Кога?</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Статус</th>
+
+
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <%= for tour <- @tours do %>
+                            <tr>
+                              <!-- <td class="px-4 py-3"></td> -->
+                              <td class="px-4 py-3"><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></td>
+                              
+
+                              <%= if is_nil(tour.location) do %>
+                                <td class="px-4 py-3 text-left">-</td>
+                              <% else %>
+                                <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
+                              <% end %>
+                              <td class="px-4 py-3 text-center">
+                                <%= if tour.date do %>
+                                  <%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %>
+                                <% else %>
+                                Ще се определи
+                                <% end %>
+                              </td>
+                              <%= if tour.date do %>
+                              <td class="px-4 py-3 text-lg text-gray-900 text-center">
+                                <%= if Date.compare(tour.date, DateTime.utc_now()) == :gt do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
+                                      Ще се играе
+                                    </span>
+                                <% end %>
+                                <%= if Date.compare(tour.date, DateTime.utc_now()) == :lt do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-200 text-green-800">
+                                      Свършил
+                                    </span>
+                                <% end %>
+                                
+                                <%= if Date.compare(tour.date, DateTime.utc_now()) == :eq do %>
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-200 text-green-800">
+                                      Играе се днес
+                                    </span>
+                                <% end %>
+
+                              </td>
+                              <% else %>
+                              <td class="px-4 py-3 text-lg text-gray-900 text-center">Ще се определи</td>
+                              <% end %>
+
+                              <!-- <td class="w-10 text-center">
+                                <input name="plan" type="radio">
+                              </td> -->
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br><br>
+                <div class="shadow-lg rounded-lg overflow-hidden">
+                  <div class="py-3 px-5 bg-gray-50">Участия по турнири</div>
+                  <canvas class="p-10" id="chartBar"></canvas>
+                </div>
+
+                <br><br>
+                <h1 class="text-3xl">Класиране</h1><br>
                 <div class="shadow-lg text-center flex flex-col">
                   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -169,6 +244,8 @@
 <!-- END -->
 
 
+
+
               </div>
             </div>
           </div>
@@ -177,3 +254,40 @@
     </div>
   </section>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Chart bar -->
+<script>
+  const labelsBarChart = [
+    <%= for tour <- @tours do %>
+    "<%= tour.title %>",
+    <% end %>
+  ];
+  const dataBarChart = {
+    labels: labelsBarChart,
+    datasets: [
+      {
+        label: "Записани играчи",
+        backgroundColor: "hsl(252, 82.9%, 67.8%)",
+        borderColor: "hsl(252, 82.9%, 67.8%)",
+        data: [
+          <%= for tour <- @tours do %>
+          <%= length(TennisPhx.Events.tour_players(tour)) %>,
+          <% end %>
+          ],
+      },
+    ],
+  };
+
+  const configBarChart = {
+    type: "bar",
+    data: dataBarChart,
+    options: {},
+  };
+
+  var chartBar = new Chart(
+    document.getElementById("chartBar"),
+    configBarChart
+  );
+</script>

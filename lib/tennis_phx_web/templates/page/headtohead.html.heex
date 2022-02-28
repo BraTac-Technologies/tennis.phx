@@ -97,14 +97,12 @@
                 </form>
                 <br><br>
 
-
-
-               <div class="shadow-lg rounded-lg overflow-hidden">
-                <div class="py-3 px-5 bg-gray-50">Doughnut chart</div>
-                <canvas class="p-10" id="chartDoughnut2"></canvas>
-              </div>
-
-
+              <!--
+                <div class="shadow-lg rounded-lg overflow-hidden">
+                  <div class="py-3 px-5 bg-gray-50">Doughnut chart</div>
+                  <canvas class="p-10" id="chartDoughnut2"></canvas>
+                </div>
+              -->
 
 
 
@@ -432,37 +430,6 @@
     </div>
   </section>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-<script>
-
-  const dataDoughnut = {
-    labels: ["JavaScript", "Python"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [<%= if is_nil(@first_player) do 1 else length(TennisPhx.Participants.get_player_v_player_wins(@first_player.id, @second_player.id)) end %> , <%= if is_nil(@second_player) do 1 else length(TennisPhx.Participants.get_player_v_player_wins(@second_player.id, @first_player.id)) end %>],
-        backgroundColor: [
-          "rgb(133, 105, 241)",
-          "rgb(164, 101, 241)",
-          
-        ],
-        hoverOffset: 4,
-      },
-    ],
-  };
-
-  const configDoughnut = {
-    type: "doughnut",
-    data: dataDoughnut,
-    options: {},
-  };
-
-  var chartBar = new Chart(
-    document.getElementById("chartDoughnut2"),
-    configDoughnut
-  );
-  </script>
 
   

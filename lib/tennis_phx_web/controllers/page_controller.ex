@@ -4,6 +4,7 @@ defmodule TennisPhxWeb.PageController do
   alias TennisPhx.Participants
   alias TennisPhx.Events
   alias TennisPhx.Tags
+  alias TennisPhx.Repo
 
   def index(conn, _params) do
     conn
@@ -16,7 +17,7 @@ defmodule TennisPhxWeb.PageController do
   def ranking(conn, _params) do
     players = Participants.list_players_ranking()
     tours = Events.list_tours()
-    tags = Tags.list_tags()
+    tags = Tags.list_tags() |> Repo.preload(:player)
     render(conn, "ranking.html", players: players, tours: tours, tags: tags)
   end
 end

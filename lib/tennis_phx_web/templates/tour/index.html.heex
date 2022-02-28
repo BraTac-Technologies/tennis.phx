@@ -73,7 +73,7 @@
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
-              Турнири
+              Всички Турнири
             </h3>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -107,7 +107,7 @@
                             <tr>
                               <!-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th> -->
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Име</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-left">Серия</th>
+                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-left">Състезание</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Зала</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Кога?</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Статус</th>
@@ -135,7 +135,7 @@
                               <% end %>
                               <td class="px-4 py-3 text-center">
                                 <%= if tour.date do %>
-                                  <%= NimbleStrftime.format(tour.date, "%d %b %Y - %H:%Mh") %>
+                                  <%= NimbleStrftime.format(tour.date, "%d %b %Y в %H:%Mч.") %>
                                 <% else %>
                                 Ще се определи
                                 <% end %>

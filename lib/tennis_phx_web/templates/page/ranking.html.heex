@@ -2,7 +2,7 @@
   <section class="relative block" style="height: 500px;">
     <div
       class="absolute top-0 w-full h-full bg-center bg-cover"
-      style='background-image: url("https://cdn.statically.io/img/butterflyonline.com/wp-content/uploads/2017/10/boll_22_10_17.jpg?quality=90&f=auto");'
+      style='background-image: url("https://t2diamond.com/wp-content/uploads/2019/07/20190718_Match4_R16_MAlong_vs_GAUZYsimon_00277-_WEBRES.jpg");'
     >
       <span
         id="blackOverlay"
@@ -73,7 +73,7 @@
             <h3
               class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
             >
-              Класиране
+              Всички Състезания
             </h3>
             <div
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -89,15 +89,21 @@
 
           <div class="mt-10 py-10 border-b border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
-              <div>
-                <%= for tag <- @tags do %>
-                  <%= link to: Routes.tag_path(@conn, :show, tag) do %>
-                    <button class = "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"><%= tag.name %></button>
-                  <% end %>
-                <% end %>
-              </div>
+            <%= for tag <- @tags do %>
+              <div class="w-1/3">                
+                <%= link to: Routes.tag_path(@conn, :show, tag) do %>
+                  <button class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"><%= tag.name %></button>
+                <% end %>                
+              </div> 
+            <br>                        
+            <% end %>
             </div>
           </div>
+
+<!--          <div class="flex mb-4">
+  <div class="w-1/2 bg-grey-light h-12"></div>
+  <div class="w-1/2 bg-grey h-12"></div>
+</div> -->
 
 
         </div>
