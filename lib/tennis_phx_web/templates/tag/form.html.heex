@@ -27,6 +27,26 @@
 
           </div>
         </div>
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Info
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+
+            <%= textarea f, :info, class: "max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md", style: "height: 55px;" %>
+
+          </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label for="about" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+            Location
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+
+            <%= select(f, :location_id, Enum.map(@locations, &{&1.name, &1.id}), prompt: [key: "Избери локация"], class: "text-center block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500") %>
+
+          </div>
+        </div>
 
       </div>
     </div>

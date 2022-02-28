@@ -79,10 +79,10 @@
               class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
             >
             <i class="fa-solid fa-info text-lg"></i>
-             Информация:
+             Информация: <%= if is_nil(@tag.info) do "-" else @tag.info end %>
              <br>
              <i class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>
-             Място на провеждане:
+             Място на провеждане: <%= if is_nil(@tag.location) do "-" else @tag.location.name end %>
             </div>
             <!-- <div class="mb-2 text-gray-700 mt-10">
               <i class="fas fa-briefcase mr-2 text-lg text-gray-500"></i

@@ -3,11 +3,14 @@ defmodule TennisPhx.Tags.Tag do
   import Ecto.Changeset
 
   alias TennisPhx.Participants.Player
+  alias TennisPhx.Locations.Location
 
   schema "tags" do
     field :name, :string
     belongs_to :player, Player
     field :points, :integer
+    field :info, :string
+    belongs_to :location, Location
 
     timestamps()
 
@@ -23,6 +26,6 @@ defmodule TennisPhx.Tags.Tag do
   @doc false
   def changeset(tag, attrs) do
     tag
-    |> cast(attrs, [:name, :player_id, :points])
+    |> cast(attrs, [:name, :info, :location_id])
   end
 end
