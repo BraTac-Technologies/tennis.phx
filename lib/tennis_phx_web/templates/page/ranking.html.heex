@@ -88,12 +88,12 @@
           <div class="mt-10 py-10 border-b border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
             <%= for tag <- @tags do %>
-              <div class="w-1/3">                
+              <div class="w-1/3 px-2 py-2">                
                 <%= link to: Routes.tag_path(@conn, :show, tag) do %>
-                  <button class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-6 py-4 bg-green-600 text-base font-medium text-white hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-200 sm:ml-3 sm:w-auto sm:text-base"><%= tag.name %></button>
-                <% end %>                
+                  <button class="w-full inline-flex bg-gradient-to-r from-green-500 to-green-700 justify-center rounded-md border border-transparent shadow-sm px-6 py-4 text-base font-medium text-white hover:bg-red-400 focus:outline-none focus:ring-2 focus:ring-offset-20 sm:ml-3 sm:w-auto sm:text-base"><%= tag.name %></button>
+                <% end %>              
               </div> 
-            <br>                        
+            
             <% end %>
             </div>
           </div>
