@@ -139,7 +139,7 @@
 
                             <tr>
                               <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                <%= if (DateTime.utc_now.year - @first_player.birthdate.year) > 80 do "-" else (DateTime.utc_now.year - @first_player.birthdate.year) end %>
+                                <%= if (DateTime.utc_now.year - @first_player.birthdate.year) > 80 do "-" else trunc(Date.diff(DateTime.utc_now, @first_player.birthdate) / 365) end %>
                               </td>
 
                               <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -147,7 +147,7 @@
                               </td>
 
                               <td class="text-right px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                  <%= if (DateTime.utc_now.year - @second_player.birthdate.year) > 80 do "-" else (DateTime.utc_now.year - @second_player.birthdate.year) end %>
+                                  <%= if (DateTime.utc_now.year - @second_player.birthdate.year) > 80 do "-" else trunc(Date.diff(DateTime.utc_now, @second_player.birthdate) / 365) end %>
                               </td>
                             </tr>
 
