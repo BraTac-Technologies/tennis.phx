@@ -61,7 +61,7 @@ defmodule TennisPhx.Events do
 
   def get_last_6_tours_by_player(%Player{} = player) do
     player_id = player.id
-    query = from(pt in PlayerTour, where: pt.player_id == ^player_id, order_by: [desc: pt.inserted_at], limit: 5)
+    query = from(pt in PlayerTour, where: pt.player_id == ^player_id, order_by: [asc: pt.inserted_at], limit: 5)
     Repo.all(query)
   end
 
