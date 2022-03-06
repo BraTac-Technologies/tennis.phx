@@ -26,7 +26,7 @@ defmodule TennisPhx.Matches do
   # =========== END Assign Match in Tour =============
 
   def get_match_by_players(player1, player2) do
-    query = from(m in Match, where: m.first_player_id == ^player1 and m.second_player_id == ^player2 or m.first_player_id == ^player2 and m.second_player_id == ^player1)
+    query = from(m in Match, where: m.first_player_id == ^player1 and m.second_player_id == ^player2 or m.first_player_id == ^player2 and m.second_player_id == ^player1, order_by: [desc: m.starting_datetime])
     Repo.all(query)
   end
 
