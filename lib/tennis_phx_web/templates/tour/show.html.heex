@@ -168,7 +168,7 @@
                             <tr>
                               <%= if match.winner_id == match.second_player_id do %>
                                 <td class="text-left">
-                                  <%= link to: Routes.player_path(@socket, :show, match.second_player) do %>
+                                  <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.second_player) do %>
                                     <i class="fas fa-check"></i>
                                     <b><%= match.second_player.name %></b>
                                   <% end %>
