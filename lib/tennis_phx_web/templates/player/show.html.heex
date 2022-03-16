@@ -2,7 +2,7 @@
   <section class="relative block" style="height: 500px;">
     <div
       class="absolute top-0 w-full h-full bg-top bg-cover"
-      style='background-image: url("https://img3.goodfon.com/wallpaper/nbig/e/83/nastolnyy-tennis-ping-pong.jpg");'
+      style='background-image: url("http://lmc-mag.com/wp-content/uploads/2017/10/andro_opener-2.jpg");'
     >
       <span
         id="blackOverlay"
@@ -195,10 +195,9 @@
                           <canvas class="p-10" id="twodata"></canvas>
                         </div>
    
-
-                    <%= if length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) > 0 do %>
+                    
                     <br>
-                      <h1> Спечелени турнири (<%= length(TennisPhx.Participants.get_length_of_tour_wins(@player.id)) %>) </h1>
+                      <h1> Участия по турнири (<%= Enum.count(@player.tours) %>) </h1>
                       <br>
                         <div class="shadow-lg text-center flex flex-col">
                           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -227,21 +226,21 @@
                                   </thead>
 
                                   <tbody class="bg-white divide-y divide-gray-200">
-                                    <%= for tour <- @won_tours do %>
+                                    <%= for assoc <- @all_tours do %>
                                     <tr>
                                       <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <%= NimbleStrftime.format(tour.date, "%d %b %Y") %>
+                                        <%= if assoc.tour.date do NimbleStrftime.format(assoc.tour.date, "%d %b %Y") end %>
                                       </td>
                                       <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <b><%= link tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) %></b>                                       
+                                        <b><%= link assoc.tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, assoc.tour) %></b>                                       
                                       </td>
 
                                         <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                          <%= if tour.tag do tour.tag.name else "-" end %>
+                                          <%= if assoc.tour.tag do assoc.tour.tag.name else "-" end %>
                                         </td>
 
                                       <td class="text-center px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <%= TennisPhx.Participants.get_points_by_player_tour(@player.id, tour.id) %>
+                                        <%= TennisPhx.Participants.get_points_by_player_tour(@player.id, assoc.tour.id) %>
                                       </td>
                                     </tr>
 
@@ -253,8 +252,7 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                    <% end %>
+                        </div>                    
                     <br>
 
                     
@@ -392,7 +390,7 @@
                               <a class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
                                 <!-- Heroicon name: solid/phone -->
                                   <i class="fas fa-table-tennis"></i>
-                                <span class="ml-3"><%= match.tour.title %></span>
+                                <span class="ml-3"><b><%= match.tour.title %></b></span>
                               </a>
                             </div>
                           </div>

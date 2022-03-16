@@ -39,9 +39,10 @@ defmodule TennisPhxWeb.PlayerController do
     points_and_tours_by_player = Events.points_and_tours_by_player(player) |> Repo.preload(:tour)
     matches = Matches.get_last6_matches_by_player(player)  |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status) |> Repo.preload(:tour)
     won_tours = Participants.get_length_of_tour_wins(player.id) |> Repo.preload(:tag)
-    tours = Participants.get_tours_by_player(player) |> Repo.preload(:tour) |> Repo.preload(tour: [:tag])
-    last5_tours = Events.get_last_6_tours_by_player(player) |> Repo.preload(:tour)
-    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count, points_and_tours_by_player: points_and_tours_by_player, matches: matches, won_tours: won_tours, tours: tours, last5_tours: last5_tours)
+    # tours = Participants.get_tours_by_player(player) |> Repo.preload(:tour) |> Repo.preload(tour: [:tag])
+    last5_tours = Events.get_last_tours_by_player(player, 5) |> Repo.preload(:tour)
+    all_tours = Events.get_last_tours_by_player_desc(player) |> Repo.preload(tour: [:tag])
+    render(conn, "show.html", player: player, winrate: winrate, match_count: match_count, points_and_tours_by_player: points_and_tours_by_player, matches: matches, won_tours: won_tours, last5_tours: last5_tours, all_tours: all_tours)
   end
 
   def edit(conn, %{"id" => id}) do
