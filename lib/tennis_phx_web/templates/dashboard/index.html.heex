@@ -489,7 +489,7 @@
                       <%= for player <- @players do %>
                       <tr>
                         <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          <%= link player.name , to: Routes.player_path(@socket, :show, player) %>
+                          <%= link player.name , to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, player) %>
                         </th>
                         <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-center">
                           <%= player.points %>
