@@ -302,13 +302,13 @@
                             <%= if match.winner_id == match.first_player.id do %>
                               <td class="text-left">
                                 <i class="fas fa-check"></i>
-                                <%= link to: Routes.player_path(@socket, :show, match.first_player) do %>
+                                <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.first_player) do %>
                                 <b><%= match.first_player.name %></b>
                                 <% end %>
                               </td>
                             <% else %>
                               <td class="text-left">
-                              <%= link to: Routes.player_path(@socket, :show, match.first_player) do %>
+                              <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.first_player) do %>
                                 <%= match.first_player.name %>
                               <% end %>
                                 </td>
@@ -347,13 +347,13 @@
                             <%= if match.winner_id == match.second_player_id do %>
                               <td class="text-left">
                                 <i class="fas fa-check"></i>
-                                <%= link to: Routes.player_path(@socket, :show, match.second_player) do %>
+                                <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.second_player) do %>
                                   <b><%= match.second_player.name %></b>
                                 <% end %>  
                               </td>
                             <% else %>
                               <td class="text-left">
-                              <%= link to: Routes.player_path(@socket, :show, match.second_player) do %>
+                              <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.second_player) do %>
                                 <%= match.second_player.name %>
                               <% end %>
                                 </td>

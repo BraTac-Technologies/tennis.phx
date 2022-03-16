@@ -124,13 +124,13 @@
                               <%= if match.winner_id == match.first_player.id do %>
                                 <td class="text-left">
                                   <i class="fas fa-check"></i>
-                                  <%= link to: Routes.player_path(@socket, :show, match.first_player) do %>
+                                  <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.first_player) do %>
                                   <b><%= match.first_player.name %></b>
                                   <% end %>
                                 </td>
                               <% else %>
                                 <td class="text-left">
-                                  <%= link to: Routes.player_path(@socket, :show, match.first_player) do %>
+                                  <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.first_player) do %>
                                     <%= match.first_player.name %>
                                   <% end %>
                                 </td>
@@ -175,7 +175,7 @@
                                 </td>
                               <% else %>
                                 <td class="text-left">
-                                  <%= link to: Routes.player_path(@socket, :show, match.second_player) do %>
+                                  <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.second_player) do %>
                                     <%= match.second_player.name %>
                                   <% end %>
                                   </td>
@@ -274,7 +274,7 @@
                                 <div class="text-center text-sm text-gray-900"><%= index + 1 %></div>
                               </td>
                               <td class="text-center px-6 py-4 whitespace-nowrap">
-                                <%= link to: Routes.player_path(@socket, :show, player_in_tour.player) do %>
+                                <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, player_in_tour.player) do %>
                                 <div class="flex items-center">
                                   <div class="flex-shrink-0 h-10 w-10">
                                     <!-- <img class="h-10 w-10 rounded-full" src={"#{OffsidePhx.BannerUploader.url({@post.banner, @post}, signed: true)}"}"https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""> -->

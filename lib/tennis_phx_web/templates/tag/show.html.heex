@@ -126,7 +126,7 @@
                                 <div class="text-center text-sm text-gray-900"><%= index + 1 %></div>
                               </td>
                               <td class="text-center px-6 py-4 whitespace-nowrap">
-                                <%= link to: Routes.player_path(@conn, :show, ranking.player) do %>
+                                <%= link to: Routes.live_path(@conn, TennisPhxWeb.PlayerShowLive, ranking.player) do %>
                                 <div class="flex items-center">
                                   <div class="flex-shrink-0 h-10 w-10">
                                     <!-- <img class="h-10 w-10 rounded-full" src={"#{OffsidePhx.BannerUploader.url({@post.banner, @post}, signed: true)}"}"https://cdn-icons-png.flaticon.com/512/149/149071.png" alt=""> -->

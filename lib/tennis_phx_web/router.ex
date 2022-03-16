@@ -23,12 +23,13 @@ defmodule TennisPhxWeb.Router do
     get "/", PageController, :index
     get "/ranking", PageController, :ranking
     resources "/tours", TourController, only: [:index]
-    resources "/players", PlayerController, except: [:create, :edit]
+    resources "/players", PlayerController, except: [:create, :edit, :show]
     resources "/tags", TagController, except: [:create, :edit, :index, :delete]
 
     live "/match/live_form", MatchLive
     live "/head2head", HeadtoHeadLive, :h2h
     live "/tour_live/:id", TourLive
+    live "/players/:id", PlayerShowLive
   end
 
   scope "/", TennisPhxWeb do

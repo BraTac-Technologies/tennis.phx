@@ -232,7 +232,7 @@
                                         <%= if assoc.tour.date do NimbleStrftime.format(assoc.tour.date, "%d %b %Y") end %>
                                       </td>
                                       <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <b><%= link assoc.tour.title , to: Routes.live_path(@conn, TennisPhxWeb.TourLive, assoc.tour) %></b>                                       
+                                        <b><%= link assoc.tour.title , to: Routes.live_path(@socket, TennisPhxWeb.TourLive, assoc.tour) %></b>                                       
                                       </td>
 
                                         <td class="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -282,13 +282,14 @@
                                   <%= if match.winner_id == match.first_player.id do %>
                                     <td class="text-left">
                                       <i class="fas fa-check"></i>
-                                      <%= link to: Routes.player_path(@conn, :show, match.first_player) do %>
+                                      <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.first_player) do %>
+                                      
                                       <b><%= match.first_player.name %></b>
                                       <% end %>
                                     </td>
                                   <% else %>
                                     <td class="text-left">
-                                    <%= link to: Routes.player_path(@conn, :show, match.first_player) do %>
+                                    <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.first_player) do %>
                                       <%= match.first_player.name %>
                                     <% end %>
                                     </td>
@@ -327,13 +328,13 @@
                                   <%= if match.winner_id == match.second_player_id do %>
                                     <td class="text-left">
                                       <i class="fas fa-check"></i>
-                                      <%= link to: Routes.player_path(@conn, :show, match.second_player) do %>
+                                      <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.second_player) do %>
                                         <b><%= match.second_player.name %></b>
                                       <% end %>
                                     </td>
                                   <% else %>
                                     <td class="text-left">
-                                    <%= link to: Routes.player_path(@conn, :show, match.second_player) do %>
+                                    <%= link to: Routes.live_path(@socket, TennisPhxWeb.PlayerShowLive, match.second_player) do %>
                                       <%= match.second_player.name %>
                                     <% end %>  
                                       </td>
