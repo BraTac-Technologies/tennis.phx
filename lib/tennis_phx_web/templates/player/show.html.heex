@@ -260,7 +260,7 @@
                     <br>
 
                     <br>
-                    <h1> Последни 6 мача (основна схема) </h1>
+                    <h1> Последни срещи (основна схема) </h1>
                     <br>
                     <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                       <%= for match <- @matches do %>
@@ -400,7 +400,12 @@
                       </li>
                       <% end %>
                     </ul>
-
+                  <br>
+                <%= if length(@matches) < length(@match_count) do %>
+                  <div>
+                    <button phx-click="load-more-matches" phx-disable-with="зарежда..." class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">Зареди още мачове</button>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>

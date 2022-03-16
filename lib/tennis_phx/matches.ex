@@ -31,10 +31,10 @@ defmodule TennisPhx.Matches do
   end
 
 
-  def get_last6_matches_by_player(%Player{} = player) do
+  def get_last_matches_by_player(%Player{} = player, limit) do
     player_id = player.id
-    query = from(m in Match, where: m.first_player_id == ^player_id or m.second_player_id == ^player_id, order_by: [desc: m.starting_datetime, desc: m.phase_id])
-    Repo.all(query) |> Enum.take(6)
+    query = from(m in Match, where: m.first_player_id == ^player_id or m.second_player_id == ^player_id, order_by: [desc: m.starting_datetime, desc: m.phase_id], limit: ^limit)
+    Repo.all(query)
   end
 
 
