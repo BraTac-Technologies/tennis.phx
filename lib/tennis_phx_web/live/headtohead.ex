@@ -38,7 +38,7 @@ defmodule TennisPhxWeb.HeadtoHeadLive do
     first_player = Participants.get_player!(player1_id)
     second_player = Participants.get_player!(player2_id)
 
-    matches = Matches.get_match_by_players(player1_id, player2_id) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:tour)
+    matches = Matches.get_match_by_players(player1_id, player2_id) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:tour) |> Repo.preload([tour: :tag])
 
     socket = assign(
     socket,

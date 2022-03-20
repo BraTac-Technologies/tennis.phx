@@ -43,7 +43,7 @@ defmodule TennisPhxWeb.PlayerShowLive do
   defp load_matches(socket) do
     assign(
       socket,
-      matches: Matches.get_last_matches_by_player(socket.assigns.player, socket.assigns.limit)  |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status) |> Repo.preload(:tour)
+      matches: Matches.get_last_matches_by_player(socket.assigns.player, socket.assigns.limit)  |> Repo.preload(:location) |> Repo.preload(:first_player) |> Repo.preload(:second_player) |> Repo.preload(:phase) |> Repo.preload(:status) |> Repo.preload(:tour) |> Repo.preload([tour: :tag])
     )
   end
 
