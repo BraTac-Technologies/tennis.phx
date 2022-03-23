@@ -6,6 +6,7 @@ defmodule TennisPhxWeb.PlayerShowLive do
   alias TennisPhx.Participants
   alias TennisPhx.Matches
   alias TennisPhx.Events
+  alias TennisPhx.Tags
 
   def render(assigns) do
    render PlayerView, "show.html", assigns
@@ -22,6 +23,7 @@ defmodule TennisPhxWeb.PlayerShowLive do
     # tours = Participants.get_tours_by_player(player) |> Repo.preload(:tour) |> Repo.preload(tour: [:tag])
     last5_tours = Events.get_last_tours_by_player(player, 5) |> Repo.preload(:tour)
     all_tours = Events.get_last_tours_by_player_desc(player) |> Repo.preload(tour: [:tag])
+    tags = Tags.list_tags()
     socket = assign(
         socket,
         player: player,
@@ -30,7 +32,8 @@ defmodule TennisPhxWeb.PlayerShowLive do
         points_and_tours_by_player: points_and_tours_by_player,
         won_tours: won_tours,
         last5_tours: last5_tours,
-        all_tours: all_tours
+        all_tours: all_tours,
+        tags: tags
       )
       socket =
         socket

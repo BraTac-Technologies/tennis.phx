@@ -99,7 +99,44 @@
                 <!-- <a href="#pablo" class="font-normal text-pink-500"
                   >Show more</a
                 > -->
+                  <div>
 
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Класиране: </h3>
+
+                    <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+
+                      <%= for tag <- @tags do %>
+
+                        <%= if Enum.member?( (TennisPhx.PlayerTag.list_players_ranking_by_tag(tag) |>Enum.map(fn(x) -> x.player_id end) ), @player.id) do %>
+
+                          <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+
+                            <dt class="text-sm font-medium text-gray-500 truncate"><%= tag.name %></dt>
+
+                            <dd class="mt-1 text-3xl font-semibold text-gray-900">№
+                            
+                            <%= TennisPhx.PlayerTag.list_players_ranking_by_tag(tag) |> Enum.with_index |> Enum.map(fn({ranking, index}) ->  %>
+                              <%= if ranking.player_id == @player.id do %>
+                                <%= index + 1 %>
+                              <% end %>  
+                            <% end) %>
+                            </dd>
+
+                          </div>
+
+                          
+
+                        <% end %>
+                      
+                      <% end %>
+
+                      
+                  ​
+
+                    </dl>
+
+                  </div>  
+                  <br>
 
                 <div class="shadow-lg bg-white shadow overflow-hidden sm:rounded-lg">
 
@@ -190,13 +227,15 @@
                     <br><br>
 
                                   
-                        <div class="shadow-lg rounded-lg overflow-hidden">
-                          <div class="py-3 px-5 bg-gray-50">Последни турнири</div>
-                          <canvas class="p-10" id="twodata"></canvas>
-                        </div>
+                    <div class="shadow-lg rounded-lg overflow-hidden">
+                      <div class="py-3 px-5 bg-gray-50">Последни турнири</div>
+                      <canvas class="p-10" id="twodata"></canvas>
+                    </div>
+
+                        
    
                     
-                    <br>
+                    <br><br>
                       <h1> Участия по турнири (<%= Enum.count(@player.tours) %>) </h1>
                       <br>
                         <div class="shadow-lg text-center flex flex-col">
