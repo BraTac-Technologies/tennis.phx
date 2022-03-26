@@ -12,6 +12,7 @@ defmodule TennisPhx.Participants do
   alias TennisPhx.Events.PlayerTour
   alias TennisPhx.Tags.Tag
   alias TennisPhx.Events.Tour
+  alias TennisPhx.Events
 
   @doc """
   Returns the list of players.
@@ -92,7 +93,6 @@ defmodule TennisPhx.Participants do
   end
 
   def get_alltime_ranking(player_id) do
-
     query = from(p in Player, select: row_number() |> over(partition_by: p.id == ^player_id, order_by: p.points))
     Repo.all(query)
 
@@ -101,6 +101,12 @@ defmodule TennisPhx.Participants do
   def get_tours_by_player(%Player{} = player) do
     player_id = player.id
     query = from(pt in PlayerTour, where: pt.player_id == ^player_id, order_by: [asc: pt.inserted_at])
+    Repo.all(query)
+  end
+
+  def get_tours_by_player_tag(%Player{} = player, tag_id) do
+    player_tours = Ecto.assoc(player, :tours)
+    query = from(pt in player_tours, where: pt.tag_id == ^tag_id, order_by: [desc: pt.inserted_at])
     Repo.all(query)
   end
 
