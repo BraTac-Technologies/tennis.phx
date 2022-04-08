@@ -46,6 +46,7 @@ defmodule TennisPhxWeb.Router do
     post "/players", PlayerController, :create
     get "/players/:id/edit", PlayerController, :edit
     resources "/tags", TagController, except: [:show]
+    live_dashboard "/dashboard", metrics: TennisPhxWeb.Telemetry
   end
 
   # Other scopes may use custom stacks.
@@ -60,15 +61,15 @@ defmodule TennisPhxWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  #if Mix.env() in [:dev, :test] do
+   # import Phoenix.LiveDashboard.Router
 
-    scope "/" do
-      pipe_through :browser
-      live_dashboard "/dashboard", metrics: TennisPhxWeb.Telemetry
+   # scope "/" do
+    #  pipe_through :browser
+     # live_dashboard "/dashboard", metrics: TennisPhxWeb.Telemetry
 
-    end
-  end
+  #  end
+ # end
 
   # Enables the Swoosh mailbox preview in development.
   #
