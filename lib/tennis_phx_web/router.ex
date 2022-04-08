@@ -2,6 +2,7 @@ defmodule TennisPhxWeb.Router do
   use TennisPhxWeb, :router
 
   import TennisPhxWeb.AdminAuth
+  import Phoenix.LiveDashboard.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
