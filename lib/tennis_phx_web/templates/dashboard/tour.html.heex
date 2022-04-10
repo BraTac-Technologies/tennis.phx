@@ -182,7 +182,7 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                           <div class="text-center text-sm text-gray-900"><%= TennisPhx.Events.get_player_points_by_tour(@tour.id, player.id) %></div>
                         </td>
-                        <%= inspect (@tour_players) %>
+                        
                         <%= if Enum.member?(@tour_players, player.id) do %>
                           <td class="px-6 py-4 whitespace-nowrap">
                             <!-- <div class="text-center text-sm text-gray-900">input</div> -->
