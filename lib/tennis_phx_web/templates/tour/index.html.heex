@@ -30,11 +30,11 @@
     </div>
   </section>
   <section class="relative py-16 bg-gray-300">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto">
       <div
         class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
       >
-        <div class="px-6">
+        <div class="">
           <div class="flex flex-wrap justify-center">
             <div
               class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center"
@@ -85,7 +85,7 @@
           </div>
           <div class="mt-10 py-10 border-t border-gray-300 text-center">
             <div class="flex flex-wrap justify-center">
-              <div class="w-full lg:w-9/12 px-4">
+              <div class="w-full lg:w-9/12">
                 <!-- <p class="mb-4 text-lg leading-relaxed text-gray-800">
                   An artist of considerable range, Jenna the name taken by
 
@@ -104,7 +104,7 @@
                               <!-- <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">#</th> -->
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Име</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-left">Състезание</th>
-                              <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Зала</th>
+                              <!--<th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">Зала</th>-->
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Кога?</th>
                               <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">Статус</th>
 
@@ -119,16 +119,17 @@
 
                               <td class="px-4 py-3 text-left">
                                 <span class="px-7 inline-flex text-sm leading-5 font-semibold rounded-lg bg-blue-100 text-green-800">
-                              <%= if tour.tag do tour.tag.name else "-" end %>
+                                <%= link to: Routes.live_path(@conn, TennisPhxWeb.TourLive, tour) do %>
+                                  <%= if tour.tag do tour.tag.name else "-" end %>
+                                <% end %>
                                 </span>
                               </td>
 
 
-                              <%= if is_nil(tour.location) do %>
-                                <td class="px-4 py-3 text-left">-</td>
-                              <% else %>
-                                <td class="px-4 py-3 text-left"><%= tour.location.name %></td>
-                              <% end %>
+                                <!--
+                                <td class="px-4 py-3 text-left"><tour.location.name</td>
+                                -->
+                              
                               <td class="px-4 py-3 text-center">
                                 <%= if tour.date do %>
                                   <%= NimbleStrftime.format(tour.date, "%d %b %Y в %H:%Mч.") %>
