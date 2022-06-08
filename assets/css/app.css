@@ -9,7 +9,7 @@
 
   .make-it-hidden-for-mobile
   {
-    visibility: hidden;
+    display: none;
   }
 }
 /* Alerts and form errors used by phx.new */
