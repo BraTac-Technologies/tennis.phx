@@ -221,6 +221,24 @@
                               <%= trunc(Enum.count(@passed_quarter_tours) / Enum.count(@lost_quarter_tours ++ @passed_quarter_tours) * 100) %>% (<%= Enum.count(@passed_quarter_tours) %> <%= if Enum.count(@passed_quarter_tours) == 1, do: "победа", else: "победи" %> / <%= Enum.count(@lost_quarter_tours) %> <%= if Enum.count(@lost_quarter_tours) == 1, do: "загуба", else: "загуби" %>)
                             </dd>
                           </div>
+                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-percentage"></i>
+                              Успеваемост на 1/2 финал <br>
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <%= trunc(Enum.count(@passed_semis_tours) / Enum.count(@lost_semis_tours ++ @passed_semis_tours) * 100) %>% (<%= Enum.count(@passed_semis_tours) %> <%= if Enum.count(@passed_semis_tours) == 1, do: "победа", else: "победи" %> / <%= Enum.count(@lost_semis_tours) %> <%= if Enum.count(@lost_semis_tours) == 1, do: "загуба", else: "загуби" %>)
+                            </dd>
+                          </div>
+                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500">
+                              <i class="fas fa-percentage"></i>
+                              Успеваемост на финал <br>
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                              <%= trunc(Enum.count(@won_tours) / Enum.count(@lost_final_tours ++ @won_tours) * 100) %>% (<%= Enum.count(@won_tours) %> <%= if Enum.count(@won_tours) == 1, do: "победа", else: "победи" %> / <%= Enum.count(@lost_final_tours) %> <%= if Enum.count(@lost_final_tours) == 1, do: "загуба", else: "загуби" %>)
+                            </dd>
+                          </div>
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-500">
                               <i class="fas fa-percentage"></i>
