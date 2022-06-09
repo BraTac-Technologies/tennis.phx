@@ -96,6 +96,37 @@ defmodule TennisPhx.Events do
     Repo.all(query)
   end
 
+  def get_passed_quarter_tours(%Player{} = player) do
+    pi = player.id
+    query = from(pt in PlayerTour, where: pt.player_id == ^pi and pt.points > 12)
+    Repo.all(query)
+  end
+
+  def get_passed_semis_tours(%Player{} = player) do
+    pi = player.id
+    query = from(pt in PlayerTour, where: pt.player_id == ^pi and pt.points > 14)
+    Repo.all(query)
+  end
+
+
+  def get_lost_quarter_tours(%Player{} = player) do
+    pi = player.id
+    query = from(pt in PlayerTour, where: pt.player_id == ^pi and pt.points == 12)
+    Repo.all(query)
+  end
+
+  def get_lost_semis_tours(%Player{} = player) do
+    pi = player.id
+    query = from(pt in PlayerTour, where: pt.player_id == ^pi and pt.points == 14)
+    Repo.all(query)
+  end
+
+  def get_lost_final_tours(%Player{} = player) do
+    pi = player.id
+    query = from(pt in PlayerTour, where: pt.player_id == ^pi and pt.points == 16)
+    Repo.all(query)
+  end
+
 
 
   @doc """

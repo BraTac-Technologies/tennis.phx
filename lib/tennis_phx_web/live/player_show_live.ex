@@ -23,6 +23,11 @@ defmodule TennisPhxWeb.PlayerShowLive do
     # tours = Participants.get_tours_by_player(player) |> Repo.preload(:tour) |> Repo.preload(tour: [:tag])
     last5_tours = Events.get_last_tours_by_player(player, 5) |> Repo.preload(:tour)
     all_tours = Events.get_last_tours_by_player_desc(player) |> Repo.preload(tour: [:tag])
+    passed_quarter_tours = Events.get_passed_quarter_tours(player)
+    passed_semis_tours = Events.get_passed_semis_tours(player)
+    lost_quarter_tours = Events.get_lost_quarter_tours(player)
+    lost_semis_tours = Events.get_lost_semis_tours(player)
+    lost_final_tours = Events.get_lost_final_tours(player)
     tags = Tags.list_tags()
     socket = assign(
         socket,
@@ -33,7 +38,12 @@ defmodule TennisPhxWeb.PlayerShowLive do
         won_tours: won_tours,
         last5_tours: last5_tours,
         all_tours: all_tours,
-        tags: tags
+        tags: tags,
+        passed_quarter_tours: passed_quarter_tours,
+        passed_semis_tours: passed_semis_tours,
+        lost_quarter_tours: lost_quarter_tours,
+        lost_semis_tours: lost_semis_tours,
+        lost_final_tours: lost_final_tours
       )
       socket =
         socket
