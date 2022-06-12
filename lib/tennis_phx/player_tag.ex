@@ -32,7 +32,7 @@ defmodule TennisPhx.PlayerTag do
 
   def list_players_ranking_by_tag(%Tag{} = tag) do
     tag_id = tag.id
-    filter = from(pt in PlayerTag, where: pt.tag_id == ^tag_id, order_by: [desc: pt.points, desc: pt.player_id])
+    filter = from(pt in PlayerTag, where: pt.tag_id == ^tag_id, order_by: [desc: pt.points, desc: desc.player_id])
     Repo.all(filter)
   end
 
