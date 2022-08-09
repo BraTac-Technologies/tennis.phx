@@ -533,7 +533,7 @@
             backgroundColor: "#ffa600",
             borderColor: "#ffa600",
             data: [
-              <%= for playertour <- @last5_tours do %>
+              <%= for playertour <- @all_tours do %>
                 <%= TennisPhx.Participants.get_points_by_player_tour(@player.id, playertour.tour.id) %>,
               <% end %> 
             ]
@@ -544,7 +544,7 @@
             backgroundColor: "#a05195",
             borderColor: "#a05195",
             data: [
-              <%= for playertour <- @last5_tours do %>
+              <%= for playertour <- @all_tours do %>
                 <%= length(TennisPhx.Matches.get_winner_matches_by_player_and_tour(@player.id, playertour.tour_id)) %>,
               <% end %>
               ]
@@ -555,13 +555,13 @@
             backgroundColor: "#f95d6a",
             borderColor: "#f95d6a",
             data: [
-              <%= for playertour <- @last5_tours do %>
+              <%= for playertour <- @all_tours do %>
                 <%= length(TennisPhx.Matches.get_matches_by_player_and_tour(@player.id, playertour.tour_id)) %>,
               <% end %>
             ],
         }],
         labels: [
-          <%= for playertour <- @last5_tours do %>
+          <%= for playertour <- @all_tours do %>
           '<%= playertour.tour.title %>',
           <% end %>
           ]
