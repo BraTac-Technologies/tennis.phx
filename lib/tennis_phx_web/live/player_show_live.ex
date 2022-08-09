@@ -22,7 +22,7 @@ defmodule TennisPhxWeb.PlayerShowLive do
     won_tours = Participants.get_length_of_tour_wins(player.id) |> Repo.preload(:tag)
     # tours = Participants.get_tours_by_player(player) |> Repo.preload(:tour) |> Repo.preload(tour: [:tag])
     last5_tours = Events.get_last_tours_by_player(player, 5) |> Repo.preload(:tour)
-    all_tours = Events.get_last_tours_by_player_desc(player) |> Repo.preload(tour: [:tag])
+    all_tours = Events.get_last_tours_by_player(player, 10) |> Repo.preload(tour: [:tag])
     passed_quarter_tours = Events.get_passed_quarter_tours(player)
     passed_semis_tours = Events.get_passed_semis_tours(player)
     lost_quarter_tours = Events.get_lost_quarter_tours(player)
