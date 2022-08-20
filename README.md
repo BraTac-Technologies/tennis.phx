@@ -1,19 +1,35 @@
-# TennisPhx
+<h1 align='center'> Tennis.Phx </h1>
 
-To start your Phoenix server:
+```
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+$$$$$$$$\                               $$\                         $$\                 
+\__$$  __|                              \__|                        $$ |                
+   $$ |    $$$$$$\  $$$$$$$\  $$$$$$$\  $$\  $$$$$$$\      $$$$$$\  $$$$$$$\  $$\   $$\ 
+   $$ |   $$  __$$\ $$  __$$\ $$  __$$\ $$ |$$  _____|    $$  __$$\ $$  __$$\ \$$\ $$  |
+   $$ |   $$$$$$$$ |$$ |  $$ |$$ |  $$ |$$ |\$$$$$$\      $$ /  $$ |$$ |  $$ | \$$$$  / 
+   $$ |   $$   ____|$$ |  $$ |$$ |  $$ |$$ | \____$$\     $$ |  $$ |$$ |  $$ | $$  $$<  
+   $$ |   \$$$$$$$\ $$ |  $$ |$$ |  $$ |$$ |$$$$$$$  |$$\ $$$$$$$  |$$ |  $$ |$$  /\$$\ 
+   \__|    \_______|\__|  \__|\__|  \__|\__|\_______/ \__|$$  ____/ \__|  \__|\__/  \__|
+                                                          $$ |                          
+                                                          $$ |                          
+                                                          \__|                          
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+ ```
+                                                                                                
+                                                                                                
+ ## Overview                                                                                               
+  Tennis.phx is an application written for a local sports centre. It features creating & managing events and players, rankings, assigned matches and points, creating news, locations and more. Currently deployed in a subdomain
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## Used Technology
++ Elixir: 1.12.9
++ Phoenix: 1.6.0
++ PostgreSQL: v.14
++ Tailwind: v.2.2.9
+
+## Where to visit?
++ `tennis.bratac.net`
+
+
+
