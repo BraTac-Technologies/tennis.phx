@@ -7,6 +7,7 @@ defmodule TennisPhx.PlayerTag do
   alias TennisPhx.Tags.Tag
 
   alias TennisPhx.Participants.PlayerTag
+  alias TennisPhx.Participants.Player
 
   @doc """
   Returns the list of player_tour.
@@ -32,8 +33,12 @@ defmodule TennisPhx.PlayerTag do
 
   def list_players_ranking_by_tag(%Tag{} = tag) do
     tag_id = tag.id
-    filter = from(pt in PlayerTag, where: pt.tag_id == ^tag_id, order_by: [desc: pt.points, asc: pt.player_id])
-    Repo.all(filter)
+
+    join_table = from pt in PlayerTag, where: pt.tag_id == ^tag_id, join: p in Player, on: pt.player_id == p.id
+    query = from [pt, p] in join_table, order_by: [desc: pt.points, asc: p.name]
+
+    Repo.all(query)
+
   end
 
   def get_rows_by_player_and_tag(tag_id, player_id) do
