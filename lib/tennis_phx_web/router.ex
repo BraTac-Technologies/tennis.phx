@@ -19,9 +19,9 @@ defmodule TennisPhxWeb.Router do
   end
 
   scope "/", TennisPhxWeb do
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_admin]
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
     get "/ranking", PageController, :ranking
     resources "/tours", TourController, only: [:index]
     resources "/players", PlayerController, except: [:create, :edit, :show]
@@ -111,7 +111,7 @@ defmodule TennisPhxWeb.Router do
 
   scope "/", TennisPhxWeb do
     pipe_through [:browser]
-
+    get "/", PageController, :index
     delete "/admins/log_out", AdminSessionController, :delete
     get "/admins/confirm", AdminConfirmationController, :new
     post "/admins/confirm", AdminConfirmationController, :create
