@@ -13,13 +13,13 @@ config :tennis_phx, TennisPhx.Repo,
   username: "postgres",
   password: "postgres",
   database: "tennis_phx_prod",
-  hostname: "tennis.bratac.net",
+  hostname: "tennis.bratac.pro",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
 
 config :tennis_phx, TennisPhxWeb.Endpoint,
-  url: [host: "tennis.bratac.net", port: 80],
+  url: [host: "tennis.bratac.pro", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -31,7 +31,7 @@ config :waffle,
 
 config :tennis_phx, TennisPhxWeb.Endpoint,
   # url: [scheme: "https", host: "offside24.net", port: 443]
-  check_origin: ["https://tennis.bratac.net", "https://www.tennisbratac.net", "https://bratac.net", "https://www.bratac.net"]
+  check_origin: ["https://tennis.bratac.pro", "https://www.tennisbratac.pro", "https://bratac.pro", "https://www.bratac.pro"]
 
 
 # ## SSL Support
